@@ -1,0 +1,114 @@
+'use client';
+import Link from 'next/link';
+import React from 'react';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
+import { commonCartType } from '@/types';
+import Rating from './Rating';
+import { Button } from '@/components/ui/button';
+import { useCartStore } from '@/store/addTocart';
+
+const CommonCard = ({
+  item,
+  color,
+}: {
+  item: commonCartType;
+  color: string;
+}) => {
+  const {
+    brand,
+    id,
+    image,
+    name,
+    price,
+    rating,
+    reviews,
+    shortDescription,
+    stock,
+  } = item;
+  const cardVariants = {
+    offscreen: {
+      opacity: 0,
+      y: 50,
+    },
+    onscreen: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: 'spring',
+        bounce: 0.3,
+        duration: 0.8,
+      },
+    },
+  };
+
+  const addProudctTocart = useCartStore((state) => state.addToCart);
+
+  return (
+    <>
+      <div className="shadow-2xl shadow-gray-100 p-4 border border-gray-100 rounded-2xl bg-white hover:translate-y-2 duration-500 ease-in-out">
+        <Link href={`/products/${name.split(' ').join('-')}`}>
+          <motion.div
+            className="text-center "
+            variants={cardVariants}
+            initial="offscreen"
+            whileInView="onscreen"
+            viewport={{ once: true, amount: 0.3 }}
+          >
+            <Image
+              src={image}
+              width={500}
+              height={500}
+              alt={item.name}
+              className="w-[140px] mx-auto h-[140px] object-contain"
+            />
+
+            <p
+              className={`${color} px-3 py-1 rounded-full mx-auto w-fit my-3 capitalize text-sm`}
+            >
+              ৳ {item.price}
+            </p>
+
+            <div>
+              <h3 className="text-lg font-semibold text-gray-800">
+                {name.slice(0, 18)}
+              </h3>
+              <div>
+                <Rating rating={rating} reviews={reviews} />
+              </div>
+              <p className="text-gray-500 mt-2 text-sm">
+                {shortDescription.slice(0, 50)}
+              </p>
+            </div>
+          </motion.div>
+        </Link>
+        <div className="w-fit mx-auto my-2">
+          <Button
+            onClick={() =>
+              addProudctTocart({
+                id,
+                brand,
+                image,
+                name,
+                price,
+                quantity: 0,
+                rating,
+                reviews,
+                shortDescription,
+                stock,
+                discount: '20',
+                isDiscount: true,
+                status: 'new',
+              })
+            }
+            variant={'outline'}
+          >
+            Add to card
+          </Button>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default CommonCard;

@@ -1,0 +1,155 @@
+import connectDB from "@/lib/db";
+import User from "@/model/user";
+import { userlogin, userregister, userUpdate } from "@/types/user";
+import { compareHashPass, hashPassword } from "@/utils";
+import { CustomError, handleError } from "@/utils/error";
+import { responce } from "@/utils/success";
+
+const userRegister=async({name,email,number,password,address}:userregister)=>{
+  try {
+    await connectDB()
+    const checkUser=await User.findOne({email})
+    if(checkUser) throw new CustomError("user already have exist",400);
+    const hashPass=await hashPassword(password)
+    const create=new User({
+      name,email,password:hashPass,address,number
+    })
+    await create.save();
+    return responce({
+      message:"Successfully account create",
+      status:200,
+      data:{
+        name,email,address,number
+      }
+    })
+
+  } catch (error:unknown) {
+      if (error instanceof Error) {
+          return handleError(error.message, (error as any).status);
+      }
+      return handleError("An unknown error occurred", 500);
+  }
+}
+
+const userLogin=async({email,password}:userlogin)=>{
+  try {
+    await connectDB()
+    const checkUser=await User.findOne({email});
+    if(!checkUser) throw new CustomError("Invalid user please register first",400)
+      if(!compareHashPass(password,checkUser.password)) throw new CustomError("Invalid credentials",400);
+    return responce({
+      message:"Successfully login",
+      status:200,
+      data:{
+        name:checkUser.name,
+        email,
+        address:checkUser.address
+      }
+    })
+    
+  } catch (error) {
+    if (error instanceof Error) {
+      return handleError(error.message, (error as any).status);
+  }
+  return handleError("An unknown error occurred", 500);
+
+  }
+}
+
+const userReset=async(email:string)=>{
+  try {
+    const checkUser=await User.findOne({email})
+    if(!checkUser) throw new CustomError("Invalid email address",400)
+      //send reset mail configaration
+
+    return responce({
+      message:"Successfully send reset link please check your email inbox",
+      status:200,
+      data:{
+        name:checkUser.name
+      }
+    })
+    
+  } catch (error) {
+    if (error instanceof Error) {
+      return handleError(error.message, (error as any).status);
+  }
+  return handleError("An unknown error occurred", 500);
+  }
+}
+
+
+const userChangePassword=async({userId,oldpass,newpass}:{userId:string,oldpass:string,newpass:string})=>{
+  try {
+    if(oldpass===newpass)throw new CustomError("Old password and new Password are same plese provide another password.")
+    const checkUser=await User.findById(userId)
+    if(!checkUser) throw new CustomError("Invalid credentials",400)
+      checkUser.password=newpass;
+    await checkUser.save();
+    return responce({
+      message:"Successfully password changed",
+      status:200,
+      data:{
+        name:checkUser.name,
+        number:checkUser.number
+      }
+    })
+
+  } catch (error) {
+    if (error instanceof Error) {
+      return handleError(error.message, (error as any).status);
+  }
+  return handleError("An unknown error occurred", 500);
+  }
+}
+
+const userUpdateInfo=async({userId,name,address,number}:userUpdate)=>{
+  try {
+    //db connected
+    await connectDB()
+    const checkUser=await User.findById(userId)
+    if(!checkUser)throw new CustomError("Invalid oparation",400);
+    if(checkUser.updateLimit>5)throw new CustomError("You cannot update your info max 5 times.")
+
+    checkUser.name=name || checkUser.name
+    checkUser.name=address || checkUser.address
+    checkUser.name=number || checkUser.number
+    checkUser.updateLimit++
+    await checkUser.save()
+    return responce({
+      message:"Successfully updated",
+      status:200,
+      data:{
+        name:checkUser.name,
+        number:checkUser.number,
+        address:checkUser.address
+      }
+    })
+
+  } catch (error) {
+    if (error instanceof Error) {
+      return handleError(error.message, (error as any).status);
+  }
+  return handleError("An unknown error occurred", 500);
+}
+}
+
+
+
+export  {
+  userRegister,
+  userLogin,
+  userReset,
+  userChangePassword,
+  userUpdateInfo
+}
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,19 @@
+export interface userregister {
+  name: string;
+  email: string;
+  password: string;
+  number: string;
+  address: string;
+}
+export interface userlogin {
+  email: string;
+  password: string;
+}
+
+export interface userUpdate {
+  userId:string;
+  name?:string;
+  address?: string;
+  number?: string;
+}
+
