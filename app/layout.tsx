@@ -6,11 +6,11 @@ import { Toaster } from '@/components/ui/sonner';
 import Footer from './components/server/Footer';
 
 export const metadata: Metadata = {
-  title: 'Glow Niva | Premium Skincare for Glowing Skin',
+  title: 'Glow Niba | Premium Skincare for Glowing Skin',
   description:
-    'Glow Niva offers premium face serums, creams, and skincare products designed for girls who love glowing skin. Shop now!',
+    'Glow Niba offers premium face serums, creams, and skincare products designed for girls who love glowing skin. Shop now!',
   keywords: [
-    'Glow Niva',
+    'Glow Niba',
     'skincare',
     'face serum',
     'face cream',
@@ -18,23 +18,23 @@ export const metadata: Metadata = {
     'girls cosmetics',
   ],
   openGraph: {
-    title: 'Glow Niva | Premium Skincare',
+    title: 'Glow Niba | Premium Skincare',
     description:
       'Best serums and creams for glowing skin. Discover Glow Niva now.',
-    url: 'https://glowniva.com',
+    url: 'https://glowniba.vercel.app',
     siteName: 'Glow Niva',
     images: [
       {
-        url: 'https://glowniva.com/og-image.jpg',
+        url: 'https://glowniba.vercel.app',
         width: 1200,
         height: 630,
-        alt: 'Glow Niva skincare product',
+        alt: 'Glow Niba skincare product',
       },
     ],
     locale: 'bn_bd',
     type: 'website',
   },
-  metadataBase: new URL('https://glowniva.com'),
+  metadataBase: new URL('https://glowniba.vercel.app'),
   alternates: {
     canonical: '/',
   },
