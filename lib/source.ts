@@ -220,11 +220,11 @@ export const productsData=[
 ]
 
 export const instaPosts = [
-  { id: 1, image: '/instagram/i1.png', alt: 'Glow Moment 1' },
-  { id: 2, image: '/instagram/i2.png', alt: 'Glow Moment 2' },
-  { id: 3, image: '/instagram/i3.png', alt: 'Glow Moment 3' },
-  { id: 4, image: '/instagram/i1.png', alt: 'Glow Moment 4' },
-  { id: 5, image: '/instagram/i3.png', alt: 'Glow Moment 5' },
-  { id: 6, image: '/instagram/i3.png', alt: 'Glow Moment 6' },
+  { id: 1, image: '/instagram/i1.PNG', alt: 'Glow Moment 1' },
+  { id: 2, image: '/instagram/i2.PNG', alt: 'Glow Moment 2' },
+  { id: 3, image: '/instagram/i3.PNG', alt: 'Glow Moment 3' },
+  { id: 4, image: '/instagram/i1.PNG', alt: 'Glow Moment 4' },
+  { id: 5, image: '/instagram/i3.PNG', alt: 'Glow Moment 5' },
+  { id: 6, image: '/instagram/i3.PNG', alt: 'Glow Moment 6' },
   // তোমার Instagram Post images এখানে add করো
 ];
