@@ -15,6 +15,7 @@ export default function Category() {
           desc="Discover a variety of skincare, beauty, and baby care products — handpicked to cater to your unique needs."
         />
 
+
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}

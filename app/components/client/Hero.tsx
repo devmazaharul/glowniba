@@ -9,7 +9,7 @@ import { Poppins } from 'next/font/google';
 import { HeroSlideImage } from '@/lib/source';
 
 const poppins = Poppins({
-  weight: '700',
+  weight: '500',
   style: 'normal',
   subsets: ['latin'],
 });
@@ -77,7 +77,7 @@ export default function BackgroundImageSlider() {
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.4, duration: 0.8 }}
-              className="text-gray-600 text-md sm:text-lg lg:text-xl font-medium leading-relaxed drop-shadow"
+              className="text-gray-600 font-light sm:text-lg lg:text-xl  leading-relaxed drop-shadow"
             >
               {currentImage.subtitle}
             </motion.p>

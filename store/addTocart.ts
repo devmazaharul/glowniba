@@ -11,9 +11,8 @@ export const useCartStore = create<CartStateType>()(
       cart: [],
       addToCart: (product: productItem) => {
         const exists = get().cart.find((item) => item.id === product.id);
-
         if (exists) {
-          if (exists.quantity > defualtValue.addProductLimit) {
+          if (exists.quantity == defualtValue.addProductLimit) {
             toast.warning(`Product added faild `, {
               description: `You can only add ${defualtValue.addProductLimit} of this product at a time.`,
               duration: 2000,
