@@ -1,42 +1,39 @@
 "use client";
 
 import { motion } from "framer-motion";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaWhatsapp } from "react-icons/fa";
 
 const WhatsAppButton: React.FC = () => {
   const phoneNumber = "8801797575932"; // তোমার ফোন নাম্বার
   const preFilledMessage = "Hi, I want to buy from Glow Niba!"; // মেসেজ পাঠাতে চাইলে
 
-  const detectDevice = () => {
-    if (typeof window !== "undefined") {
-      const platform = window.navigator.userAgent.toLowerCase();
-  
+  const [device, setDevice] = useState<"windows" | "mac" | "android" | "ios" | "unknown">("unknown");
 
-      if (platform.includes("windows")) return "Windows";
-      if (platform.includes("mac")) return "Mac";
-      if (platform.includes("android")) return "Android";
-      if (/iphone|ipad|ipod/.test(platform)) return "iOS";
-
-      return "Unknown";
-    }
-    return "Unknown";
-  };
-
-  const device = detectDevice();
+  useEffect(() => {
+    const detectDevice = () => {
+      const agentname = window.navigator.userAgent.toLowerCase();
+      if (agentname.includes("windows")) return "windows";
+      if (agentname.includes("iphone")) return "ios";
+      if (agentname.includes("mac")) return "mac";
+      if (agentname.includes("android")) return "android";
+      return "unknown";
+    };
+    setDevice(detectDevice());
+  }, []);
 
   const getWhatsAppLink = () => {
-    if (device === "Windows" || device === "Mac") {
-      // Desktop Devices
+    if (device === "windows" || device === "mac") {
       return `https://web.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(preFilledMessage)}`;
-    } else if (device === "Android" || device === "iOS") {
-      // Mobile Devices
+    } else if (device === "android" || device === "ios") {
       return `https://wa.me/${phoneNumber}?text=${encodeURIComponent(preFilledMessage)}`;
     } else {
-      // Fallback
       return `https://wa.me/${phoneNumber}?text=${encodeURIComponent(preFilledMessage)}`;
     }
   };
+
+  // Device detect না হওয়া পর্যন্ত কিছু রেন্ডার করবো না
+  if (device === "unknown") return null;
 
   const whatsappLink = getWhatsAppLink();
 
@@ -53,9 +50,10 @@ const WhatsAppButton: React.FC = () => {
         duration: 1.5,
         ease: "easeInOut",
       }}
-      className="fixed font-normal bottom-8 z-50 right-5 flex items-center justify-center gap-1 py-1 px-3 bg-gray-800/80 text-white rounded-lg  text-2xl shadow-2xl shadow-gray-100 hover:bg-emerald-800/80 transition-all duration-300"
+      className="fixed font-normal bottom-8 z-50 right-5 flex items-center justify-center gap-1 py-1 px-3 bg-gray-800/80 text-white rounded-lg text-2xl shadow-2xl shadow-gray-100 hover:bg-emerald-700/80 transition-all duration-300"
     >
-      <span className="text-xl"><FaWhatsapp/></span> <span className="font-semibold text-lg">Chat with us</span>
+      <span className="text-xl"><FaWhatsapp /></span> 
+      <span className="font-semibold text-lg">Chat with us</span>
     </motion.a>
   );
 };
