@@ -119,7 +119,6 @@ const ProductCart = (prop: productItem) => {
             />
           </motion.div>
         </div>
-
         <div className="px-2 py-3">
           <h1 className="text-lg font-semibold capitalize py-2">{name.slice(0,18)}</h1>
           <div className="flex items-center justify-between">
@@ -133,19 +132,17 @@ const ProductCart = (prop: productItem) => {
               </small>
           </div>
           <div>
-            <div className="flex w-[90%] mx-auto items-center justify-between py-2">
-              <p className={`${isDiscount && 'line-through'} px-2`}>
+            <div className="flex w-[95%] mx-auto items-center  py-2">
+              <b className={`${isDiscount && 'line-through'} px-2`}>
                 ৳ {price}
-              </p>
-              <p className="text-gray-400">
-                {isDiscount ? Number(discount) + '% off = ' : ''}
-              </p>
+              </b>
               {isDiscount ? (
-                <b className="text-gray-700">
-                  ৳ {price - (price * Number(discount || 10)) / 100}{' '}
-                </b>
+                <p className="text-gray-700">
+                  <b>৳ {price - (price * Number(discount || 10)) / 100}</b>
+                  <small> - discount price</small>
+                </p>
               ) : (
-                'Available'
+                <small className=''>{' - Limited stock'}</small>
               )}
             </div>
 

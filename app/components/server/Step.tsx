@@ -38,6 +38,7 @@ const Step = () => {
       </motion.div>
 
       <div className="grid md:grid-cols-3 lg:grid-cols-4 grid-cols-1 sm:grid-cols-2 gap-5">
+        <h1>{window.navigator.userAgent.toLocaleLowerCase().includes("windows")?"yes windows":"not windows " }</h1>
         {stepData.map((item, idx) => (
           <motion.div
             key={idx}
