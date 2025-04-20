@@ -58,8 +58,7 @@ const FAQSection: React.FC = () => {
                   {item.answer.includes('ফেসবুক পেজ') ? (
                     <div>
                       আমরা একটি সহজ প্রক্রিয়ায় প্রোডাক্ট বিক্রি করি। আপনি আমাদের
-                      ওয়েবসাইটে অথবা{ window.navigator.userAgent}
-                      {window.navigator.platform}
+                      ওয়েবসাইটে অথবা
                       <Link
                         href={'https://facebook.com/glowniba'}
                         className="text-blue-400"
