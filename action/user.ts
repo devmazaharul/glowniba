@@ -1,3 +1,4 @@
+'use server'
 import connectDB from "@/lib/db";
 import User from "@/model/user";
 import { userlogin, userregister, userUpdate } from "@/types/user";
@@ -24,10 +25,11 @@ const userRegister=async({name,email,number,password,address}:userregister)=>{
     })
 
   } catch (error:unknown) {
-      if (error instanceof Error) {
-          return handleError(error.message, (error as any).status);
-      }
+    if(error instanceof CustomError) {
+      return handleError(error.message, error.status);
+    }else{
       return handleError("An unknown error occurred", 500);
+    }
   }
 }
 
@@ -36,7 +38,8 @@ const userLogin=async({email,password}:userlogin)=>{
     await connectDB()
     const checkUser=await User.findOne({email});
     if(!checkUser) throw new CustomError("Invalid user please register first",400)
-      if(!compareHashPass(password,checkUser.password)) throw new CustomError("Invalid credentials",400);
+
+      if(await compareHashPass(password,checkUser.password)==false) throw new CustomError("Invalid credentials",400)
     return responce({
       message:"Successfully login",
       status:200,
@@ -135,13 +138,34 @@ const userUpdateInfo=async({userId,name,address,number}:userUpdate)=>{
 }
 
 
+const getUsers=async()=>{
+  try {
+    await connectDB()
+    const users=await User.find({}).select("-password")
+    if(!users) throw new CustomError("No user found",400)
+    return responce({
+      message:"Successfully get all users",
+      status:200,
+      data:{
+        users
+      }
+    })
+  } catch (error) {
+    if (error instanceof Error) {
+      return handleError(error.message, (error as any).status);
+  }
+  return handleError("An unknown error occurred", 500);
+  }
+}
+
 
 export  {
   userRegister,
   userLogin,
   userReset,
   userChangePassword,
-  userUpdateInfo
+  userUpdateInfo,
+  getUsers
 }
 
 

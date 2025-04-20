@@ -17,3 +17,11 @@ export interface userUpdate {
   number?: string;
 }
 
+export interface userIfo {
+  _id: string;
+  name: string;
+  email: string;
+  password: string;
+  number: string;
+  address: string;
+}

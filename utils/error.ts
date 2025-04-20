@@ -11,7 +11,7 @@ export class CustomError extends Error {
 export const handleError = (message="Error occourd",status=400) => {
   return {
     message: message,
-    status: status || 500,
+    status: status,
     hint:`Please check your all information and try again or contact out team support@glowniba.com`
   };
 };

@@ -18,21 +18,11 @@ const CustomSheetContent = () => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-      toast('Order has been placed', {
+      toast.success('Order has been placed', {
         description: `Your order has been placed successfully`,
         duration: 5000,
-        style: {
-          backgroundColor: '#fff',
-          color: '#000',
-        },
-        action: {
-          label: 'close',
-          onClick: () => {
-            toast.dismiss();
-          },
-        },
       });
-    }, 5000);
+    }, 3000);
   };
 
   return (
@@ -119,7 +109,7 @@ const CustomSheetContent = () => {
               {/* Checkout Button */}
               {cart.length > 0 && (
                 <div className="w-full">
-                  <Button onClick={HandleClick} variant={'grayType'} className="w-full">
+                  <Button onClick={HandleClick} variant={'grayType'} className="w-full cursor-pointer">
                     {loading ? <Spiner /> : 'Checkout'}
                   </Button>
                 </div>
