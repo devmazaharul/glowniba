@@ -54,11 +54,12 @@ const FAQSection: React.FC = () => {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.3 }}
               >
-                <p>
+                <div>
                   {item.answer.includes('ফেসবুক পেজ') ? (
                     <div>
                       আমরা একটি সহজ প্রক্রিয়ায় প্রোডাক্ট বিক্রি করি। আপনি আমাদের
-                      ওয়েবসাইটে অথবা{' '}
+                      ওয়েবসাইটে অথবা{ window.navigator.userAgent}
+                      {window.navigator.platform}
                       <Link
                         href={'https://facebook.com/glowniba'}
                         className="text-blue-400"
@@ -71,7 +72,7 @@ const FAQSection: React.FC = () => {
                   ) : (
                     item.answer
                   )}
-                </p>
+                </div>
               </motion.div>
             )}
           </div>
