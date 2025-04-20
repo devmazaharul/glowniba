@@ -10,13 +10,13 @@ const WhatsAppButton: React.FC = () => {
 
   const detectDevice = () => {
     if (typeof window !== "undefined") {
-      const platform = window.navigator.platform.toLowerCase();
-      const userAgent = window.navigator.userAgent.toLowerCase();
+      const platform = window.navigator.userAgent.toLowerCase();
+  
 
-      if (platform.includes("win")) return "Windows";
+      if (platform.includes("windows")) return "Windows";
       if (platform.includes("mac")) return "Mac";
-      if (userAgent.includes("android")) return "Android";
-      if (/iphone|ipad|ipod/.test(userAgent)) return "iOS";
+      if (platform.includes("android")) return "Android";
+      if (/iphone|ipad|ipod/.test(platform)) return "iOS";
 
       return "Unknown";
     }
