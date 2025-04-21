@@ -149,7 +149,7 @@ const getUsers=async(limit:number=10,page:number=1)=>{
     const totalItems=await User.countDocuments({});
     if(!users) throw new CustomError("No user found",400);
 
-    const totalPage=parseInt((totalItems/limit).toString())
+    const totalPage=Math.ceil((totalItems/limit))
     return responceItems({
       message:"Successfully get users",
       status:200,

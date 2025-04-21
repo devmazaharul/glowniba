@@ -29,9 +29,11 @@ const LoginPage = () => {
       if (signInvalidation(state)) {
         const email = state.email.trim().toLowerCase();
         const password = state.password.trim();
-        if (password == '') return toast.error('Please provide password');
+        if (password == '') return toast.warning('Please provide password',{
+          description:"Invalid password please provide your current password"
+        });
         if (password.length < 6)
-          return toast.error('Invalid credentials', {
+          return toast.warning('Invalid credentials', {
             description: 'plese provide a valid credentials for login',
             duration: 3000,
           });
