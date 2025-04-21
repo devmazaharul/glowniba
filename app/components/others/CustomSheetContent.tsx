@@ -39,7 +39,7 @@ const CustomSheetContent = () => {
 
           {/* Header */}
           <SheetHeader>
-            <SheetClose className="absolute right-4 top-4 z-10 cursor-pointer hover:bg-gray-100 rounded-full p-1 transition-all" />
+            <SheetClose className="absolute right-4 top-4 z-100 cursor-pointer hover:bg-gray-100 rounded-full p-1 transition-all" />
             <SheetTitle className="flex items-center gap-1">
               <span className="text-lg font-semibold">My Cart</span>
               <ShoppingBag />
@@ -117,9 +117,9 @@ const CustomSheetContent = () => {
               {cart.length > 0 && (
                 <div className="w-full">
                  <div className='my-2'>
-                 <Button onClick={HandleClick} variant={'outline'} className="w-full cursor-pointer">
-                    {loading ? <Spiner /> : 'View carts'}
-                  </Button>
+                 <Link href={'/charts'}  className="w-full  cursor-pointer">
+                  <Button variant={"outline"} className='w-full'>View charts</Button>
+                  </Link>
                  </div>
                   <Button onClick={HandleClick} variant={'grayType'} className="w-full cursor-pointer">
                     {loading ? <Spiner /> : 'Checkout'}

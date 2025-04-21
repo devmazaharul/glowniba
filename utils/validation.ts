@@ -12,19 +12,19 @@ import { toast } from "sonner";
     }
     if(!isValidEmail(email)){
       toast.error("Email is not valid",{
-        description:"Please enter a valid email address"
+        description:"Please provide a valid email address"
       })
       return false;
     }
     if(!isValidNumber(number)){
       toast.error("Phone number is not valid",{
-        description:"Please enter a valid bd phone number"
+        description:"Please provide a valid bd phone number"
       })
       return false;
     }
     if(!isValidAddress(address)){
       toast.error("Address is not valid",{
-        description:"Please enter a valid address"
+        description:"Please provide a valid address"
       })
       return false;
     }
@@ -42,7 +42,7 @@ import { toast } from "sonner";
     const { email } = data;
     if (!isValidEmail(email)) {
       toast.error("Email is not valid", {
-        description: "Please enter a valid email address",
+        description: "Please provide a valid email address",
       });
       return false;
     }

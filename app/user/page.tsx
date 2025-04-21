@@ -118,7 +118,7 @@ const LoginPage = () => {
 
         {/* other section */}
         <div className="flex text-sm py-3 px-1 items-center w-fit mx-auto gap-2">
-          <p>Don`&apos`t have an account?</p>
+          <p>Don&apos; have an account?</p>
           <Link href={'/signup'} className="text-blue-500">
             Sign Up
           </Link>

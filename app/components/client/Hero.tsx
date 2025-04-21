@@ -28,7 +28,7 @@ export default function BackgroundImageSlider() {
   const currentImage = HeroSlideImage[currentIndex];
 
   return (
-    <section className="w-full relative overflow-hidden">
+    <section className="w-full relative overflow-hidden py-10">
       {/* Background Image */}
       <AnimatePresence mode="wait">
         <motion.div

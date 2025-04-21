@@ -84,7 +84,8 @@ const Reviews = () => {
           {customers.map((item, idx) => (
             <motion.div
               key={idx}
-              className="mx-5 w-[300px] min-w-[250px] text-center shadow-2xl shadow-gray-50 p-6 border border-gray-100 rounded-2xl bg-white hover:scale-95 duration-500 ease-in-out "
+              className="mx-5 w-[300px] min-w-[250px] text-center shadow-2xl shadow-gray-50 p-6 border border-gray-100 rounded-2xl bg-white hover:scale-95 duration-500 ease-in-out 
+              "
               variants={cardVariants}
               
               viewport={{ once: true, amount: 0.3 }}

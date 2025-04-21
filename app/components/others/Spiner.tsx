@@ -1,11 +1,11 @@
 'use clinet'
 import { ScaleLoader } from 'react-spinners';
-const Spiner = () => {
+const Spiner = ({color='#fff'}:{color?:string}) => {
   
   return (
     <div>
     <ScaleLoader
-  color="#fff"
+  color={color}
   height={14}
   margin={2}
   radius={5}

@@ -10,6 +10,8 @@ import Reviews from './components/server/Reviews';
 import Step from './components/server/Step';
 
 export default function page() {
+
+
   return (
     <div>
       <BackgroundImageSlider />
@@ -22,6 +24,7 @@ export default function page() {
       <Reviews/>
       <WhatsAppButton/>
       <FAQSection/>
+      
     </div>
   );
 }

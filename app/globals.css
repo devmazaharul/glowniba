@@ -11,7 +11,7 @@
   }
 
   .btn_outline{
-    @apply border border-gray-200  px-8 h-10 font-medium transition-colors disabled:pointer-events-none	disabled:opacity-50	 text-sm rounded-sm  capitalize text-black cursor-pointer hover:bg-gray-100/80  duration-200 ease-in-out
+    @apply border border-gray-200  w-full px-8 h-10 font-medium transition-colors disabled:pointer-events-none	disabled:opacity-50	 text-sm rounded-sm  capitalize text-black cursor-pointer hover:bg-gray-100/80  duration-200 ease-in-out
   }
   .section{
     @apply my-12 py-8 max-w-[90%] mx-auto

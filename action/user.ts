@@ -10,7 +10,7 @@ const userRegister=async({name,email,number,password,address}:userregister)=>{
   try {
     await connectDB()
     const checkUser=await User.findOne({email})
-    if(checkUser) throw new CustomError("user already have exist",400);
+    if(checkUser) throw new CustomError("User already have exist",400);
     const hashPass=await hashPassword(password)
     const create=new User({
       name,email,password:hashPass,address,number
@@ -167,13 +167,32 @@ const getUsers=async(limit:number=10,page:number=1)=>{
 }
 
 
+const userDelete=async(id:any)=>{
+    try {
+     await User.findByIdAndDelete(id);
+      return responce({
+        message:"Successfully deleted",
+        status:200,
+        data:{}
+      })
+      
+    } catch (error) {
+      if (error instanceof Error) {
+        return handleError(error.message, (error as any).status);
+    }
+    return handleError("An unknown error occurred", 500);
+    }
+}
+
+
 export  {
   userRegister,
   userLogin,
   userReset,
   userChangePassword,
   userUpdateInfo,
-  getUsers
+  getUsers,
+  userDelete
 }
 
 
