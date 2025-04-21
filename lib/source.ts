@@ -87,6 +87,8 @@ export const productsData=[
     "thumbnail": "/images/products/thumbnails/glow-vitamin-c-serum-thumb.jpg",
     "tags": ["vitamin c", "brightening", "serum", "glow"],
     "isFeatured": true,
+    "discount":"10",
+    "isDiscount":true,
   },
   {
     "id": "2",

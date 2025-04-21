@@ -4,7 +4,7 @@ import User from "@/model/user";
 import { userlogin, userregister, userUpdate } from "@/types/user";
 import { compareHashPass, hashPassword } from "@/utils";
 import { CustomError, handleError } from "@/utils/error";
-import { responce } from "@/utils/success";
+import { responce, responceItems } from "@/utils/success";
 
 const userRegister=async({name,email,number,password,address}:userregister)=>{
   try {
@@ -138,18 +138,26 @@ const userUpdateInfo=async({userId,name,address,number}:userUpdate)=>{
 }
 
 
-const getUsers=async()=>{
+const getUsers=async(limit:number=10,page:number=1)=>{
   try {
-    await connectDB()
-    const users=await User.find({}).select("-password")
-    if(!users) throw new CustomError("No user found",400)
-    return responce({
-      message:"Successfully get all users",
+    await connectDB();
+    const skip=(page-1)*limit;
+    
+    const usersa=await User.find({});
+    const users=usersa.reverse().slice(skip,skip+limit);
+
+    const totalItems=await User.countDocuments({});
+    if(!users) throw new CustomError("No user found",400);
+
+    const totalPage=parseInt((totalItems/limit).toString())
+    return responceItems({
+      message:"Successfully get users",
       status:200,
-      data:{
-        users
-      }
+      items: JSON.parse(JSON.stringify(users)),
+      totalitems:totalItems,
+      totalpage:totalPage
     })
+
   } catch (error) {
     if (error instanceof Error) {
       return handleError(error.message, (error as any).status);

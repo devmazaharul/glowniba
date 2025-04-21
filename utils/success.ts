@@ -6,11 +6,12 @@ export const responce=({message="",status=200,data={}})=>{
     data
   }
 }
-export const responceProduct=(msg:string,status=200,prod=[])=>{
+export const responceItems=({message='',status=200,items,totalitems=0,totalpage=0}:{message:string,status:number,items:any[],totalitems:number,totalpage:number})=>{
   return {
-    message:msg,
+    message,
     status,
-    items:prod,
-    length:prod.length
+    items:items,
+    totalItems:totalitems,
+    totalpage:totalpage,
   }
 }

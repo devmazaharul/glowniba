@@ -9,6 +9,7 @@ import { productItem } from '@/types';
 import Spiner from './Spiner';
 import { useState } from 'react';
 import { toast } from 'sonner';
+import Link from 'next/link';
 
 const CustomSheetContent = () => {
   const { increaseQuantity, decreaseQuantity, cart, removeFromCart } = useCartStore();
@@ -86,9 +87,12 @@ const CustomSheetContent = () => {
                 </div>
               ))
             ) : (
-              <div className="flex items-center justify-center h-full text-gray-400">
-                Your cart is empty
+          <div className='flex gap-2 items-center justify-center h-full text-gray-400'>
+                <div className="inline-block">
+               <p> Your cart is empty</p> 
               </div>
+              <Link href={'/products'} className='text-blue-800'> continue shopping</Link>
+          </div>
             )}
           </div>
 
@@ -96,12 +100,15 @@ const CustomSheetContent = () => {
           <SheetFooter className="pt-4 border-t mt-2">
             <div className="flex flex-col w-full gap-4">
               {/* Total Price */}
-              <div className="flex justify-between">
-                <span className="text-lg font-semibold">Subtotal:</span>
+          <div>
+  
+              <div className="flex justify-between ">
+                <span className="text-lg font-semibold">Total:</span>
                 <p className="font-semibold">
                   {cart.reduce((total, item) => total + item.price * item.quantity, 0)}৳
                 </p>
               </div>
+          </div>
               <small className="text-gray-400">
                 Shipping and taxes calculated at checkout.
               </small>
@@ -109,6 +116,11 @@ const CustomSheetContent = () => {
               {/* Checkout Button */}
               {cart.length > 0 && (
                 <div className="w-full">
+                 <div className='my-2'>
+                 <Button onClick={HandleClick} variant={'outline'} className="w-full cursor-pointer">
+                    {loading ? <Spiner /> : 'View carts'}
+                  </Button>
+                 </div>
                   <Button onClick={HandleClick} variant={'grayType'} className="w-full cursor-pointer">
                     {loading ? <Spiner /> : 'Checkout'}
                   </Button>

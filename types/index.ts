@@ -65,5 +65,9 @@ export interface commonCartType {
   price:number,
   brand:string
   id:string,
-  reviews:number
+  reviews:number,
+  isDiscount?:boolean,
+  discount?:string,
+  status?:string,
+
 }

@@ -18,7 +18,7 @@ const NewArrivals = () => {
       <div className='flex items-center justify-between py-2'>
         <p></p>
         <Link href={'/products'}>
-          <Button variant={'outline'}>See all</Button>
+          <Button variant={'outline'}>See all products</Button>
         </Link>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">

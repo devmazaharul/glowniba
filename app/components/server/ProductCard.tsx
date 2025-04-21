@@ -87,11 +87,15 @@ const ProductCart = (prop: productItem) => {
           <div className="flex items-center px-2 relative top-[8px] justify-between w-full">
             <div className="w-full">
               {isDiscount ? (
-                <p className={`bg-blue-100 text-blue-800 px-3 py-1 rounded-full  w-fit my-3 capitalize text-sm`}>
-                 discount
+                <p
+                  className={`bg-blue-100 text-blue-800 px-3 py-1 rounded-full  w-fit my-3 capitalize text-sm`}
+                >
+                  discount
                 </p>
               ) : (
-                <p  className={`bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full  w-fit my-3 capitalize text-sm`}>
+                <p
+                  className={`bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full  w-fit my-3 capitalize text-sm`}
+                >
                   {status || 'new'}
                 </p>
               )}
@@ -107,9 +111,7 @@ const ProductCart = (prop: productItem) => {
               </button>
             </div>
           </div>
-          <motion.div
-            transition={{ type: 'spring', stiffness: 50 }}
-          >
+          <motion.div transition={{ type: 'spring', stiffness: 50 }}>
             <Image
               src={image}
               alt={name}
@@ -120,7 +122,9 @@ const ProductCart = (prop: productItem) => {
           </motion.div>
         </div>
         <div className="px-2 py-3">
-          <h1 className="text-lg font-semibold capitalize py-2">{name.slice(0,18)}</h1>
+          <h1 className="text-lg font-semibold capitalize py-2">
+            {name.slice(0, 18)}
+          </h1>
           <div className="flex items-center justify-between">
             <div>
               <Rating rating={rating} reviews={reviews} />
@@ -128,8 +132,10 @@ const ProductCart = (prop: productItem) => {
           </div>
           <div className="py-1">
             <small className="text-gray-500">
-            {shortDescription.length>60?shortDescription.slice(0,60)+"...":shortDescription}
-              </small>
+              {shortDescription.length > 60
+                ? shortDescription.slice(0, 60) + '...'
+                : shortDescription}
+            </small>
           </div>
           <div>
             <div className="flex w-[95%] mx-auto items-center  py-2">
@@ -138,11 +144,11 @@ const ProductCart = (prop: productItem) => {
               </b>
               {isDiscount ? (
                 <p className="text-gray-700">
-                  <b>৳ {price - (price * Number(discount || 10)) / 100}</b>
+                  <b>৳ {price - (price * Number(discount || 0)) / 100}</b>
                   <small> - discount price</small>
                 </p>
               ) : (
-                <small className=''>{' - Limited stock'}</small>
+                <small className="">{' - Limited stock'}</small>
               )}
             </div>
 

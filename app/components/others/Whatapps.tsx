@@ -53,7 +53,7 @@ const WhatsAppButton: React.FC = () => {
       className="fixed font-normal bottom-8 z-50 right-5 flex items-center justify-center gap-1 py-1 px-3 bg-gray-800/80 text-white rounded-lg text-2xl shadow-2xl shadow-gray-100 hover:bg-emerald-700/80 transition-all duration-300"
     >
       <span className="text-xl"><FaWhatsapp /></span> 
-      <span className="font-semibold text-lg">Chat with us</span>
+      <span className="font-medium text-lg "> Chat</span>
     </motion.a>
   );
 };

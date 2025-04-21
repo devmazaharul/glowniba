@@ -17,7 +17,7 @@ const FeatureProduct = () => {
         desc=" আমরা বেছে নিয়েছি সেরা কিছু প্রোডাক্ট, যেগুলো আপনার স্কিন কেয়ারে দেবে অসাধারণ ফলাফল।"
       />
       <div>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2">
           {featuredProducts
             .slice(0, defualtValue.featureListSize)
             .map((item, idx) => (

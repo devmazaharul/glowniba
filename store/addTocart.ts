@@ -58,10 +58,10 @@ export const useCartStore = create<CartStateType>()(
                     : item
                 ),
               });
-              toast.success(`Product quantity increased`, {
-                description: `Product quantity has been increased`,
-                duration: 3000,
-              });
+              // toast.success(`Product quantity increased`, {
+              //   description: `Product quantity has been increased`,
+              //   duration: 3000,
+              // });
             } else {
               toast.warning(`Product added faild `, {
                 description: `You can only add ${defualtValue.addProductLimit} of this product at a time.`,

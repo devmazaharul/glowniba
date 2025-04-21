@@ -25,3 +25,12 @@ export interface userIfo {
   number: string;
   address: string;
 }
+export interface userIfodata {
+  _id: string;
+  name: string;
+  email: string;
+  number: string;
+  address: string;
+  createdAt: string;
+  updatedAt: string;
+}
