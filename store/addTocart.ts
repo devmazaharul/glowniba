@@ -22,7 +22,7 @@ export const useCartStore = create<CartStateType>()(
             set({
               cart: get().cart.map((item) =>
                 item.id === product.id
-                  ? { ...item, quantity: item.quantity + 1 }
+                  ? { ...item, quantity: (item.quantity ?? 1) + 1 }
                   : item
               ),
             });
@@ -50,11 +50,11 @@ export const useCartStore = create<CartStateType>()(
       increaseQuantity: (id) => {
         get().cart.map((item) => {
           if (item.id == id) {
-            if (item.quantity < defualtValue.addProductLimit) {
+            if ((item.quantity ?? 1 )< defualtValue.addProductLimit) {
               set({
                 cart: get().cart.map((item) =>
                   item.id == id
-                    ? { ...item, quantity: item.quantity + 1 }
+                    ? { ...item, quantity:( item.quantity ?? 1 )+ 1 }
                     : item
                 ),
               });
@@ -75,7 +75,7 @@ export const useCartStore = create<CartStateType>()(
       decreaseQuantity: (id) => {
         set({
           cart: get().cart.map((item) =>
-            item.id === id ? { ...item, quantity: item.quantity - 1 } : item
+            item.id === id ? { ...item, quantity: (item.quantity ?? 1) - 1 } : item
           ),
         });
       },

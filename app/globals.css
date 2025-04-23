@@ -16,6 +16,9 @@
   .section{
     @apply my-12 py-8 max-w-[90%] mx-auto
   }
+  .section1{
+    @apply my-16 py-8 max-w-[90%] mx-auto
+  }
   .input{
     @apply  px-4 py-2 rounded-md border flex items-center gap-2 my-4
   }

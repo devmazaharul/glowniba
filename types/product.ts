@@ -1,14 +1,16 @@
-
-export interface strogeKey{
-message:string,
-status:number,
-data:{
-  items:[{
-    name:string,
-    brand:string,
-    id:string,
-    image:string
-    price:number
-  }]
-}
+export interface productItem{
+  name:string,
+  id:string,
+  price:number,
+  quentity:number
+  isDiscount?:boolean
+  discount?:number
+  shortDescription:string,
+  category:string,
+  isFeatured:string,
+  image:string,
+  slug:string,
+  rating:number
+  reviews:number
+  stock:number
 }

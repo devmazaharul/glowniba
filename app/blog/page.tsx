@@ -1,11 +1,11 @@
 import React from 'react';
 
-const UseFetch = () => {
+const Page = () => {
   return (
     <div>
-      
+      <h1>Blog</h1>
     </div>
   );
 }
 
-export default UseFetch;
+export default Page;

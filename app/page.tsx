@@ -1,6 +1,7 @@
 import FAQSection from './components/client/FAQ';
 import BackgroundImageSlider from './components/client/Hero';
 import WhatsAppButton from './components/others/Whatapps';
+
 import Category from './components/server/Category';
 import Common from './components/server/Common';
 import FeatureProduct from './components/server/FeatureProduct';
@@ -24,7 +25,7 @@ export default function page() {
       <Reviews/>
       <WhatsAppButton/>
       <FAQSection/>
-      
+
     </div>
   );
 }

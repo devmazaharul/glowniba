@@ -76,7 +76,7 @@ const LoginPage = () => {
 
   return (
     <div>
-      <div className="md:w-[400px] py-4 w-[80%] mt-10 mx-auto">
+      <div className="md:w-[400px] w-[80%] py-20 mx-auto">
         <div className="text-center py-3">
           <h1 className="text-xl pb-2 text-gray-700 font-semibold">
             Welcome Back

@@ -4,13 +4,14 @@ import './globals.css';
 import Header from './components/client/Header';
 import { Toaster } from '@/components/ui/sonner';
 import Footer from './components/server/Footer';
-
+import {defualtValue} from "../constants/index";
+const {siteName="Glow niba",siteUrl} =defualtValue
 export const metadata: Metadata = {
-  title: 'Glow Niba | Premium Skincare for Glowing Skin',
+  title: `${siteName}| Premium Skincare for Glowing Skin`,
   description:
-    'Glow Niba offers premium face serums, creams, and skincare products designed for girls who love glowing skin. Shop now!',
+    `${siteName} offers premium face serums, creams, and skincare products designed for girls who love glowing skin. Shop now!`,
   keywords: [
-    'Glow Niba',
+    siteName,
     'skincare',
     'face serum',
     'face cream',
@@ -18,23 +19,23 @@ export const metadata: Metadata = {
     'girls cosmetics',
   ],
   openGraph: {
-    title: 'Glow Niba | Premium Skincare',
+    title: `${siteName} | Premium Skincare`,
     description:
       'Best serums and creams for glowing skin. Discover Glow Niva now.',
-    url: 'https://glowniba.vercel.app',
-    siteName: 'Glow Niva',
+    url:siteUrl,
+    siteName: siteName,
     images: [
       {
-        url: 'https://glowniba.vercel.app',
+        url: siteUrl,
         width: 1200,
         height: 630,
-        alt: 'Glow Niba skincare product',
+        alt: `${siteName} skincare product`,
       },
     ],
     locale: 'bn_bd',
     type: 'website',
   },
-  metadataBase: new URL('https://glowniba.vercel.app'),
+  metadataBase: new URL(siteUrl),
   alternates: {
     canonical: '/',
   },
@@ -55,7 +56,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={` ${raleway.className} `}>
         <div>
+          <div className='mb-10'>
           <Header />
+          </div>
           <div className='max-w-[100%] mx-auto'>{children}</div>
         </div>
 

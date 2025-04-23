@@ -8,7 +8,7 @@ export interface productItem{
   brand:string
   id:string,
   reviews:number
-  quantity:number
+  quantity?:number
   discount?:string
   isDiscount?:boolean,
   status?:string

@@ -58,13 +58,13 @@ const FAQSection: React.FC = () => {
                   {item.answer.includes('ফেসবুক পেজ') ? (
                     <div>
                       আমরা একটি সহজ প্রক্রিয়ায় প্রোডাক্ট বিক্রি করি। আপনি আমাদের
-                      ওয়েবসাইটে অথবা
+                      ওয়েবসাইটে অথবা 
                       <Link
                         href={'https://facebook.com/glowniba'}
-                        className="text-blue-400"
+                        className="text-blue-400 px-1"
                         target="_blank"
                       >
-                        ফেসবুক পেজ
+                         ফেসবুক পেজ 
                       </Link>{' '}
                       গিয়ে প্রোডাক্ট নির্বাচন করে অর্ডার করতে পারবেন।
                     </div>

@@ -1,5 +1,4 @@
 'use client';
-
 import { getUsers, userDelete } from "@/action/user";
 import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { userIfodata } from "@/types/user";
@@ -36,7 +35,6 @@ export default function Page() {
       setLoading(false);
     }
   };
-
   useEffect(() => {
     fetchUsers(currentPage);
   }, [currentPage]);
@@ -94,7 +92,6 @@ export default function Page() {
         <h1 className="text-2xl font-semibold text-gray-700">Users</h1>
         <p className="text-gray-500 text-sm">Manage your users and their information.</p>
       </div>
-
       <Table className="shadow-2xl shadow-gray-100 border border-gray-200 rounded-lg">
         <TableCaption>A list of your recent users.</TableCaption>
         <TableHeader>

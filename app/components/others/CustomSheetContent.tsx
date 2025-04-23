@@ -105,7 +105,7 @@ const CustomSheetContent = () => {
               <div className="flex justify-between ">
                 <span className="text-lg font-semibold">Total:</span>
                 <p className="font-semibold">
-                  {cart.reduce((total, item) => total + item.price * item.quantity, 0)}৳
+                  {cart.reduce((total, item) => total + item.price * (item.quantity ?? 1), 0)}৳
                 </p>
               </div>
           </div>
