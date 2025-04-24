@@ -31,7 +31,7 @@ const FAQSection: React.FC = () => {
               onClick={() => toggleAnswer(index)}
               className={`${
                 activeIndex !== index ? 'border rounded-md' : ''
-              } w-full text-left py-4 px-4 text-xl font-medium text-gray-700 shadow-2xl shadow-gray-100 rounded-t-md border-gray-200 cursor-pointer border-t border-r border-l hover:bg-gray-50 focus:outline-none`}
+              } w-full text-left py-4 px-4 text-xl font-medium text-gray-700 shadow-2xl shadow-gray-100 rounded-t-md border-gray-100 cursor-pointer border-t border-r border-l hover:bg-gray-50 focus:outline-none`}
               whileHover={{ scale: 1.0 }}
               transition={{ duration: 0.3 }}
             >

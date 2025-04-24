@@ -11,13 +11,14 @@ export const  defualtValue=Object.freeze({
   siteUrl:"https://glowniba.vercel.app",
   facbookPageUrl:"https://facebook.com/glowniba",
   instagramUrl:"http://instagram.com/glowniba",
-  whatsAppNumber:"8801797575932",
+  instagramUserName:"@glowniba",
+  whatsAppNumber:"8801799588",
   whatAppsMessage:"Hi, I want to buy from Glow Niba!",
 })
 
 export const contactInfo = Object.freeze({
   supprtyEmail: "support@glowniba.com",
-  supprtyPhone: "+8801797575932",
+  supprtyPhone: "+880171265885",
   supprtyAddress: "Dhaka, Bangladesh",
   supprtyLocation: "Dhaka, Bangladesh",
 })

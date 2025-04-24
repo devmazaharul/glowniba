@@ -23,7 +23,7 @@ export default function Page() {
       <ul className="space-y-4 text-lg">
         <li>
           <Link  target='_blank' href="/policies/privacy-policy" className="text-gray-600 flex items-center gap-1  hover:underline">
-            <MdPrivacyTip className='text-yellow-500'/> প্রাইভেসি নীতি (Privacy Policy)
+            <MdPrivacyTip className='text-green-500'/> প্রাইভেসি নীতি (Privacy Policy)
           </Link>
         </li>
         <li>

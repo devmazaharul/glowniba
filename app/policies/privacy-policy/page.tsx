@@ -12,7 +12,7 @@ export default function Page() {
         <title>Glow Niba | গোপনীয়তা নীতি</title>
         <meta name="description" content="Glow Niba-তে আমরা আপনার ব্যক্তিগত তথ্যের গোপনীয়তা রক্ষা করতে প্রতিশ্রুতিবদ্ধ। বিস্তারিত জানতে পড়ুন।" />
       </Head>
-      <h1 className="text-3xl flex items-center gap-2 font-bold mb-6"><MdPrivacyTip className='text-yellow-500 text-5xl md:text-4xl'/> গোপনীয়তা নীতি (Privacy Policy)</h1>
+      <h1 className="text-3xl flex items-center gap-2 font-bold mb-6"><MdPrivacyTip className='text-green-500 text-5xl md:text-4xl'/> গোপনীয়তা নীতি (Privacy Policy)</h1>
       <section className="text-gray-700 leading-relaxed space-y-6">
         <p>
           Glow Niba-তে আপনার গোপনীয়তা আমাদের কাছে অত্যন্ত গুরুত্বপূর্ণ। আমরা আপনার ব্যক্তিগত তথ্য সংগ্রহ, ব্যবহার এবং সুরক্ষার বিষয়ে সম্পূর্ণ স্বচ্ছতা বজায় রাখি। এই গোপনীয়তা নীতিতে ব্যাখ্যা করা হয়েছে কিভাবে আমরা আপনার তথ্য সংগ্রহ করি, ব্যবহার করি এবং সুরক্ষা দেই।

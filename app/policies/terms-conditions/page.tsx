@@ -41,7 +41,7 @@ export default function Page() {
 
         <h2 className="text-2xl font-semibold">৫. গোপনীয়তা</h2>
         <p>
-          আপনার ব্যক্তিগত তথ্য সুরক্ষিত রাখতে, আমরা আপনার তথ্য কেবল আমাদের নীতি অনুযায়ী ব্যবহার করি। আমাদের গোপনীয়তা নীতি সম্পর্কে বিস্তারিত জানতে, আপনি আমাদের <Link target='_blank' href="/privacy-policy" className="text-blue-400 hover:underline">গোপনীয়তা নীতি</Link> পড়তে পারেন।
+          আপনার ব্যক্তিগত তথ্য সুরক্ষিত রাখতে, আমরা আপনার তথ্য কেবল আমাদের নীতি অনুযায়ী ব্যবহার করি। আমাদের গোপনীয়তা নীতি সম্পর্কে বিস্তারিত জানতে, আপনি আমাদের <Link target='_blank' href="/policies/privacy-policy" className="text-blue-400 hover:underline">গোপনীয়তা নীতি</Link> পড়তে পারেন।
         </p>
 
         <h2 className="text-2xl font-semibold">৬. সীমাবদ্ধতা এবং দায়বদ্ধতা</h2>

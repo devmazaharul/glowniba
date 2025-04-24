@@ -1,5 +1,4 @@
 'use client';
-
 import { ArrowRight, Mail } from 'lucide-react';
 import { FaFacebook, FaTiktok, FaYoutube } from 'react-icons/fa';
 import { BsInstagram } from 'react-icons/bs';
@@ -8,41 +7,67 @@ import { useState } from 'react';
 import { isValidEmail } from '@/utils';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { MdErrorOutline } from 'react-icons/md';
+import { IoShieldCheckmarkSharp  } from "react-icons/io5";
+import { subscribeUser } from '@/action/subscribe';
+import { CustomError } from '@/utils/error';
+
 
 export default function Footer() {
   const [state, setState] = useState('');
+  const [laoding, setLoading] = useState(false);
+  const pathName=usePathname()
 
-  const HandleSubscribe = () => {
-    if (!state) {
-      toast('Please provide an email address.', {
-        description: 'Email address is required to subscribe.',
-        duration: 3000,
-        action: {
-          label: 'Close',
-          onClick: () => toast.dismiss(),
-        },
-      });
-      return;
+  const HandleSubscribe =async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setLoading(true)
+    try {
+      if (!state) {
+        toast('Invalid Email address', {
+          description: 'Email address is required to subscribe.',
+          duration: 2000,
+          icon:<MdErrorOutline className='text-xl text-red-500'/>
+        });
+        return;
+      }
+      if (!isValidEmail(state)) {
+        toast('Please provide a valid email address.', {
+          description: 'The email address you provided is not valid.',
+          duration: 2000,
+          icon:<MdErrorOutline className='text-xl text-red-500'/>
+        
+        });
+        return;
+      }
+  
+      const subscibeAction=await subscribeUser(state);
+      console.log(subscibeAction);
+      if(subscibeAction.status==200){
+        toast('Thank you for subscribing!', {
+          description: 'You will receive the latest updates and special offers.',
+          duration: 2000,
+          icon:<IoShieldCheckmarkSharp  className='text-xl text-green-500'/>
+          
+        });
+      }else{
+        throw new CustomError(subscibeAction.message,subscibeAction.status)
+      }
+
+    } catch (error) {
+          if (error instanceof CustomError) {
+              toast.warning(error.message, {
+                description:
+                  error.status === 400
+                    ? 'Invalid credentials, please try again.'
+                    : 'Please try again later',
+                duration: 3000,
+              });
+            }
+    }finally{
+      setState("")
+      setLoading(false)
     }
-    if (!isValidEmail(state)) {
-      toast('Please provide a valid email address.', {
-        description: 'The email address you provided is not valid.',
-        duration: 3000,
-        action: {
-          label: 'Close',
-          onClick: () => toast.dismiss(),
-        },
-      });
-      return;
-    }
-    toast('Thank you for subscribing!', {
-      description: 'You will receive the latest updates and special offers.',
-      duration: 3000,
-      action: {
-        label: 'Close',
-        onClick: () => toast.dismiss(),
-      },
-    });
   };
 
   return (
@@ -74,12 +99,12 @@ export default function Footer() {
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8 }}>
           <h3 className="font-semibold mb-3">Policies</h3>
           <ul className="space-y-2 text-sm">
-            <li><Link href="/policies/privacy-policy" className="hover:underline">Privacy Policy</Link></li>
-            <li><Link href="/policies/return-policy" className="hover:underline">Return & Refund Policy</Link></li>
-            <li><Link href="/policies/terms-conditions" className="hover:underline">Terms & Conditions</Link></li>
-            <li><Link href="/policies/shipping-policy" className="hover:underline">Shipping & Delivery Policy</Link></li>
-            <li><Link href="/policies/payment-policy" className="hover:underline">Payment Policy</Link></li>
-            <li><Link href="/policies/disclaimer" className="hover:underline">Disclaimer</Link></li>
+            <li><Link href="/policies/privacy-policy" className={`${pathName=="/policies/privacy-policy" ? 'text-blue-400':"hover:underline"}`}>Privacy Policy</Link></li>
+            <li><Link href="/policies/return-policy"  className={`${pathName=="/policies/return-policy" ? 'text-blue-400':"hover:underline"}`}>Return & Refund Policy</Link></li>
+            <li><Link href="/policies/terms-conditions"  className={`${pathName=="/policies/terms-conditions" ? 'text-blue-400':"hover:underline"}`}>Terms & Conditions</Link></li>
+            <li><Link href="/policies/shipping-policy"  className={`${pathName=="/policies/shipping-policy" ? 'text-blue-400':"hover:underline"}`}>Shipping & Delivery Policy</Link></li>
+            <li><Link href="/policies/payment-policy"  className={`${pathName=="/policies/payment-policy" ? 'text-blue-400':"hover:underline"}`}>Payment Policy</Link></li>
+            <li><Link href="/policies/disclaimer"  className={`${pathName=="/policies/disclaimer" ? 'text-blue-400':"hover:underline"}`}>Disclaimer</Link></li>
           </ul>
         </motion.div>
 
@@ -105,7 +130,7 @@ export default function Footer() {
                 onClick={HandleSubscribe}
                 className="bg-black text-white cursor-pointer p-2 rounded-full hover:bg-gray-700"
               >
-                <ArrowRight />
+              {laoding ? "...":  <ArrowRight />}
               </button>
             </div>
           </div>

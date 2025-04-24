@@ -2,6 +2,7 @@
 import mongoose from "mongoose";
 
 const connectionUrl=process.env.MONGODB_URI as string;
+console.log(connectionUrl && connectionUrl);
 if(!connectionUrl) console.log("Plese provide valid bd url");
 
 const connectDB = async () => {
