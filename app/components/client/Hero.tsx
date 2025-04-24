@@ -77,7 +77,7 @@ export default function BackgroundImageSlider() {
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.4, duration: 0.8 }}
-              className="text-gray-600 font-light sm:text-lg lg:text-xl  leading-relaxed drop-shadow"
+              className="text-gray-200 bg-gray-700 w-fit py-1 px-2 rounded-md font-light sm:text-lg lg:text-xl  leading-relaxed drop-shadow"
             >
               {currentImage.subtitle}
             </motion.p>
@@ -90,7 +90,7 @@ export default function BackgroundImageSlider() {
             transition={{ delay: 0.6, duration: 0.8 }}
           >
             <Link href={'/search'}>
-              <Button variant={'grayType'} className="my-6 cursor-pointer">
+              <Button variant={'outline'} className="my-6 cursor-pointer">
                 <Search /> Explore Now
               </Button>
             </Link>

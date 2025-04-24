@@ -25,6 +25,7 @@ const CommonCard = ({
     rating,
     reviews,
     shortDescription,
+    description,
     stock,
   } = item;
   const cardVariants = {
@@ -100,6 +101,7 @@ const CommonCard = ({
                 rating,
                 reviews,
                 shortDescription,
+                description,
                 stock,
                 discount: '20',
                 isDiscount: true,

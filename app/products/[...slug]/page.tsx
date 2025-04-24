@@ -12,7 +12,10 @@ const Page = () => {
     return <div>Loading...</div>; // যদি slug না পাওয়া যায়, তাহলে লোডিং শো করা
   }
 
-  const productID = slug[0]; // প্রথম অংশটি পণ্য আইডি হিসেবে ব্যবহার
+  const slugValue = slug[0]; // প্রথম অংশটি পণ্য আইডি হিসেবে ব্যবহার
+  const splitProd=slugValue.split("-")
+  const productID=splitProd[splitProd.length-1]
+
   const getProduct = productsData.find((item) => item.id === productID);
 
   if (!getProduct) {

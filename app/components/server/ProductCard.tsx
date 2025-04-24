@@ -19,6 +19,7 @@ const ProductCart = (prop: productItem) => {
     stock,
     reviews,
     shortDescription,
+    description,
     price,
     brand,
     id,
@@ -67,6 +68,7 @@ const ProductCart = (prop: productItem) => {
       stock,
       reviews,
       shortDescription,
+      description,
       price,
       brand,
       id,
@@ -77,8 +79,10 @@ const ProductCart = (prop: productItem) => {
     });
   };
 
+  const productLink = `/products/${(name + ' ' + id).split(' ').join('-')}`;
+
   return (
-    <Link href={`/products/${id}/${name.split(' ').join('-')}`}>
+    <Link href={productLink}>
       <motion.div
         key={Math.random()}
         className="cursor-pointer shadow-2xl shadow-gray-100 p-4 border border-gray-100 w-[85%] sm:w-full mx-auto rounded-2xl bg-white  duration-500 ease-in-out "
@@ -164,6 +168,7 @@ const ProductCart = (prop: productItem) => {
                     rating,
                     reviews,
                     shortDescription,
+                    description,
                     stock,
                     quantity: 0,
                     discount,

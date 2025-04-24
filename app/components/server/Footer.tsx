@@ -42,17 +42,19 @@ export default function Footer() {
       }
   
       const subscibeAction=await subscribeUser(state);
-      console.log(subscibeAction);
-      if(subscibeAction.status==200){
+      if(subscibeAction.status!==200){
+        throw new CustomError(subscibeAction.message,subscibeAction.status)
+      }
         toast('Thank you for subscribing!', {
           description: 'You will receive the latest updates and special offers.',
           duration: 2000,
           icon:<IoShieldCheckmarkSharp  className='text-xl text-green-500'/>
           
         });
-      }else{
-        throw new CustomError(subscibeAction.message,subscibeAction.status)
-      }
+       
+  
+     
+   
 
     } catch (error) {
           if (error instanceof CustomError) {
