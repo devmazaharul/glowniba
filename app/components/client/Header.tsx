@@ -28,13 +28,15 @@ const Header = () => {
   useEffect(() => {
     const handleScroll = () => {
       if (typeof window !== 'undefined') {
-        if (window.scrollY > lastScrollY) {
+        if (window.scrollY > 500) {
           // স্ক্রল নিচের দিকে যাচ্ছে
           setShowHeader(false);
-        } else {
-          // স্ক্রল উপরের দিকে যাচ্ছে
-          setShowHeader(true);
-        }
+        } 
+          
+          if(lastScrollY>window.scrollY){
+            setShowHeader(true);
+          }
+        
         setLastScrollY(window.scrollY);
       }
     };
@@ -71,7 +73,7 @@ const Header = () => {
             whileHover={{ scale: 1.1 }}
             transition={{ type: 'spring', stiffness: 300 }}
           >
-            <p>Shops</p>
+            <p>Shops </p>
             <MdOutlineExpandMore className="relative top-0.5" />
           </motion.div>
         </div>
