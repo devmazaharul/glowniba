@@ -126,7 +126,7 @@ export default function Footer() {
                 value={state}
                 onChange={(e) => setState(e.target.value)}
                 placeholder="Enter your email"
-                className="w-full px-2 py-1 text-sm outline-none"
+                className="w-full px-2 py-1 text-sm outline-none lowercase"
               />
               <button
                 onClick={HandleSubscribe}
