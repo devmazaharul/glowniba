@@ -33,7 +33,7 @@ const SingleProduct = ({ item }: { item: productItem }) => {
     isDiscount,
     quantity,
   } = item;
-  const productLink = `/products/${(item.name + ' ' + item.id)
+  const productLink = defualtValue.siteUrl+`/products/${(item.name + ' ' + item.id)
     .split(' ')
     .join('-')}`;
 
