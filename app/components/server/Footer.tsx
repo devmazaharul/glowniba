@@ -133,7 +133,7 @@ export default function Footer() {
                 onClick={HandleSubscribe}
                 className="bg-black text-white cursor-pointer p-2 rounded-full hover:bg-gray-700"
               >
-              {laoding ?<AiOutlineLoading3Quarters className='animate-spin'/>:  <ArrowRight />}
+              {laoding ?<AiOutlineLoading3Quarters className='animate-spin w-5 h-5'/>:  <ArrowRight className='w-5 h-5' />}
               </button>
             </div>
           </div>
