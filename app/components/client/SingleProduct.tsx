@@ -40,8 +40,8 @@ const SingleProduct = ({ item }: { item: productItem }) => {
 
   const { cart, addToCart, increaseQuantity, decreaseQuantity } =
     useCartStore();
-  const finPoduct = cart.find((item) => item.id == item.id);
-
+  const finPoduct = cart.find((val) => val.id == item.id);
+  
   return (
     <div className="w-[90%] mx-auto ">
       <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 ">

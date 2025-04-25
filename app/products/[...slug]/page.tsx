@@ -25,7 +25,7 @@ const Page = () => {
   return (
     <div className="py-10">
       {/* SingleProduct কম্পোনেন্টে পণ্য তথ্য পাঠানো */}
-      <SingleProduct item={getProduct} />
+      <SingleProduct item={getProduct}  />
     </div>
   );
 };
