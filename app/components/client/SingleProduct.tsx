@@ -40,10 +40,10 @@ const SingleProduct = ({ item }: { item: productItem }) => {
 
   const { cart, addToCart, increaseQuantity, decreaseQuantity } =
     useCartStore();
-  const finPoduct = cart.find((val) => val.id == item.id);
+  const finPoduct = cart.find((val) => val.id == item.id && val.name==item.name);
   
   return (
-    <div className="w-[90%] mx-auto ">
+    <div className="">
       <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 ">
         <div className=" shadow-gray-50 rounded-2xl cursor-zoom-in p-2">
           <div className="bg-yellow-100 flex opacity-100 md:opacity-0 px-2 md:flex items-center gap-1 rounded-md w-fit text-md">

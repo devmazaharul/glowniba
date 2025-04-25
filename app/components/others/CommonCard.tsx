@@ -46,12 +46,13 @@ const CommonCard = ({
   };
 
   const addProudctTocart = useCartStore((state) => state.addToCart);
+  const productLink = `/products/${(name + ' ' + id).split(' ').join('-')}`;
 
   return (
     <>
       <div className="shadow-2xl  shadow-gray-100 p-4 border border-gray-100 rounded-2xl bg-white hover:translate-y-2 duration-500 ease-in-out">
       {item.isDiscount ?<p className='w-fit flex items-center  bg-yellow-100 rounded-md px-2 text-yellow-800  '> <FaGripfire/> {parseInt(item.discount || '0')}% less</p>:<p className='opacity-0'>new</p>}
-        <Link href={`/products/${id}/${name.split(' ').join('-')}`}>
+        <Link href={productLink}>
           <motion.div
             className="text-center "
             variants={cardVariants}

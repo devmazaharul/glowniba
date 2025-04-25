@@ -92,7 +92,7 @@ export const productsData=[
   },
   {
     "id": "2",
-    "name": "Jigott UV Sun Block SPF50+",
+    "name": "Jigott UV Sun Block SPF5",
     "slug": "jigott-uv-sun-block-spf50",
     "price": 520,
     "category": "sunblock",

@@ -4,7 +4,7 @@ import { handleError } from "@/utils/error";
 
 const addProduct=async()=>{
   try {
-    await connectDB()
+    await connectDB();
     
   } catch (error) {
      if (error instanceof Error) {
