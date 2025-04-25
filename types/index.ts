@@ -13,6 +13,7 @@ export interface productItem{
   discount?:string
   isDiscount?:boolean,
   status?:string
+  tags:string[]
 }
 
 export type CartStateType = {
@@ -71,5 +72,6 @@ export interface commonCartType {
   isDiscount?:boolean,
   discount?:string,
   status?:string,
+  tags:string[]
 
 }

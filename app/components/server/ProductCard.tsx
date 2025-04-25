@@ -26,6 +26,7 @@ const ProductCart = (prop: productItem) => {
     discount,
     isDiscount,
     status,
+    tags
   } = prop;
 
   // State management section
@@ -57,6 +58,7 @@ const ProductCart = (prop: productItem) => {
       discount,
       isDiscount,
       status,
+      tags
     }: productItem
   ) => {
     e.stopPropagation();
@@ -76,6 +78,7 @@ const ProductCart = (prop: productItem) => {
       isDiscount,
       status,
       quantity: 0,
+      tags
     });
   };
 
@@ -174,6 +177,7 @@ const ProductCart = (prop: productItem) => {
                     discount,
                     isDiscount,
                     status,
+                    tags
                   })
                 }
                 variant={'outline'}

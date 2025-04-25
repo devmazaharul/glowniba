@@ -12,6 +12,7 @@ import { MdErrorOutline } from 'react-icons/md';
 import { IoShieldCheckmarkSharp  } from "react-icons/io5";
 import { subscribeUser } from '@/action/subscribe';
 import { CustomError } from '@/utils/error';
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 
 export default function Footer() {
@@ -132,7 +133,7 @@ export default function Footer() {
                 onClick={HandleSubscribe}
                 className="bg-black text-white cursor-pointer p-2 rounded-full hover:bg-gray-700"
               >
-              {laoding ? "...":  <ArrowRight />}
+              {laoding ?<AiOutlineLoading3Quarters className='animate-spin'/>:  <ArrowRight />}
               </button>
             </div>
           </div>

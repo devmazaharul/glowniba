@@ -27,6 +27,7 @@ const CommonCard = ({
     shortDescription,
     description,
     stock,
+    tags
   } = item;
   const cardVariants = {
     offscreen: {
@@ -106,6 +107,7 @@ const CommonCard = ({
                 discount: '20',
                 isDiscount: true,
                 status: 'new',
+                tags
               })
             }
             variant={'outline'}

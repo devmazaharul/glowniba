@@ -32,6 +32,7 @@ const SingleProduct = ({ item }: { item: productItem }) => {
     discount,
     isDiscount,
     quantity,
+    tags
   } = item;
   const productLink = defualtValue.siteUrl+`/products/${(item.name + ' ' + item.id)
     .split(' ')
@@ -86,7 +87,7 @@ const SingleProduct = ({ item }: { item: productItem }) => {
               </div>
 
               <div className="w-fit mx-auto">
-                <QRCodeSVG size={80} value={productLink} />
+                <QRCodeSVG marginSize={1}   size={80} value={productLink} />
                 <small className="text-center block py-1 text-gray-600">
                   Scan now
                 </small>
@@ -118,7 +119,7 @@ const SingleProduct = ({ item }: { item: productItem }) => {
               {finPoduct && (finPoduct.quantity ?? 0) > 0 && (
                 <div className="flex items-center gap-2 mb-8">
                   <Button
-                    disabled={finPoduct?.quantity == 0 ? true : false}
+                    disabled={finPoduct?.quantity == 1 ? true : false}
                     onClick={() => decreaseQuantity(item.id)}
                     variant={'outline'}
                   >
@@ -164,6 +165,7 @@ const SingleProduct = ({ item }: { item: productItem }) => {
                       isDiscount,
                       quantity,
                       status,
+                      tags
                     })
                   }
                   className="cursor-pointer"
@@ -172,6 +174,19 @@ const SingleProduct = ({ item }: { item: productItem }) => {
                   Add to cart
                 </Button>
                 {finPoduct && (finPoduct.quantity ?? 0) > 0 && <Button variant={'outline'}>Check out</Button>}
+              </div>
+
+              <div className='my-6'>
+                <b className='mb-2 block'>Additional information</b>
+              <div>
+                  <p className='text-gray-500'>Brand : {item.brand}</p>
+                </div>
+
+                <div className='flex text-gray-500 capitalize'>
+                  Tag : {item.tags ? item.tags.join(" - "):"serume"}
+                </div>
+
+                
               </div>
             </div>
           </div>
