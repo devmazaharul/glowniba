@@ -88,7 +88,7 @@ const SingleProduct = ({ item }: { item: productItem }) => {
 
               <div className="w-fit mx-auto">
                 <QRCodeSVG marginSize={1}   size={80} value={productLink} />
-                <small className="text-center block py-1 text-gray-600">
+                <small className="text-center block  text-gray-600">
                   Scan now
                 </small>
               </div>
