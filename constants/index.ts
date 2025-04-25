@@ -22,3 +22,11 @@ export const contactInfo = Object.freeze({
   supprtyAddress: "Dhaka, Bangladesh",
   supprtyLocation: "Dhaka, Bangladesh",
 })
+
+
+export const  loggerControllerExternalObject=Object.freeze({
+  useExternalLogserver:true,
+  loggerServerHost:"localhost",
+  loggerServerPort:8080,
+  loggerServerPath:"/log",
+})

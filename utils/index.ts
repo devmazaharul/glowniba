@@ -7,8 +7,6 @@ export function isValidName(name:string) {
   return regex.test(trimmedName) && trimmedName.length >= 3 && trimmedName.length <= 50;
 }
 
-
-
 export const isValidNumber = (number: string) => {
   const bdPhoneRegex = /^01[3-9]\d{8}$/;
   return bdPhoneRegex.test(number);
@@ -26,7 +24,6 @@ export const isValidAddress = (addr: string) => {
   return addressRegex.test(addr);
 };
 
-
 export const hashPassword=async(password="")=>{
   const hash=await bcrypt.hash(password,defualtValue.saltRound)
   return hash
@@ -35,4 +32,12 @@ export const hashPassword=async(password="")=>{
 export const compareHashPass=async(password="",hash:string)=>{
   const mach= await bcrypt.compare(password,hash)
 return mach
+}
+
+export function getFormattedDate() {
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = `${date.getMonth() + 1}`.padStart(2, '0'); // 0-based month
+  const day = `${date.getDate()}`.padStart(2, '0');
+  return `${year}-${month}-${day}`;
 }

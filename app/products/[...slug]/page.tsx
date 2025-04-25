@@ -23,7 +23,7 @@ const Page = () => {
     throw new Error('Product not found'); // পণ্য না পেলে ত্রুটি ফেলা
   }
 
-const similarProduct=productsData.filter((item)=>item.tags.includes(getProduct.tags[0]))
+// const similarProduct=productsData.filter((item)=>item.tags.includes(getProduct.tags[0]))
 
 
   return (

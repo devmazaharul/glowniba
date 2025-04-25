@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 7
+    },
+    "auditLog": "D:\\code\\glowniba\\logs\\.b837263fb705735eff7975d5e98c0b6d48e15325-audit.json",
+    "files": [
+        {
+            "date": 1745593878030,
+            "name": "D:\\code\\glowniba\\logs\\error-2025-04-25.log",
+            "hash": "b4dc0326d3ab0622e4ec832247e30dd9d0b3a6d745a244d0fe2e837f2f5b207f"
+        }
+    ],
+    "hashType": "sha256"
+}

@@ -45,7 +45,7 @@ export interface Product {
   tags: string[];
   discount?: string;
   isDiscount?: boolean;
-  status?: string;
+  status:"new" | "old" ;
   quantity?: number;
   wishlistCount?: number;
   flashSaleEnd?: string;
