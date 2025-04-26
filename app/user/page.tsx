@@ -55,12 +55,12 @@ const LoginPage = () => {
           description:
             error.status === 400
               ? 'Invalid credentials, please try again.'
-              : 'Please try again later',
+              : 'Please try again later2',
           duration: 5000,
         });
       } else if (error instanceof Error) {
         toast.error(error.message, {
-          description: 'Please try again later',
+          description: 'Please try again later1',
           duration: 5000,
         });
       } else {
