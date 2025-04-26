@@ -203,7 +203,7 @@ export const productsData=[
   },
   {
     "id": "8",
-    "name": "Hydra Moist Whitening 2-25",
+    "name": "Hydra Moist Whitening",
     "slug": "hydra-moist-whitening-cream",
     "price": 982,
     "category": "cream",
