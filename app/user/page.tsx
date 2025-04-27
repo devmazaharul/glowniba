@@ -5,18 +5,20 @@ import { RiLockPasswordFill } from 'react-icons/ri';
 import { MdOutlineEmail } from 'react-icons/md';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
-import { userLogin } from '@/action/user'; // ✅ login এর action ধরলাম
+import { userLogin } from '@/action/user'; // ✅ login action
 import { CustomError } from '@/utils/error';
-import { signInvalidation } from '@/utils/validation'; // ✅ login validation ধরলাম
+import { signInvalidation } from '@/utils/validation'; // ✅ login validation
 import Spiner from '../components/others/Spiner';
+import { useRouter } from 'next/navigation';
 
-const LoginPage = () => {
-  const [state, setState] = React.useState({
+const Page = () => {
+  const [state, setState] = useState({
     email: '',
     password: '',
   });
 
   const [loading, setLoading] = useState(false);
+  const router = useRouter(); // Router for redirect after login
 
   const handleChange = (name: string, value: string) => {
     setState((prev) => ({ ...prev, [name]: value }));
@@ -29,15 +31,22 @@ const LoginPage = () => {
       if (signInvalidation(state)) {
         const email = state.email.trim().toLowerCase();
         const password = state.password.trim();
-        if (password == '') return toast.warning('Please provide password',{
-          description:"Invalid password please provide your current password"
-        });
-        if (password.length < 6)
+
+        if (password === '') {
+          return toast.warning('Please provide a password', {
+            description:
+              'Invalid password, please provide your current password',
+          });
+        }
+
+        if (password.length < 6) {
           return toast.warning('Invalid credentials', {
-            description: 'plese provide a valid credentials for login',
+            description: 'Please provide valid credentials for login',
             duration: 3000,
           });
-        // ✅ login action call করলাম
+        }
+
+        // Call login action
         const res = await userLogin({ email, password });
 
         if (res.status === 200) {
@@ -45,6 +54,8 @@ const LoginPage = () => {
             description: 'Welcome back!',
             duration: 5000,
           });
+          // Redirect to dashboard or home page
+          router.push('/dashboard');
         } else {
           throw new CustomError(res.message, res.status);
         }
@@ -55,12 +66,12 @@ const LoginPage = () => {
           description:
             error.status === 400
               ? 'Invalid credentials, please try again.'
-              : 'Please try again later2',
+              : 'Please try again later',
           duration: 5000,
         });
       } else if (error instanceof Error) {
         toast.error(error.message, {
-          description: 'Please try again later1',
+          description: 'Please try again later',
           duration: 5000,
         });
       } else {
@@ -96,6 +107,7 @@ const LoginPage = () => {
               value={state.email}
               onChange={(e) => handleChange('email', e.target.value)}
               placeholder="Email address"
+              aria-label="Email address"
             />
           </div>
 
@@ -108,17 +120,18 @@ const LoginPage = () => {
               value={state.password}
               onChange={(e) => handleChange('password', e.target.value)}
               placeholder="Password"
+              aria-label="Password"
             />
           </div>
 
-          <Button variant={'grayType'} className="w-full cursor-pointer py-3">
+          <Button variant={'default'} className="w-full cursor-pointer py-3">
             {loading ? <Spiner /> : 'Log In'}
           </Button>
         </form>
 
         {/* other section */}
         <div className="flex text-sm py-3 px-1 items-center w-fit mx-auto gap-2">
-          <p>Don&apos; have an account?</p>
+          <p>Don&apos;t have an account?</p>
           <Link href={'/signup'} className="text-blue-500">
             Sign Up
           </Link>
@@ -128,4 +141,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default Page;

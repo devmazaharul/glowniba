@@ -1,7 +1,13 @@
 'use client';
 import { ShoppingBag, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { SheetClose, SheetContent, SheetFooter, SheetHeader, SheetTitle } from '@/components/ui/sheet';
+import {
+  SheetClose,
+  SheetContent,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+} from '@/components/ui/sheet';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useCartStore } from '@/store/addTocart';
@@ -12,7 +18,8 @@ import { toast } from 'sonner';
 import Link from 'next/link';
 
 const CustomSheetContent = () => {
-  const { increaseQuantity, decreaseQuantity, cart, removeFromCart } = useCartStore();
+  const { increaseQuantity, decreaseQuantity, cart, removeFromCart } =
+    useCartStore();
   const [loading, setLoading] = useState(false);
 
   const HandleClick = () => {
@@ -36,7 +43,6 @@ const CustomSheetContent = () => {
           transition={{ duration: 0.3, ease: 'easeOut' }}
           className="flex flex-col h-full"
         >
-
           {/* Header */}
           <SheetHeader>
             <SheetClose className="absolute right-4 top-4 z-100 cursor-pointer hover:bg-gray-100 rounded-full p-1 transition-all" />
@@ -66,11 +72,22 @@ const CustomSheetContent = () => {
                       <h4 className="text-md font-medium">{item.name}</h4>
                       <p className="text-sm text-gray-500">{item.price}৳</p>
                       <div className="flex items-center gap-3 my-2">
-                        <Button onClick={() => decreaseQuantity(item.id)} variant={"outline"} disabled={item.quantity == 1} className={`${item.quantity == 1 ? 'disabled:bg-gray-200' : ''}`}>
+                        <Button
+                          onClick={() => decreaseQuantity(item.id)}
+                          variant={'outline'}
+                          disabled={item.quantity == 1}
+                          className={`${
+                            item.quantity == 1 ? 'disabled:bg-gray-200' : ''
+                          } cursor-pointer`}
+                        >
                           -
                         </Button>
                         <button>{item.quantity}</button>
-                        <Button onClick={() => increaseQuantity(item.id)} variant={"outline"}>
+                        <Button
+                          onClick={() => increaseQuantity(item.id)}
+                          variant={'outline'}
+                          className="cursor-pointer"
+                        >
                           +
                         </Button>
                       </div>
@@ -80,19 +97,22 @@ const CustomSheetContent = () => {
                     onClick={() => removeFromCart(item.id)}
                     variant="ghost"
                     size="sm"
-                    className='cursor-pointer'
+                    className="cursor-pointer"
                   >
                     <X className="h-4 w-4 hover:bg-gray-50 " />
                   </Button>
                 </div>
               ))
             ) : (
-          <div className='flex gap-2 items-center justify-center h-full text-gray-400'>
+              <div className="flex gap-2 items-center justify-center h-full text-gray-400">
                 <div className="inline-block">
-               <p> Your cart is empty</p> 
+                  <p> Your cart is empty</p>
+                </div>
+                <Link href={'/products'} className="text-blue-800">
+                  {' '}
+                  continue shopping
+                </Link>
               </div>
-              <Link href={'/products'} className='text-blue-800'> continue shopping</Link>
-          </div>
             )}
           </div>
 
@@ -100,15 +120,19 @@ const CustomSheetContent = () => {
           <SheetFooter className="pt-4 border-t mt-2">
             <div className="flex flex-col w-full gap-4">
               {/* Total Price */}
-          <div>
-  
-              <div className="flex justify-between ">
-                <span className="text-lg font-semibold">Total:</span>
-                <p className="font-semibold">
-                  {cart.reduce((total, item) => total + item.price * (item.quantity ?? 1), 0)}৳
-                </p>
+              <div>
+                <div className="flex justify-between ">
+                  <span className="text-lg font-semibold">Total:</span>
+                  <p className="font-semibold">
+                    {cart.reduce(
+                      (total, item) =>
+                        total + item.price * (item.quantity ?? 1),
+                      0
+                    )}
+                    ৳
+                  </p>
+                </div>
               </div>
-          </div>
               <small className="text-gray-400">
                 Shipping and taxes calculated at checkout.
               </small>
@@ -116,19 +140,27 @@ const CustomSheetContent = () => {
               {/* Checkout Button */}
               {cart.length > 0 && (
                 <div className="w-full">
-                 <div className='my-2'>
-                 <Link href={'/charts'}  className="w-full  cursor-pointer">
-                  <Button variant={"outline"} className='w-full'>View charts</Button>
-                  </Link>
-                 </div>
-                  <Button onClick={HandleClick} variant={'grayType'} className="w-full cursor-pointer">
+                  <div className="my-2">
+                    <Link href={'/charts'} className="w-full  cursor-pointer">
+                      <Button
+                        variant={'outline'}
+                        className="w-full cursor-pointer"
+                      >
+                        View charts
+                      </Button>
+                    </Link>
+                  </div>
+                  <Button
+                    onClick={HandleClick}
+                    variant={'default'}
+                    className="w-full cursor-pointer"
+                  >
                     {loading ? <Spiner /> : 'Checkout'}
                   </Button>
                 </div>
               )}
             </div>
           </SheetFooter>
-
         </motion.div>
       </SheetContent>
     </>

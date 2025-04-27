@@ -31,12 +31,12 @@ const Header = () => {
         if (window.scrollY > 500) {
           // স্ক্রল নিচের দিকে যাচ্ছে
           setShowHeader(false);
-        } 
-          
-          if(lastScrollY>window.scrollY){
-            setShowHeader(true);
-          }
-        
+        }
+
+        if (lastScrollY > window.scrollY) {
+          setShowHeader(true);
+        }
+
         setLastScrollY(window.scrollY);
       }
     };
@@ -63,7 +63,7 @@ const Header = () => {
           <div className={pacifico.className}>
             <Link href="/">
               <p className="text-2xl text-gray-700 font-bold cursor-pointer">
-               {defualtValue.siteName || "Glow niba"}
+                {defualtValue.siteName || 'Glow niba'}
               </p>
             </Link>
           </div>

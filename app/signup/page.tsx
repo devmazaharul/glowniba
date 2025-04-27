@@ -152,7 +152,7 @@ const Page = () => {
             />
           </div>
 
-          <Button variant={'grayType'} className="w-full cursor-pointer py-3">
+          <Button variant={'default'} className="w-full cursor-pointer py-3">
             {loading ? <Spiner /> : ' sign up'}
           </Button>
         </form>

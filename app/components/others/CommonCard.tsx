@@ -7,7 +7,7 @@ import { commonCartType } from '@/types';
 import Rating from './Rating';
 import { Button } from '@/components/ui/button';
 import { useCartStore } from '@/store/addTocart';
-import { FaGripfire } from "react-icons/fa";
+import { FaGripfire } from 'react-icons/fa';
 
 const CommonCard = ({
   item,
@@ -27,7 +27,7 @@ const CommonCard = ({
     shortDescription,
     description,
     stock,
-    tags
+    tags,
   } = item;
   const cardVariants = {
     offscreen: {
@@ -51,7 +51,14 @@ const CommonCard = ({
   return (
     <>
       <div className="shadow-2xl  shadow-gray-100 p-4 border border-gray-100 rounded-2xl bg-white hover:translate-y-2 duration-500 ease-in-out">
-      {item.isDiscount ?<p className='w-fit flex items-center  bg-yellow-100 rounded-md px-2 text-yellow-800  '> <FaGripfire/> {parseInt(item.discount || '0')}% less</p>:<p className='opacity-0'>new</p>}
+        {item.isDiscount ? (
+          <p className="w-fit flex items-center  bg-yellow-100 rounded-md px-2 text-yellow-800  ">
+            {' '}
+            <FaGripfire /> {parseInt(item.discount || '0')}% less
+          </p>
+        ) : (
+          <p className="opacity-0">new</p>
+        )}
         <Link href={productLink}>
           <motion.div
             className="text-center "
@@ -68,14 +75,19 @@ const CommonCard = ({
               className="w-[140px] mx-auto h-[140px] object-contain"
             />
 
-        
-       
-           <p
+            <p
               className={`${color} px-3 py-1 rounded-full mx-auto w-fit my-3 capitalize text-sm`}
             >
-              {item.isDiscount && item.discount ?  <span> <span className='line-through'> ৳{item.price}</span>  ৳{item.price - (item.price * Number(item.discount || 0)) / 100}</span> :  '৳'+item.price}
+              {item.isDiscount && item.discount ? (
+                <span>
+                  {' '}
+                  <span className="line-through"> ৳{item.price}</span> ৳
+                  {item.price - (item.price * Number(item.discount || 0)) / 100}
+                </span>
+              ) : (
+                '৳' + item.price
+              )}
             </p>
-      
 
             <div>
               <h3 className="text-lg font-semibold text-gray-800">
@@ -108,10 +120,11 @@ const CommonCard = ({
                 discount: '20',
                 isDiscount: true,
                 status: 'new',
-                tags
+                tags,
               })
             }
             variant={'outline'}
+            className="cursor-pointer"
           >
             Add to card
           </Button>

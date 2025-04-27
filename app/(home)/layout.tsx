@@ -1,11 +1,10 @@
 import type { Metadata } from 'next';
 import { Raleway } from 'next/font/google';
-import './globals.css';
+import '../globals.css';
 import { Toaster } from '@/components/ui/sonner';
 import { defualtValue } from '@/constants';
-import Header from './components/client/Header';
-import Footer from './components/server/Footer';
-
+import Header from '../components/client/Header';
+// import Footer from '../components/server/Footer';
 const { siteName = 'Glow niba', siteUrl } = defualtValue;
 export const metadata: Metadata = {
   title: `${siteName}| Premium Skincare for Glowing Skin`,
@@ -53,16 +52,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className={` ${raleway.className} `}>
-      <div>
-        <div className="mb-10">
-          <Header />
+    <html>
+      <body className={` ${raleway.className} `}>
+        <div>
+          <div className="mb-10">
+            <Header />
+          </div>
+          <div className="max-w-[100%] mx-auto">{children}</div>
         </div>
-        <div className="max-w-[100%] mx-auto">{children}</div>
-      </div>
-
-      <Toaster position="top-left" richColors />
-      <Footer />
-    </div>
+        <Toaster position="top-left" richColors />
+      </body>
+    </html>
   );
 }
