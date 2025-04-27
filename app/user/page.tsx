@@ -61,22 +61,23 @@ const Page = () => {
         }
       }
     } catch (error) {
+      console.log(error);
       if (error instanceof CustomError) {
         toast.warning(error.message, {
           description:
             error.status === 400
               ? 'Invalid credentials, please try again.'
-              : 'Please try again later',
+              : 'Please try again later1',
           duration: 5000,
         });
       } else if (error instanceof Error) {
         toast.error(error.message, {
-          description: 'Please try again later',
+          description: 'Please try again later2',
           duration: 5000,
         });
       } else {
         toast.error('An unknown error occurred', {
-          description: 'Please try again later',
+          description: 'Please try again later3',
           duration: 5000,
         });
       }
