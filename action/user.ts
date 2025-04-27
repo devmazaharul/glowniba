@@ -1,6 +1,6 @@
 'use server';
 import connectDB from '@/lib/db';
-import { systemLogger } from '@/lib/logger';
+
 import User from '@/model/user';
 import { userlogin, userregister, userUpdate } from '@/types/user';
 import { compareHashPass, hashPassword } from '@/utils';
@@ -55,7 +55,6 @@ const userLogin = async ({ email, password }: userlogin) => {
 
     if ((await compareHashPass(password, checkUser.password)) == false)
       throw new CustomError('Invalid credentials', 400);
-    systemLogger.info('try login and successfully loged in');
     return responce({
       message: 'Successfully login',
       status: 200,
@@ -67,10 +66,9 @@ const userLogin = async ({ email, password }: userlogin) => {
     });
   } catch (error) {
     if (error instanceof Error) {
-      systemLogger.error('Login faild error is : ' + error.message);
       return handleError(error.message, (error as any).status);
     }
-    systemLogger.error('Login faild error');
+
     return handleError('An unknown error occurred', 500);
   }
 };
