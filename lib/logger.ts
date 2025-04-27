@@ -50,7 +50,7 @@ const errorTransport = new transports.DailyRotateFile({
 });
 
 // ✅ Setup logger with both local and external options
-let transportsArray = [infoTransport, errorTransport];
+const transportsArray = [infoTransport, errorTransport];
 
 export const systemLogger = createLogger({
   format: logFormat,
