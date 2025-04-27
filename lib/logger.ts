@@ -3,14 +3,14 @@ import { createLogger, format, transports } from 'winston';
 import 'winston-daily-rotate-file';
 import path from 'path';
 import fs from 'fs';
-import { loggerControllerExternalObject } from '@/constants';
+// import { loggerControllerExternalObject } from '@/constants';
 
-const {
-  useExternalLogserver,
-  loggerServerHost,
-  loggerServerPath,
-  loggerServerPort,
-} = loggerControllerExternalObject;
+// const {
+//   useExternalLogserver,
+//   loggerServerHost,
+//   loggerServerPath,
+//   loggerServerPort,
+// } = loggerControllerExternalObject;
 
 const logDirectory = path.join(process.cwd(), 'logs');
 
