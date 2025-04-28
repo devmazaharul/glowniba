@@ -23,8 +23,8 @@ export const contactInfo = Object.freeze({
 });
 
 export const loggerControllerExternalObject = Object.freeze({
-  useExternalLogserver: false,
-  loggerServerHost: 'https://estudy-backend.vercel.app',
-  loggerServerPort: 8080,
+  useExternalLogserver: true,
+  loggerServerHost: 'localhost',
+  loggerServerPort: 8081,
   loggerServerPath: '/log',
 });

@@ -1,6 +1,5 @@
 // lib/logger.ts
 import { createLogger, format, transports } from 'winston';
-import 'winston-daily-rotate-file';
 import { loggerControllerExternalObject } from '@/constants';
 
 const {
@@ -12,12 +11,10 @@ const {
 
 const logFormat = format.combine(
   format.timestamp({ format: 'DD-MM-YYYY HH:mm:ss' }),
-  format.printf(
-    (info) =>
-      `${info.timestamp} [${info.level.toUpperCase()}]: ${info.message} ${
-        info.metadata || ''
-      }`
-  )
+  format.metadata({ fillExcept: ['message', 'level', 'timestamp', 'label'] }),
+  format.printf(({ timestamp, level, message }) => {
+    return `${timestamp} [${level.toUpperCase()}]: ${message} `;
+  })
 );
 
 const transportsArray = [
@@ -27,7 +24,7 @@ const transportsArray = [
         port: loggerServerPort,
         path: loggerServerPath,
       })
-    : new transports.Console({ level: 'info' }),
+    : new transports.Console(),
 ];
 
 export const systemLogger = createLogger({
@@ -36,4 +33,4 @@ export const systemLogger = createLogger({
 });
 
 // Now using console logging for Vercel environment
-console.log('Logger initialized successfully.');
+// console.log('Logger initialized successfully.');
