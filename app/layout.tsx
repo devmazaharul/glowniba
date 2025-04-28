@@ -55,7 +55,7 @@ export default function RootLayout({
     <html>
       <body className={` ${raleway.className} `}>
         <div>
-          <div className="mb-10">
+          <div>
             <ConditionalHeader />
           </div>
           <div className="max-w-[100%] mx-auto">{children}</div>
