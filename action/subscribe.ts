@@ -40,3 +40,21 @@ export const subscribeUser = async (email: string) => {
     }
   }
 };
+export const getSubscribers = async () => {
+  try {
+    await connectDB();
+    const items = await Subscribe.find();
+    if (!items) throw new CustomError('No subscritions data ', 400);
+    return responce({
+      message: 'Subscriptios data',
+      status: 200,
+      data: items,
+    });
+  } catch (error: unknown) {
+    if (error instanceof CustomError) {
+      return handleError(error.message, error.status);
+    } else {
+      return handleError('An unknown error occurred', 500);
+    }
+  }
+};

@@ -24,6 +24,7 @@ export interface userIfo {
   password: string;
   number: string;
   address: string;
+  createdAt:string
 }
 export interface userIfodata {
   _id: string;

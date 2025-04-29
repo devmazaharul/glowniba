@@ -75,3 +75,10 @@ export interface commonCartType {
   tags:string[]
 
 }
+
+
+export interface subscriptionInfo{
+  _id:string,
+  email:string,
+  createdAt:string
+}

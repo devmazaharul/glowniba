@@ -1,3 +1,4 @@
+'use client'
 import Link from 'next/link';
 import React from 'react';
 import { FaSignOutAlt } from 'react-icons/fa'; // using react-icons
@@ -7,47 +8,58 @@ import { GrUserSettings } from 'react-icons/gr';
 import { MdOutlineManageHistory } from 'react-icons/md';
 import { IoHomeOutline } from 'react-icons/io5';
 import { IoSettingsOutline } from 'react-icons/io5';
+import { MdOutlineUnsubscribe } from 'react-icons/md';
+import { usePathname } from 'next/navigation';
 
 const Sidebar = () => {
+
+  const path=usePathname()
+
   return (
-    <div className="h-screen w-64 bg-gray-700 text-white flex flex-col p-4">
+    <div className="h-screen w-full bg-gray-700 text-white flex flex-col p-4">
       {/* Logo or Title */}
 
       {/* Navigation Links */}
       <nav className="flex flex-col gap-4">
-        <Link
-          href="/"
-          className="flex items-center gap-3 hover:bg-gray-600 p-2 rounded"
+        <Link 
+          href="/dashboard"
+          className={`${path=="/dashboard" && 'bg-gray-800' } flex items-center gap-3 hover:bg-gray-600 p-2 rounded`}
         >
-          <IoHomeOutline /> Home
+          <IoHomeOutline /> Main
         </Link>
         <Link
           href="/dashboard/orders"
-          className="flex items-center gap-3 hover:bg-gray-600 p-2 rounded"
+          className={`${path=="/dashboard/orders" && 'bg-gray-600 text-gray-300' } flex items-center gap-3 hover:bg-gray-600 p-2 rounded`}
         >
           <TbShoppingCartStar /> Orders
         </Link>
         <Link
           href="/dashboard/products"
-          className="flex items-center gap-3 hover:bg-gray-600 p-2 rounded"
+          className={`${path=="/dashboard/products" && 'bg-gray-600 text-gray-300' } flex items-center gap-3 hover:bg-gray-600 p-2 rounded`}
         >
           <CiViewList /> Products
         </Link>
         <Link
           href="/dashboard/users"
-          className="flex items-center gap-3 hover:bg-gray-600 p-2 rounded"
+          className={`${path=="/dashboard/users" && 'bg-gray-600 text-gray-300' } flex items-center gap-3 hover:bg-gray-600 p-2 rounded`}
         >
           <GrUserSettings /> Users
         </Link>
         <Link
+          href="/dashboard/subscriptions"
+          className={`${path=="/dashboard/subscriptions" && 'bg-gray-600 text-gray-300' } flex items-center gap-3 hover:bg-gray-600 p-2 rounded`}
+        >
+          <MdOutlineUnsubscribe /> Subscriptions
+        </Link>
+        <Link
           href="/dashboard/control"
-          className="flex items-center gap-3 hover:bg-gray-600 p-2 rounded"
+          className={`${path=="/dashboard/control" && 'bg-gray-600 text-gray-300' } flex items-center gap-3 hover:bg-gray-600 p-2 rounded`}
         >
           <MdOutlineManageHistory /> Control
         </Link>
         <Link
           href="/dashboard/settings"
-          className="flex items-center gap-3 hover:bg-gray-600 p-2 rounded"
+          className={`${path=="/dashboard/settings" && 'bg-gray-600 text-gray-300' } flex items-center gap-3 hover:bg-gray-600 p-2 rounded`}
         >
           <IoSettingsOutline /> Settings
         </Link>
