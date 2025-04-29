@@ -2,14 +2,16 @@ import { getUsers } from '@/action/user';
 import { userIfo } from '@/types/user';
 import { BsBookmarkCheckFill } from 'react-icons/bs';
 import PaginationUI from '../components/Paigination';
-const Page = async ({ searchParams }: { searchParams: { page?: string } }) => {
-  const paramsAw=await searchParams;
-  const currentPage = parseInt(paramsAw?.page || '1', 10);
+
+
+const Page = async ({ searchParams }: { searchParams?: Record<string, string | undefined> }) => {
+  const currentPage = parseInt(searchParams?.page ?? '1', 10);
   const limit = 10;
 
-  const users = await getUsers(limit,currentPage);
+  const users = await getUsers(limit, currentPage);
   const items = 'items' in users ? users.items : [];
   const totalPage = 'totalpage' in users ? users.totalpage : 0;
+
   return (
     <div className="overflow-x-auto  overflow-y-auto max-h-[500px] max-w-[100%]">
       <table className="border border-gray-400">
@@ -31,47 +33,37 @@ const Page = async ({ searchParams }: { searchParams: { page?: string } }) => {
               <tr key={item._id} className="text-center">
                 <td className="px-4 py-2 border font-medium  border-gray-100 text-gray-600">
                   <p className="bg-yellow-100 px-2  rounded-md">
-                    {' '}
                     #{item._id.toString().slice(0, 5)}
                   </p>
                 </td>
-                <td className="px-2 py-2 border   border-gray-100 text-gray-700">
-                  <p className=" text-emerald-800 rounded-md w-8 text-center  h-6">
-                    {Math.floor(Math.random() * 10)}
-                  </p>
+                <td className="px-2 py-2 border border-gray-100 text-emerald-800 w-8 h-6 rounded-md text-center">
+                  {Math.floor(Math.random() * 10)}
                 </td>
-                <td className="px-2 py-2 border border-gray-100">
-                  {item.name}
-                </td>
-                <td className="px-2 py-2 border border-gray-100">
-                  {item.number}
-                </td>
-                <td className="px-2 py-2 border border-gray-100">
-                  {item.email}
-                </td>
+                <td className="px-2 py-2 border border-gray-100">{item.name}</td>
+                <td className="px-2 py-2 border border-gray-100">{item.number}</td>
+                <td className="px-2 py-2 border border-gray-100">{item.email}</td>
                 <td className="px-2 py-2 border border-gray-100">
                   {new Date(item.createdAt).toLocaleDateString('en-us', {
                     day: '2-digit',
                     month: 'short',
-                    year:"numeric"
+                    year: 'numeric',
                   })}
                 </td>
                 <td className="px-2 py-2 border border-gray-100">
-                  {item.address.slice(0, 20)}
+                  {item.address?.slice(0, 20)}
                 </td>
                 <td className="px-4 py-2 border text-center border-gray-100">
-                  <BsBookmarkCheckFill className="w-fit mx-auto text-green-500" />
+                  <BsBookmarkCheckFill className="mx-auto text-green-500" />
                 </td>
               </tr>
             ))}
         </tbody>
       </table>
 
-{/* paigination section */}
-<div className="my-3">
-      <PaginationUI currentPage={currentPage} totalPage={totalPage}/>
+      {/* pagination section */}
+      <div className="my-3">
+        <PaginationUI currentPage={currentPage} totalPage={totalPage} />
       </div>
-
     </div>
   );
 };
