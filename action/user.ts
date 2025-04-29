@@ -7,6 +7,7 @@ import { userlogin, userregister, userUpdate } from '@/types/user';
 import { compareHashPass, hashPassword } from '@/utils';
 import { CustomError, handleError } from '@/utils/error';
 import { responce, responceItems } from '@/utils/success';
+import { revalidatePath } from 'next/cache';
 const userRegister = async ({
   name,
   email,
@@ -27,6 +28,8 @@ const userRegister = async ({
       number,
     });
     await create.save();
+    revalidatePath('/dashboard/users'); // বা যেই path এ user list show হয়
+
     return responce({
       message: 'Successfully account create',
       status: 200,
