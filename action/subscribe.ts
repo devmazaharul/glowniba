@@ -4,6 +4,8 @@ import { Subscribe } from '@/model/subscribe';
 import { isValidEmail } from '@/utils';
 import { CustomError, handleError } from '@/utils/error';
 import { responce } from '@/utils/success';
+import { revalidatePath } from 'next/cache';
+import randomstring from "randomstring"
 
 export const subscribeUser = async (email: string) => {
   try {
@@ -23,8 +25,11 @@ export const subscribeUser = async (email: string) => {
     }
     const addEmailSubscribe = new Subscribe({
       email,
+      subacriberId:randomstring.generate({length:6,charset:"alphanumeric"})
     });
     await addEmailSubscribe.save();
+       revalidatePath('/dashboard/subscriptions'); // বা যেই path এ user list show হয়
+    
     return responce({
       message: 'Thanks for subscribing',
       status: 200,

@@ -78,7 +78,7 @@ export interface commonCartType {
 
 
 export interface subscriptionInfo{
-  _id:string,
+  subacriberId:string,
   email:string,
   createdAt:string
 }
