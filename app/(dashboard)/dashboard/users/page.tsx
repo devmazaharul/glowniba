@@ -2,10 +2,16 @@ import { getUsers } from '@/action/user';
 import { userIfo } from '@/types/user';
 import { BsBookmarkCheckFill } from 'react-icons/bs';
 import PaginationUI from '../components/Paigination';
+type Props = {
+  searchParams?: Record<string, string | string[] | undefined>;
+};
 
-
-const Page = async ({ searchParams }: { searchParams?: Record<string, string | undefined> }) => {
-  const currentPage = parseInt(searchParams?.page ?? '1', 10);
+const Page = async ({ searchParams }: Props) => {
+  const currentPage = parseInt(
+    typeof searchParams?.page === 'string' ? searchParams.page : '1',
+    10
+  );
+  
   const limit = 10;
 
   const users = await getUsers(limit, currentPage);
