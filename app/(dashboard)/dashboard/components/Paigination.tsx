@@ -62,6 +62,7 @@ const PaginationUI = ({
               <PaginationLink
                 href={`?page=${page}`}
                 isActive={currentPage === page}
+                className={`${page==currentPage?'bg-gray-100':""}`}
               >
                 {page}
               </PaginationLink>
