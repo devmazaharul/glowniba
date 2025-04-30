@@ -141,7 +141,7 @@ const CustomSheetContent = () => {
               {cart.length > 0 && (
                 <div className="w-full">
                   <div className="my-2">
-                    <Link href={'/charts'} className="w-full  cursor-pointer">
+                    <Link href={'/cart'} className="w-full  cursor-pointer">
                       <Button
                         variant={'outline'}
                         className="w-full cursor-pointer"
@@ -150,13 +150,14 @@ const CustomSheetContent = () => {
                       </Button>
                     </Link>
                   </div>
-                  <Button
-                    onClick={HandleClick}
-                    variant={'default'}
-                    className="w-full cursor-pointer"
+                  <Link href={'/checkout'}
+                    
+                    className="w-full cursor-pointer "
                   >
+                    <Button className='cursor-pointer w-full'>
                     {loading ? <Spiner /> : 'Checkout'}
-                  </Button>
+                    </Button>
+                  </Link>
                 </div>
               )}
             </div>

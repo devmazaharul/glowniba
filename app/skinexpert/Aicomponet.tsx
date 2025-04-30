@@ -18,7 +18,7 @@ const AiComponent = () => {
     toast.error("Please write your problem.")
     return
   }
-  setQuestion('');
+
   setIsloading(true);
     try {
       e.preventDefault();
@@ -37,6 +37,7 @@ const AiComponent = () => {
       toast.error('Error occur');
     } finally {
       setIsloading(false);
+      setQuestion('');
     }
   };
 

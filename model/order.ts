@@ -1,24 +1,41 @@
-// models/Order.ts
-import mongoose from "mongoose";
+import { Schema, model, models } from 'mongoose';
 
-const orderSchema = new mongoose.Schema(
+const orderSchema = new Schema(
   {
-    orderId:{type:String,required:true},
-    user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     products: [
       {
-        product: { type: mongoose.Schema.Types.ObjectId, ref: "Product" },
+        productId: {
+          type: Schema.Types.ObjectId,
+          ref: 'Product',
+          required: true,
+        },
         quantity: { type: Number, required: true },
         price: { type: Number, required: true },
       },
     ],
+
     totalAmount: { type: Number, required: true },
-    shippingAddress: { type: String, required: true },
-    paymentMethod: { type: String, default: "cod" }, // cod, stripe, etc.
-    status: { type: String, default: "pending" }, // pending, shipped, delivered
+    shippingAddress: {
+      name: String,
+      phone: String,
+      address: String,
+      city: String,
+      postalCode: String,
+    },
+
+    paymentMethod: { type: String, default: 'cash_on_delivery' },
+
+    status: {
+      type: String,
+      enum: ['pending', 'processing', 'shipped', 'delivered', 'cancelled'],
+      default: 'pending',
+    },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+  }
 );
 
-const Order = mongoose.models.Order || mongoose.model("Order", orderSchema);
+const Order = models.Order || model('Order', orderSchema);
 export default Order;
