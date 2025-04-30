@@ -10,7 +10,7 @@ import { Poppins } from 'next/font/google';
 import Rating from '../others/Rating';
 import { Button } from '@/components/ui/button';
 import { useCartStore } from '@/store/addTocart';
-import { defualtValue } from '@/constants';
+import { defaultValues } from '@/constants';
 const poppins = Poppins({
   weight: '700',
   style: 'normal',
@@ -35,7 +35,7 @@ const SingleProduct = ({ item }: { item: productItem }) => {
     tags,
   } = item;
   const productLink =
-    defualtValue.siteUrl +
+  defaultValues.siteUrl +
     `/products/${(item.name + ' ' + item.id).split(' ').join('-')}`;
 
   const { cart, addToCart, increaseQuantity, decreaseQuantity } =
@@ -136,7 +136,7 @@ const SingleProduct = ({ item }: { item: productItem }) => {
                   </Button>
                   <Button
                     disabled={
-                      finPoduct?.quantity == defualtValue.addProductLimit
+                      finPoduct?.quantity == defaultValues.addProductLimit
                         ? true
                         : false
                     }

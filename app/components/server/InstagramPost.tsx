@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { FaHeart } from 'react-icons/fa'; // Add Heart Icon
 import { instaPosts } from '@/lib/source';
 import Link from 'next/link';
-import { defualtValue } from '@/constants';
+import { defaultValues } from '@/constants';
 
 const InstagramPost = () => {
   const cardVariants = {
@@ -61,11 +61,11 @@ const InstagramPost = () => {
       {/* CTA Button */}
       <div className="flex justify-center mt-12">
         <Link
-          href={defualtValue.instagramUrl}
+          href={defaultValues.instagramUrl}
           target="_blank"
           className="inline-block px-7 py-3 bg-gray-600 text-white font-semibold rounded-full hover:scale-105 transition-transform duration-300 shadow-2xl`"
         >
-          Follow {defualtValue.instagramUserName}
+          Follow {defaultValues.instagramUserName}
         </Link>
       </div>
     </div>

@@ -1,4 +1,4 @@
-export const defualtValue = Object.freeze({
+export const defaultValues = Object.freeze({
   saltRound: 10,
   addProductLimit: 50,
   featureListSize: 10,
@@ -13,6 +13,8 @@ export const defualtValue = Object.freeze({
   instagramUserName: '@glowniba',
   whatsAppNumber: '8801799588',
   whatAppsMessage: 'Hi, I want to buy from Glow Niba!',
+  responceUserLimit:10,
+  responceSubscriberLimit:10,
 });
 
 export const contactInfo = Object.freeze({
@@ -28,3 +30,5 @@ export const loggerControllerExternalObject = Object.freeze({
   loggerServerPort: 443,
   loggerServerPath: '/log',
 });
+
+

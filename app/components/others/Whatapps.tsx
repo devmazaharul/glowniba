@@ -1,13 +1,13 @@
 "use client";
 
-import { defualtValue } from "@/constants";
+import { defaultValues } from "@/constants";
 import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import { FaWhatsapp } from "react-icons/fa";
 
 const WhatsAppButton: React.FC = () => {
-  const phoneNumber = defualtValue.whatsAppNumber; // তোমার ফোন নাম্বার
-  const preFilledMessage = defualtValue.whatAppsMessage // মেসেজ পাঠাতে চাইলে
+  const phoneNumber = defaultValues.whatsAppNumber; // তোমার ফোন নাম্বার
+  const preFilledMessage = defaultValues.whatAppsMessage // মেসেজ পাঠাতে চাইলে
 
   const [device, setDevice] = useState<"windows" | "mac" | "android" | "ios" | "unknown">("unknown");
 

@@ -2,10 +2,10 @@ import type { Metadata } from 'next';
 import { Raleway } from 'next/font/google';
 import './globals.css';
 import { Toaster } from '@/components/ui/sonner';
-import { defualtValue } from '@/constants';
+import { defaultValues } from '@/constants';
 import { ConditionalHeader } from './components/client/ConditionalHeader';
 import { ConditionalFooter } from './components/client/ConditionalFooter';
-const { siteName = 'Glow niba', siteUrl } = defualtValue;
+const { siteName = 'Glow niba', siteUrl } = defaultValues;
 export const metadata: Metadata = {
   title: `${siteName}| Premium Skincare for Glowing Skin`,
   description: `${siteName} offers premium face serums, creams, and skincare products designed for girls who love glowing skin. Shop now!`,

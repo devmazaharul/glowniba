@@ -10,7 +10,7 @@ import { Sheet, SheetTrigger } from '@/components/ui/sheet';
 import CustomSheetContent from '../others/CustomSheetContent';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { defualtValue } from '@/constants';
+import { defaultValues } from '@/constants';
 
 const pacifico = Pacifico({
   style: 'normal',
@@ -63,7 +63,7 @@ const Header = () => {
           <div className={pacifico.className}>
             <Link href="/">
               <p className="text-2xl text-gray-700 font-bold cursor-pointer">
-                {defualtValue.siteName || 'Glow niba'}
+                {defaultValues.siteName || 'Glow niba'}
               </p>
             </Link>
           </div>

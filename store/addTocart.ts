@@ -1,5 +1,5 @@
 // stores/useCartStore.ts
-import { defualtValue } from '@/constants';
+import {  defaultValues} from '@/constants';
 import { CartStateType, productItem } from '@/types';
 import { toast } from 'sonner';
 import { create } from 'zustand';
@@ -12,7 +12,7 @@ export const useCartStore = create<CartStateType>()(
       increaseQuantity: (id) => {
         get().cart.map((item) => {
           if (item.id == id) {
-            if ((item.quantity ?? 1) < defualtValue.addProductLimit) {
+            if ((item.quantity ?? 1) < defaultValues.addProductLimit) {
               set({
                 cart: get().cart.map((item) =>
                   item.id == id
@@ -22,7 +22,7 @@ export const useCartStore = create<CartStateType>()(
               });
             } else {
               toast.warning(`Product added faild `, {
-                description: `You can only add ${defualtValue.addProductLimit} of this product at a time.`,
+                description: `You can only add ${defaultValues.addProductLimit} of this product at a time.`,
                 duration: 3000,
               });
               return;
@@ -33,9 +33,9 @@ export const useCartStore = create<CartStateType>()(
       addToCart: (product: productItem) => {
         const exists = get().cart.find((item) => item.id === product.id);
         if (exists) {
-          if (exists.quantity == defualtValue.addProductLimit) {
+          if (exists.quantity == defaultValues.addProductLimit) {
             toast.warning(`Product added faild `, {
-              description: `You can only add ${defualtValue.addProductLimit} of this product at a time.`,
+              description: `You can only add ${defaultValues.addProductLimit} of this product at a time.`,
               duration: 2000,
             });
             return;

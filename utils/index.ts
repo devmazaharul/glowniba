@@ -1,4 +1,4 @@
-import { defualtValue } from '@/constants';
+import { defaultValues } from '@/constants';
 import bcrypt from 'bcryptjs';
 // import { cookies } from 'next/headers';
 // import jwt from 'jsonwebtoken';
@@ -31,7 +31,7 @@ export const isValidAddress = (addr: string) => {
 };
 
 export const hashPassword = async (password = '') => {
-  const hash = await bcrypt.hash(password, defualtValue.saltRound);
+  const hash = await bcrypt.hash(password, defaultValues.saltRound);
   return hash;
 };
 
@@ -47,25 +47,3 @@ export function getFormattedDate() {
   const day = `${date.getDate()}`.padStart(2, '0');
   return `${year}-${month}-${day}`;
 }
-
-// export const getCookie = async () => {
-//   const coolieVal = await cookies();
-//   const SECRET_KEY = process.env.SECRET_KEY;
-//   const token = coolieVal.get('token')?.value;
-//   if (!token) {
-//     return false;
-//   }
-//   if (!SECRET_KEY) {
-//     throw new Error('SECRET KEY is not defined');
-//   }
-//   const decoded = jwt.verify(token || '', SECRET_KEY) as unknown as {
-//     role: string;
-//   };
-//   console.log(decoded);
-//   // যদি role admin না হয়
-//   if (decoded.role !== 'admin') {
-//     return false;
-//   }
-
-//   return true;
-// };

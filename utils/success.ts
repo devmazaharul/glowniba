@@ -11,7 +11,7 @@ export const responceItems=({message='',status=200,items,totalitems=0,totalpage=
     message,
     status,
     items:items,
-    totalItems:totalitems,
+    totalitems:totalitems,
     totalpage:totalpage,
   }
 }

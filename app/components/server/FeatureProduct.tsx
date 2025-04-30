@@ -2,7 +2,7 @@
 import React from 'react';
 import { productsData } from '@/lib/source';
 import SectionTop from '../others/SectionTop';
-import { defualtValue } from '@/constants';
+import { defaultValues } from '@/constants';
 import CommonCard from '../others/CommonCard';
 
 const FeatureProduct = () => {
@@ -19,7 +19,7 @@ const FeatureProduct = () => {
       <div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2">
           {featuredProducts
-            .slice(0, defualtValue.featureListSize)
+            .slice(0, defaultValues.featureListSize)
             .map((item, idx) => (
               <CommonCard key={idx} item={item} color='bg-yellow-100 text-yellow-800' />
             ))}

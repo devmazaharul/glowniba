@@ -1,3 +1,4 @@
+import AiComponent from './skinexpert/Aicomponet';
 import FAQSection from './components/client/FAQ';
 import BackgroundImageSlider from './components/client/Hero';
 import WhatsAppButton from './components/others/Whatapps';
@@ -13,6 +14,7 @@ export default function page() {
   return (
     <div>
       <BackgroundImageSlider />
+      <AiComponent/>
       <Category />
       <FeatureProduct />
       <NewArrivals />
