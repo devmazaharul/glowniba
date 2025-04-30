@@ -10,12 +10,18 @@ const AiComponent = () => {
   const [question, setQuestion] = useState('');
   const [isLoading, setIsloading] = useState(false);
   const [answer, setAnswer] = useState('');
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    setIsloading(true);
-    setQuestion('');
+   
+
+  if(!question){
+    toast.error("Please write your problem.")
+    return
+  }
+  setQuestion('');
+  setIsloading(true);
     try {
       e.preventDefault();
-
       const stream = await askSkinExpert(question);
       const reader = stream.getReader();
       const decoder = new TextDecoder();
@@ -44,7 +50,7 @@ const AiComponent = () => {
         onSubmit={handleSubmit}
         className="w-full md:w-[400px] mx-auto text-center"
       >
-        <textarea value={question}
+        <textarea value={question} required
           className="w-full h-[100px] max-h-[150px]  border border-gray-200 p-3 outline-none rounded-2xl shadow-2xl shadow-gray-100"
           onChange={(e) => setQuestion(e.target.value)}
           placeholder="আপনি কোন ধরনের সমস্যায় ভুগছেন?"
