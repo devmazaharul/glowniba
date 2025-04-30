@@ -26,12 +26,13 @@ const [answer,setAnswer]=useState("")
         result += decoder.decode(value);
         setAnswer(result); // updates live
       }
-
+      setQuestion("")
     } catch  {
-      toast.error('Error occur')
+      toast.error('Error occur');
+      setQuestion("")
     }finally{
       setIsloading(false)
-      setQuestion("")
+
     }
 
   }
