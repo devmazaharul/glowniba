@@ -31,6 +31,7 @@ const [answer,setAnswer]=useState("")
       toast.error('Error occur')
     }finally{
       setIsloading(false)
+      setQuestion("")
     }
 
   }
