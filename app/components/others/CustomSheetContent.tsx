@@ -12,27 +12,11 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useCartStore } from '@/store/addTocart';
 import { productItem } from '@/types';
-import Spiner from './Spiner';
-import { useState } from 'react';
-import { toast } from 'sonner';
 import Link from 'next/link';
 
 const CustomSheetContent = () => {
   const { increaseQuantity, decreaseQuantity, cart, removeFromCart } =
     useCartStore();
-  const [loading, setLoading] = useState(false);
-
-  const HandleClick = () => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      toast.success('Order has been placed', {
-        description: `Your order has been placed successfully`,
-        duration: 5000,
-      });
-    }, 3000);
-  };
-
   return (
     <>
       <SheetContent>
@@ -58,7 +42,7 @@ const CustomSheetContent = () => {
               cart.map((item: productItem) => (
                 <div
                   key={item.id}
-                  className="flex items-center justify-between border-b p-2"
+                  className="flex items-center justify-between border-b border-dashed last:border-b-0 p-2"
                 >
                   <div className="flex items-center gap-4">
                     <Image
@@ -117,7 +101,7 @@ const CustomSheetContent = () => {
           </div>
 
           {/* Footer */}
-          <SheetFooter className="pt-4 border-t mt-2">
+          <SheetFooter className="pt-4 border-t border-gray-100 mt-2">
             <div className="flex flex-col w-full gap-4">
               {/* Total Price */}
               <div>
@@ -155,7 +139,7 @@ const CustomSheetContent = () => {
                     className="w-full cursor-pointer "
                   >
                     <Button className='cursor-pointer w-full'>
-                    {loading ? <Spiner /> : 'Checkout'}
+                    Checkout
                     </Button>
                   </Link>
                 </div>
