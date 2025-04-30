@@ -10,9 +10,9 @@ export function ConditionalFooter() {
   }
 
   return (
-    <header>
+    <>
       {/* Global Header */}
       <Footer />
-    </header>
+    </>
   );
 }

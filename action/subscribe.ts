@@ -54,11 +54,9 @@ export const getSubscribers = async (limit: number, page: number) => {
   try {
     await connectDB();
     const skip = (page - 1) * limit;
-    const [items, totalCount] = await Promise.all([
-      Subscribe.find().skip(skip).limit(limit),
-      Subscribe.countDocuments(),
-    ]);
-
+      const res=await Subscribe.find()
+      const items=res.reverse().slice(skip,skip+limit)
+      const totalCount=await Subscribe.countDocuments()
     if (!items || items.length === 0) {
       throw new CustomError('No subscription data', 400);
     }
@@ -67,7 +65,7 @@ export const getSubscribers = async (limit: number, page: number) => {
     return responceItems({
       message: 'Subscriptions data',
       status: 200,
-      items,
+      items:JSON.parse(JSON.stringify(items)),
       totalitems:11,
       totalpage:totalPage,
     });

@@ -11,9 +11,9 @@ export function ConditionalHeader() {
   }
 
   return (
-    <header>
+    <>
       {/* Global Header */}
       <Header />
-    </header>
+    </>
   );
 }

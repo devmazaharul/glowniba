@@ -20,11 +20,11 @@ const Page = () => {
     password: '',
     name: '',
     number: '',
-    address: '',
+    address: ''
   });
 
   const [loading, setLoading] = useState(false);
-
+const [isChacked,setIschaked]=useState(false)
   const handlechange = (name: string, value: string) => {
     setState((prev) => ({ ...prev, [name]: value }));
   };
@@ -33,12 +33,17 @@ const Page = () => {
     e.preventDefault();
     setLoading(true);
     try {
+      
       if (signupValidation(state)) {
         const name = state.name.trim().toLocaleLowerCase();
         const email = state.email.trim().toLocaleLowerCase();
         const address = state.address.trim().toLocaleLowerCase();
         const password = state.password.trim();
         const number = state.number;
+        if(isChacked==false){
+          toast.error("Please agree privecy and policy")
+          return 
+        }
         const res = await userRegister({
           name,
           email,
@@ -52,6 +57,13 @@ const Page = () => {
             description: 'You can now login to your account',
             duration: 5000,
           });
+          setState({
+            email: '',
+            password: '',
+            name: '',
+            number: '',
+            address: ''
+          })
         } else {
           throw new CustomError(res.message, res.status);
         }
@@ -78,6 +90,7 @@ const Page = () => {
       }
     } finally {
       setLoading(false);
+     
     }
   };
 
@@ -150,6 +163,12 @@ const Page = () => {
               onChange={(e) => handlechange('password', e.target.value)}
               placeholder="Password"
             />
+          </div>
+          <div className='flex items-center gap-1 pb-2'>
+            <input type="checkbox" checked={isChacked} onChange={() =>setIschaked(!isChacked)} />
+            <div className='text-gray-500 text-sm'>I agree to glow niba 
+           
+               <Link className='text-blue-400 px-1' href={'/policies/privacy-policy'}>privecy policy</Link>  </div>
           </div>
 
           <Button variant={'default'} className="w-full cursor-pointer py-3">

@@ -21,7 +21,7 @@ const UsersTable = () => {
 
   useEffect(() => {
     const getUsr = async () => {
-      setIsLoading(true); // loading starts
+      setIsLoading(true); 
       const data = await getUsers(limit, parseInt(currentPage.toString()));
       if ('items' in data && 'totalpage' in data) {
         setState({
@@ -86,8 +86,8 @@ const UsersTable = () => {
               </tr>
             </thead>
             <tbody className="text-gray-600">
-              {state.items.map((item: userIfo) => (
-                <tr key={item._id} className="text-center">
+              {state.items.map((item: userIfo,i:number) => (
+                <tr key={item._id ?? i} className="text-center">
                   <td className="px-4 py-2 border border-gray-100 text-gray-600">
                     <p className="bg-yellow-100 px-2 rounded-md">
                       #{item._id.toString().slice(0, 5)}
