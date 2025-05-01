@@ -121,6 +121,7 @@ const SingleProduct = ({ item }: { item: productItem }) => {
               {finPoduct && (finPoduct.quantity ?? 0) > 0 && (
                 <div className="flex items-center gap-2 mb-8">
                   <Button
+                  className='cursor-pointer'
                     disabled={finPoduct?.quantity == 1 ? true : false}
                     onClick={() => decreaseQuantity(item.id)}
                     variant={'outline'}
@@ -129,7 +130,7 @@ const SingleProduct = ({ item }: { item: productItem }) => {
                   </Button>
 
                   <Button
-                    className="cursor-pointer font-bold w-20"
+                    className="font-bold w-20 "
                     variant={'outline'}
                   >
                     {finPoduct?.quantity || 0}
@@ -142,6 +143,7 @@ const SingleProduct = ({ item }: { item: productItem }) => {
                     }
                     variant={'outline'}
                     onClick={() => increaseQuantity(item.id)}
+                      className='cursor-pointer'
                   >
                     <FaPlus />
                   </Button>
@@ -176,7 +178,7 @@ const SingleProduct = ({ item }: { item: productItem }) => {
                   Add to cart
                 </Button>
                 {finPoduct && (finPoduct.quantity ?? 0) > 0 && (
-                  <Button variant={'outline'}>Check out</Button>
+                  <Button   className='cursor-pointer' variant={'outline'}>Check out</Button>
                 )}
               </div>
 

@@ -116,7 +116,7 @@ const Header = () => {
             <Sheet>
               <SheetTrigger asChild>
                 <div className="relative">
-                  <button className="flex items-center cursor-pointer">
+                  <button className="flex items-center cursor-pointer z-50" >
                     <ShoppingCart className="text-gray-700 text-2xl" />
                     <p className="absolute -top-2 -right-2 bg-gray-700 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
                       {cartItems.length || 0}
