@@ -14,7 +14,7 @@ import { BsBookmarkCheckFill } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import { userIfo } from "@/types/user";
 import { getUsers } from "@/action/user";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import PaginationUI from "../components/Paigination";
 import { toast } from "sonner";
 import { defaultValues } from "@/constants";
@@ -47,7 +47,7 @@ const UsersTable = () => {
         } else {
           toast.error("Unexpected response format");
         }
-      } catch (err) {
+      } catch  {
         toast.error("Error fetching users");
       }
       setIsLoading(false);
@@ -150,7 +150,7 @@ const UsersTable = () => {
                     ))}
                   </TableRow>
                 ))
-              : filtered.map((user, i) => (
+              : filtered.map((user) => (
                   <TableRow key={user._id} className="border border-gray-100">
                     <TableCell>
                       <span className="bg-yellow-100 px-2 py-1 rounded text-sm font-medium text-gray-700">
