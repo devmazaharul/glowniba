@@ -32,13 +32,12 @@ const AiComponent = () => {
         if (done) break;
         result += decoder.decode(value);
         setAnswer(result); // updates live
+        setIsloading(false);
+      setQuestion('');
       }
     } catch {
       toast.error('Error occur');
-    } finally {
-      setIsloading(false);
-      setQuestion('');
-    }
+    } 
   };
 
   return (

@@ -16,7 +16,7 @@ const Sidebar = () => {
   const path=usePathname()
 
   return (
-    <div className="h-screen w-full bg-gray-700 text-white flex flex-col p-4">
+    <div className="h-full w-full bg-gray-700 text-white flex flex-col p-4">
       {/* Logo or Title */}
 
       {/* Navigation Links */}
@@ -29,13 +29,13 @@ const Sidebar = () => {
         </Link>
         <Link
           href="/dashboard/orders"
-          className={`${path=="/dashboard/orders" && 'bg-gray-600 text-gray-300' } flex items-center gap-3 hover:bg-gray-600 p-2 rounded`}
+          className={`${path.startsWith("/dashboard/orders") && 'bg-gray-600 text-gray-300' } flex items-center gap-3 hover:bg-gray-600 p-2 rounded`}
         >
           <TbShoppingCartStar /> Orders
         </Link>
         <Link
           href="/dashboard/products"
-          className={`${path=="/dashboard/products" && 'bg-gray-600 text-gray-300' } flex items-center gap-3 hover:bg-gray-600 p-2 rounded`}
+          className={`${path.startsWith("/dashboard/products") && 'bg-gray-600 text-gray-300' } flex items-center gap-3 hover:bg-gray-600 p-2 rounded`}
         >
           <CiViewList /> Products
         </Link>

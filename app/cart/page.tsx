@@ -10,11 +10,7 @@ import { FaRegFaceSadTear } from "react-icons/fa6";
 import Link from "next/link";
 import { defaultValues } from "@/constants";
 
-
-
-
 const Page = () => {
-
 
   const {cart,increaseQuantity,decreaseQuantity,removeFromCart}=useCartStore()
 
