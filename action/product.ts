@@ -6,7 +6,8 @@ import connectDB from '@/lib/db';
 import Product from '@/model/product';
 import { AddproductItem } from '@/types';
 import { CustomError, handleError } from '@/utils/error';
-import { responce } from '@/utils/success';
+import { responce, responceItems } from '@/utils/success';
+import { revalidatePath } from 'next/cache';
 import Randomstring from 'randomstring';
 
 export const addProduct = async ({
@@ -25,6 +26,7 @@ export const addProduct = async ({
   tags,
   category,
   featured,
+  size
 }: AddproductItem) => {
   try {
     await connectDB();
@@ -61,10 +63,11 @@ export const addProduct = async ({
       tags,
       category,
       featured,
+      size:size.split(",")
     });
 
     const savedProduct = await newProduct.save();
-
+    revalidatePath("/dashboard/products")
     return responce({
       message: 'successfully product added',
       status: 200,
@@ -83,3 +86,28 @@ export const addProduct = async ({
     return handleError('An unknown error occurred', 500);
   }
 };
+
+export const getProducts=async(limit=10,page=1)=>{
+  try {
+    await connectDB()
+    const items=await Product.find()
+    const totalitems=await Product.countDocuments({})
+    if(!items) throw new CustomError("No products found",400)
+      const totalPage=Math.ceil(items.length/limit)
+      return responceItems({
+    message:"successfully get products",
+    status:200,
+    items: JSON.parse(JSON.stringify(items)),
+    totalitems,
+    totalpage:totalPage
+  })
+    
+  } catch (error) {
+    if (error instanceof Error) {
+      return handleError(error.message, (error as any).status || 500);
+    } else if (error instanceof CustomError) {
+      return handleError(error.message, (error as any).status || 500);
+    }
+    return handleError('An unknown error occurred', 500);
+  }
+}

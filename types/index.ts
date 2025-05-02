@@ -17,6 +17,8 @@ export interface productItem{
 }
 
 export interface AddproductItem {
+  productID?:string,
+  imageurl?:string,
   name:string,
     price: string,
     category: string,
@@ -32,6 +34,7 @@ export interface AddproductItem {
     status: string,
     featured: boolean,
     image: any, 
+    size:string
 }
 
 

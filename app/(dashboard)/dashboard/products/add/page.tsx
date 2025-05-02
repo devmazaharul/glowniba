@@ -32,6 +32,7 @@ const ProductForm = () => {
     status: 'new',
     featured: false,
     image: null,
+    size:''
   };
   const [productData, setProductData] = useState({ ...prObj });
   const [isLoading,setIsloading]=useState(false)
@@ -56,7 +57,8 @@ const ProductForm = () => {
         for (const key in error) {
           const arr = error[key];
           toast.error(arr, {
-            duration: 2000,
+            duration: key=='size'?5000:2000,
+            description:key=="size"?"Invalid product size example [200ML,500ML] and max 20 character use total22":"Validation faild"
           });
         }
       }
@@ -77,6 +79,7 @@ const ProductForm = () => {
           rating,
           reviews,
           tags,
+          size
         } = productData;
   
       
@@ -98,12 +101,13 @@ const ProductForm = () => {
           rating,
           reviews,
           tags,
+          size
         });
         if (res.status == 200) {
           toast.success('Products successfully added');
-          setProductData({
-            ...prObj,
-          });
+          // setProductData({
+          //   ...prObj,
+          // });
         }}
     } catch {
         toast.error("Product added faild")
@@ -309,7 +313,8 @@ const ProductForm = () => {
         </div>
 
         {/* Tags */}
-        <div>
+        <div className='flex items-center justify-between gap-6'>
+        <div className='w-full'>
           <Label>Tags</Label>
           <Input
             type="text"
@@ -319,6 +324,20 @@ const ProductForm = () => {
             value={productData.tags}
             onChange={handleChange}
           />
+        </div>
+        <div className='w-full'>
+          <Label className='pb-1'>Size <small className='text-gray-500 '>(Write carefully and separate with commas. )</small></Label>
+          <Input
+            type="text"
+            required
+            placeholder="200ML,500ML"
+            className="mt-1 rounded-md lowercase"
+            name="size"
+            value={productData.size}
+            onChange={handleChange}
+          />
+        </div>
+
         </div>
 
         {/* Status */}

@@ -1,46 +1,31 @@
 'use client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { RiDeleteBinLine } from "react-icons/ri";
 import { TbShoppingBagEdit } from "react-icons/tb";
+import { getProducts } from '@/action/product';
+import { AddproductItem } from '@/types';
+import Image from 'next/image';
 
-const products = [
-  {
-    id: '1',
-    name: 'Jigott Sunblock SPF50+',
-    category: 'sunblock',
-    price: 520,
-    discount: 10,
-    stock: 120,
-    brand: 'Jigott',
-    status: 'new',
-  },
-  {
-    id: '2',
-    name: 'Vitamin C Serum',
-    category: 'serum',
-    price: 850,
-    discount: 0,
-    stock: 50,
-    brand: 'GlowSkin',
-    status: 'best-selling',
-  },
-  {
-    id: '3',
-    name: 'Aloe Vera Gel',
-    category: 'moisturizer',
-    price: 350,
-    discount: 15,
-    stock: 30,
-    brand: 'Nature Republic',
-    status: 'eid-special',
-  },
-];
 
 const ProductsTable = () => {
+  
+  const [products,setProducts]=useState<AddproductItem[]>([])
+  useEffect(()=>{
+    const getproducts=async()=>{
+      const res=await getProducts()
+      if("items" in res){
+        console.log(res.items);
+        setProducts(res.items)
+      }
+    }
+    getproducts()
+  },[])
+
+
   return (
     <div className="p-6">
       <div className='flex items-center justify-between'>
@@ -56,6 +41,7 @@ const ProductsTable = () => {
         <Table >
           <TableHeader className='bg-gray-600 '>
             <TableRow className='text-white'>
+              <TableHead className='text-gray-200'>Image</TableHead>
               <TableHead className='text-gray-200'>Name</TableHead>
               <TableHead className='text-gray-200'>Category</TableHead>
               <TableHead className='text-gray-200'>Brand</TableHead>
@@ -69,8 +55,11 @@ const ProductsTable = () => {
           </TableHeader>
           <TableBody>
             {products.map((product) => (
-              <TableRow key={product.id}>
-                <TableCell className="font-medium">{product.name}</TableCell>
+              <TableRow key={product.productID}>
+                <TableCell className="font-medium overflow-hidden">
+                  <Image src={product.image || ""} className='w-8 h-8 rounded-sm  bg-center' width={500} height={500} alt={product.name}/>
+                </TableCell>
+                <TableCell className="font-medium overflow-hidden">{product.name.slice(0,20)}</TableCell>
                 <TableCell>{product.category}</TableCell>
                 <TableCell>{product.brand}</TableCell>
                 <TableCell>
