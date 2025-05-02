@@ -21,6 +21,7 @@ const SubscriptionsTable = () => {
 
   const [items, setItems] = useState<SubscriberResponseState>({ items: [], totalpage: 0 });
   const [isLoading, setIsLoading] = useState(false);
+  const [isChecked,setIschecked]=useState(false)
   const searchParams = useSearchParams();
   const currentPage = searchParams.get('page') || '1';
   const limit = defaultValues.responceSubscriberLimit;
@@ -53,12 +54,24 @@ const SubscriptionsTable = () => {
 
   return (
     <div className="p-6">
+      <div className='flex items-center justify-between'>
       <h2 className="text-2xl font-semibold mb-4">All Subscribers</h2>
+<div className='flex items-center gap-3'>
+{isChecked && <Button  className='cursor-pointer' variant={"default"}><TbSend/></Button>}
+{items.items.length>0 && <Button onClick={()=>setIschecked(!isChecked)} className='cursor-pointer' variant={"outline"}>
+ {isChecked?"Unchecked":" Check all"}
+
+</Button>
+}
+</div>
+      </div>
+    
 
       <div className="border border-gray-100 shadow-2xl shadow-gray-100 rounded-md overflow-x-auto">
         <Table>
           <TableHeader className='bg-gray-700 text-center'>
             <TableRow>
+              <TableHead className='text-white'>Check</TableHead>
               <TableHead className='text-white'>No</TableHead>
               <TableHead className='text-white'>ID</TableHead>
               <TableHead className='text-white'>Status</TableHead>
@@ -72,7 +85,7 @@ const SubscriptionsTable = () => {
             {isLoading
               ? fakeRows.map((_, i) => (
                   <TableRow className='border border-gray-100' key={i}>
-                    {Array.from({ length: 6 }).map((_, idx) => (
+                    {Array.from({ length: 7 }).map((_, idx) => (
                       <TableCell key={idx}>
                         <Skeleton className="h-4 w-full mx-auto " />
                       </TableCell>
@@ -81,6 +94,9 @@ const SubscriptionsTable = () => {
                 ))
               : items.items.map((item, i) => (
                   <TableRow key={item.subacriberId ?? i}>
+                    <TableCell>
+                      <input type='checkbox' checked={isChecked} className='cursor-pointer'/>
+                    </TableCell>
                     <TableCell>{i + 1}</TableCell>
                     <TableCell>
                       #{item.subacriberId?.toString().slice(0, 6) || 'N/A'}
@@ -104,8 +120,10 @@ const SubscriptionsTable = () => {
                      
                     </TableCell>
                     <TableCell className='text-right'>
-                     <Link href={'/'}>
-                     <Button className='cursor-pointer hover:bg-gray-700'><TbSend/></Button>
+                     <Link href={'/'} >
+                     <button className={`${isChecked?'bg-gray-200 cursor-not-allowed':'bg-gray-700 cursor-pointer'} w-8 h-8  p-2 text-white rounded-md`} disabled={isChecked} >
+                      <TbSend/>
+                      </button>
                      </Link>
                     </TableCell>
                   </TableRow>

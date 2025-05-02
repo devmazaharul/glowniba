@@ -89,7 +89,7 @@ const ProductsTable = () => {
                 <TableCell className="text-center ">
                   <div className="flex gap-4  w-fit mx-auto">
                     <Link href={'/'}  className='cursor-pointer' >
-<TbShoppingBagEdit className='text-xl '/>
+                            <TbShoppingBagEdit className='text-xl '/>
                     </Link>
                     <button  className='cursor-pointer'><RiDeleteBinLine className='fill-red-500 hover:fill-red-400 text-xl'/></button>
                   </div>

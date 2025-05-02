@@ -1,10 +1,15 @@
 import Sidebar from './components/Navbar';
 import Topbar from './components/Topbar';
+import { Inter } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"], display: "swap" });
+
+
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html>
-      <body>
+      <body className={inter.className}>
         <div className=" ">
           <div>
             <Topbar />

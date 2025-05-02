@@ -8,7 +8,7 @@ export interface ProductDataInvalidation  {
   reviews: string;
   shortDescription: string;
   description: string;
-  tags: string[];
+  tags: string;
   discount: number;
   isDiscount: boolean;
   status: string;
@@ -82,4 +82,20 @@ const validateProductData = (productData: ProductDataInvalidation) => {
   return errors;
 };
 
+
+
+
 export default validateProductData;
+
+
+
+  export const fileToBase64 = (file: File | null): Promise<string> =>
+          new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            if (file) {
+              reader.readAsDataURL(file);
+            }
+            reader.onload = () => resolve(reader.result as string);
+            reader.onerror = reject;
+          });
+  

@@ -16,6 +16,25 @@ export interface productItem{
   tags:string[]
 }
 
+export interface AddproductItem {
+  name:string,
+    price: string,
+    category: string,
+    brand: string,
+    stock: string,
+    rating:string,
+    reviews: string,
+    shortDescription: string,
+    description: string,
+    tags: string,
+    discount: number,
+    isDiscount: boolean,
+    status: string,
+    featured: boolean,
+    image: any, 
+}
+
+
 export type CartStateType = {
   cart: productItem[];
   addToCart: (product: productItem) => void;

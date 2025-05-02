@@ -1,4 +1,5 @@
 'use client';
+
 import { ShoppingBag, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -13,142 +14,134 @@ import Image from 'next/image';
 import { useCartStore } from '@/store/addTocart';
 import { productItem } from '@/types';
 import Link from 'next/link';
+import { defaultValues } from '@/constants';
 
 const CustomSheetContent = () => {
-  const { increaseQuantity, decreaseQuantity, cart, removeFromCart } =
-    useCartStore();
-  return (
-    <>
-      <SheetContent>
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.95 }}
-          transition={{ duration: 0.3, ease: 'easeOut' }}
-          className="flex flex-col h-full"
-        >
-          {/* Header */}
-          <SheetHeader>
-            <SheetClose className="absolute right-4 top-4 z-100 cursor-pointer hover:bg-gray-100 rounded-full p-1 transition-all" />
-            <SheetTitle className="flex items-center gap-1">
-              <span className="text-lg font-semibold">My Cart</span>
-              <ShoppingBag />
-            </SheetTitle>
-          </SheetHeader>
+  const { increaseQuantity, decreaseQuantity, cart, removeFromCart } = useCartStore();
 
-          {/* Cart Items with Scroll */}
-          <div className="flex-1 overflow-y-auto mt-4 space-y-4 pr-2">
-            {cart.length > 0 ? (
-              cart.map((item: productItem) => (
-                <div
-                  key={item.id}
-                  className="flex items-center justify-between border-b border-dashed last:border-b-0 p-2"
-                >
-                  <div className="flex items-center gap-4">
-                    <Image
-                      width={500}
-                      height={500}
-                      src={item.image}
-                      alt={item.name}
-                      className="w-12 h-12 rounded-md object-cover"
-                    />
-                    <div>
-                      <h4 className="text-md font-medium">{item.name}</h4>
-                      <p className="text-sm text-gray-500">{item.price}৳</p>
-                      <div className="flex items-center gap-3 my-2">
-                        <Button
-                          onClick={() => decreaseQuantity(item.id)}
-                          variant={'outline'}
-                          disabled={item.quantity == 1}
-                          className={`${
-                            item.quantity == 1 ? 'disabled:bg-gray-200' : ''
-                          } cursor-pointer`}
-                        >
-                          -
-                        </Button>
-                        <button>{item.quantity}</button>
-                        <Button
-                          onClick={() => increaseQuantity(item.id)}
-                          variant={'outline'}
-                          className="cursor-pointer"
-                        >
-                          +
-                        </Button>
-                      </div>
+  return (
+    <SheetContent>
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.95 }}
+        transition={{ duration: 0.3, ease: 'easeOut' }}
+        className="flex flex-col h-full"
+      >
+        {/* Header */}
+        <SheetHeader>
+          <SheetClose className="absolute right-4 top-4 z-100 cursor-pointer hover:bg-gray-100 rounded-full p-1 transition-all" />
+          <SheetTitle className="flex items-center gap-1">
+            <span className="text-lg font-semibold">My Cart</span>
+            <ShoppingBag />
+          </SheetTitle>
+        </SheetHeader>
+
+        {/* Cart Items */}
+        <div className="flex-1 overflow-y-auto mt-4 space-y-4 pr-2">
+          {cart.length > 0 ? (
+            cart.map((item: productItem) => (
+              <div
+                key={item.id}
+                className="flex items-center justify-between border-b border-dashed last:border-b-0 p-2"
+              >
+                <div className="flex items-center gap-4">
+                  <Image
+                    width={500}
+                    height={500}
+                    src={item.image}
+                    alt={item.name}
+                    className="w-12 h-12 rounded-md object-cover"
+                  />
+                  <div>
+                    <h4 className="text-md font-medium">{item.name}</h4>
+                    <p className="text-sm text-gray-500">{item.price}৳</p>
+                    <div className="flex items-center gap-3 my-2">
+                      <Button
+                        onClick={() => decreaseQuantity(item.id)}
+                        variant="outline"
+                        disabled={item.quantity === 1}
+                        className={`${
+                          item.quantity === 1 ? 'disabled:bg-gray-100' : ''
+                        } cursor-pointer`}
+                      >
+                        -
+                      </Button>
+                      <button>{item.quantity}</button>
+                      <Button
+                        onClick={() => increaseQuantity(item.id)}
+                        disabled={item.quantity==defaultValues.addProductLimit && true}
+                        variant="outline"
+                        className={`${
+                          item.quantity === defaultValues.addProductLimit ? 'disabled:bg-gray-100' : ''
+                        } cursor-pointer`}
+                      >
+                        +
+                      </Button>
                     </div>
                   </div>
-                  <Button
-                    onClick={() => removeFromCart(item.id)}
-                    variant="ghost"
-                    size="sm"
-                    className="cursor-pointer"
-                  >
-                    <X className="h-4 w-4 hover:bg-gray-50 " />
-                  </Button>
                 </div>
-              ))
-            ) : (
-              <div className="flex gap-2 items-center justify-center h-full text-gray-400">
-                <div className="inline-block">
-                  <p> Your cart is empty</p>
+                <Button
+                  onClick={() => removeFromCart(item.id)}
+                  variant="ghost"
+                  size="sm"
+                  className="cursor-pointer"
+                >
+                  <X className="h-4 w-4 hover:bg-gray-50" />
+                </Button>
+              </div>
+            ))
+          ) : (
+            <div className="flex gap-2 items-center justify-center h-full text-gray-400">
+              <p>Your cart is empty</p>
+              <Link href="/products" className="text-blue-800">
+                continue shopping
+              </Link>
+            </div>
+          )}
+        </div>
+
+        {/* Footer */}
+        <SheetFooter className="pt-4 border-t border-gray-100 mt-2">
+          <div className="flex flex-col w-full gap-4">
+            {/* Total Price */}
+            <div className="flex justify-between">
+              <span className="text-lg font-semibold">Total:</span>
+              <p className="font-semibold">
+                {cart.reduce(
+                  (total, item) => total + item.price * (item.quantity ?? 1),
+                  0
+                )}
+                ৳
+              </p>
+            </div>
+            <small className="text-gray-400">
+              Shipping and taxes calculated at checkout.
+            </small>
+
+            {/* Buttons */}
+            {cart.length > 0 && (
+              <div className="w-full">
+                <div className="my-2">
+                  <Link href="/cart" className="w-full">
+                    <SheetClose asChild>
+                      <Button variant="outline" className="w-full cursor-pointer">
+                        View cart
+                      </Button>
+                    </SheetClose>
+                  </Link>
                 </div>
-                <Link href={'/products'} className="text-blue-800">
-                  {' '}
-                  continue shopping
+                <Link href="/checkout" className="w-full ">
+                  <SheetClose asChild>
+                    <Button className="w-full cursor-pointer">Checkout</Button>
+                  </SheetClose>
                 </Link>
               </div>
             )}
           </div>
-
-          {/* Footer */}
-          <SheetFooter className="pt-4 border-t border-gray-100 mt-2">
-            <div className="flex flex-col w-full gap-4">
-              {/* Total Price */}
-              <div>
-                <div className="flex justify-between ">
-                  <span className="text-lg font-semibold">Total:</span>
-                  <p className="font-semibold">
-                    {cart.reduce(
-                      (total, item) =>
-                        total + item.price * (item.quantity ?? 1),
-                      0
-                    )}
-                    ৳
-                  </p>
-                </div>
-              </div>
-              <small className="text-gray-400">
-                Shipping and taxes calculated at checkout.
-              </small>
-
-              {/* Checkout Button */}
-              {cart.length > 0 && (
-                <div className="w-full">
-                  <div className="my-2">
-                    <Link href={'/cart'} className="w-full  cursor-pointer">
-                      <Button
-                        variant={'outline'}
-                        className="w-full cursor-pointer"
-                      >
-                        View charts
-                      </Button>
-                    </Link>
-                  </div>
-                  <Link href={'/checkout'}
-                    
-                    className="w-full cursor-pointer "
-                  >
-                    <Button className='cursor-pointer w-full'>
-                    Checkout
-                    </Button>
-                  </Link>
-                </div>
-              )}
-            </div>
-          </SheetFooter>
-        </motion.div>
-      </SheetContent>
-    </>
+        </SheetFooter>
+      </motion.div>
+    </SheetContent>
   );
 };
 

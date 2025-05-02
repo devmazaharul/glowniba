@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 
 const productSchema = new mongoose.Schema(
   {
-    productId:{type:String,required:true},
+    productId:{type:String,required:true,unique:true},
     name: { type: String, required: true },
     slug: { type: String, required: true, unique: true },
     price: { type: Number, required: true },
@@ -14,14 +14,13 @@ const productSchema = new mongoose.Schema(
     reviews: { type: Number, default: 0 },
     shortDescription: { type: String },
     description: { type: String },
-    ingredients: [{ type: String }],
+    size:[{type:String,required:true}],
     image: { type: String },
-    images: [{ type: String }],
     tags: [{ type: String }],
     discount: { type: Number, default: 0 },
     isDiscount: { type: Boolean, default: false },
     status: { type: String, default: "new" }, // best-selling, new, etc.
-    featured: { type: Boolean, default: false }, // featured product default false 
+    featured: { type: Boolean, default: false }
   },
   { timestamps: true }
 );

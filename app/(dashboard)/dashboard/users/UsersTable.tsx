@@ -179,9 +179,11 @@ const UsersTable = () => {
       </div>
 
       {/* Pagination */}
-      <div className="my-4">
+
+      {!isLoading && <div className="my-4">
         <PaginationUI currentPage={Number(currentPage)} totalPage={state.totalpage} />
-      </div>
+      </div>}
+
     </div>
   );
 };

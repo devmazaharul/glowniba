@@ -44,6 +44,7 @@ const raleway = Raleway({
   weight: '400',
   subsets: ['cyrillic'],
   style: 'normal',
+  display:"swap"
 });
 
 export default function RootLayout({
