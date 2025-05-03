@@ -118,6 +118,29 @@ export const getProducts = async (limit: number = 10, page: number = 1) => {
   }
 };
 
+export const getProductsClient = async () => {
+  try {
+    await connectDB();
+
+    const items = await Product.find().sort({ createdAt: -1 })
+    // Handle no products found
+    if (!items.length) throw new CustomError("No products found", 400);
+    return responce({
+      message:"Successfully get data",
+      status:200,
+      data: JSON.parse(JSON.stringify(items)),
+    })
+
+  } catch (error) {
+    if (error instanceof Error) {
+      return handleError(error.message, (error as any).status || 500);
+    } else if (error instanceof CustomError) {
+      return handleError(error.message, (error as any).status || 500);
+    }
+    return handleError('An unknown error occurred', 500);
+  }
+};
+
 
 
 export const getProductbySlug = async (productslug: string) => {

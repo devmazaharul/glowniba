@@ -74,7 +74,7 @@ const ProductCart = ({ prop }: { prop: productInformation }) => {
               alt={prop.brand}
               width={300}
               height={300}
-              className="w-full h-[250px] object-cover rounded-md transition-transform duration-300 ease-in-out hover:scale-105"
+              className="w-full h-[250px] object-center rounded-md transition-transform duration-300 ease-in-out hover:scale-105"
             />
           </motion.div>
         </Link>

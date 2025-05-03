@@ -32,3 +32,6 @@ export const loggerControllerExternalObject = Object.freeze({
 });
 
 
+export const productLimitation=Object.freeze({
+  productShowLImit:30
+})
