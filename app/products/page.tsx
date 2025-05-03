@@ -44,7 +44,7 @@ const Page = () => {
       <SectionTop title="Products" desc="Your favourite products all in here" />
 
       <div className="grid space-y-2 md:grid-cols-3 lg:grid-cols-4 grid-cols-1 sm:grid-cols-2 gap-4 w-[80%] md:w-full mx-auto">
-        {visibleProducts.map((item) => (
+        {!isLoading && visibleProducts.map((item) => (
           <ProductCart key={item.productID} prop={item}/>
         ))}
 

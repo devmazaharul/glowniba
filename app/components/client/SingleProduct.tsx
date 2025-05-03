@@ -29,14 +29,14 @@ const SingleProduct = ({ item }: { item: productInformation }) => {
   return (
     <div className="">
       <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 ">
-        <div className=" shadow-gray-50   cursor-zoom-in ">
+        <div className="md:mr-5  cursor-zoom-in ">
           <div className="bg-yellow-100 flex opacity-100  relative top-7 left-1 md:opacity-0 px-2 md:flex items-center gap-1 rounded-md w-fit text-md">
             {' '}
             <FaGripfire className="fill-yellow-700" /> available
           </div>
 
           <Image
-            className="w-fit h-fit rounded-md"
+            className="w-full h-full rounded-md"
             src={item.image}
             width={600}
             height={600}
@@ -86,15 +86,13 @@ const SingleProduct = ({ item }: { item: productInformation }) => {
             {/* product size */}
             <div className="py-6">
               <div className="flex items-center gap-2">
-                <button className="border-2 font-semibold rounded-md py-1 px-4  border-gray-400 focus:bg-gray-700 cursor-pointer focus:text-gray-100 text-gray-600">
-                  10 Ml
-                </button>
-                <button className="border-2 font-semibold rounded-md py-1 px-4  border-gray-400 focus:bg-gray-700 cursor-pointer focus:text-gray-100 text-gray-600">
-                  50 Ml
-                </button>
-                <button className="border-2 font-semibold rounded-md py-1 px-4  border-gray-400 focus:bg-gray-700 cursor-pointer focus:text-gray-100 text-gray-600">
-                  100 Ml
-                </button>
+              {item.size.map((s,i)=>(
+ <button key={i} className="border-2 font-semibold rounded-md py-1 px-4  border-gray-400 focus:bg-gray-700 cursor-pointer focus:text-gray-100 text-gray-600">
+ {s || '10ml'}
+</button>
+              ))}
+               
+              
               </div>
             </div>
 

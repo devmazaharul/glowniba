@@ -1,4 +1,4 @@
-'use server';
+'use server'
 import cloudinary from '@/lib/cloudinary';
 import connectDB from '@/lib/db';
 import Product from '@/model/product';
@@ -41,7 +41,7 @@ export const addProduct = async ({
       charset: 'alphanumeric',
       length: 7,
     });
-    const makeSlug = name.split(' ').join('-').concat(`-${makeProductId}`);
+    const makeSlug = (name.trim().split(" ").join("-")+"-"+makeProductId).toLocaleLowerCase();
     // Save to MongoDB
     const newProduct = new Product({
       productID: makeProductId,
@@ -111,15 +111,17 @@ export const getProducts=async(limit=10,page=1)=>{
   }
 }
 
-export const getProductbySlug=async(productslug:string)=>{
-  try { 
-    const findProduct=await Product.findOne({slug:productslug});
-    if(!findProduct) throw new CustomError("Invalid product slug",400)
+
+export const getProductbySlug = async (productslug: string) => {
+  try {
+    const findProduct = await Product.findOne({ slug: productslug });
+    if (!findProduct) throw new CustomError("Invalid product slug", 400);
+
     return responce({
-      message:"successfully get product data",
-      status:200,
-      data:JSON.parse(JSON.stringify(findProduct))
-    })
+      message: "successfully get product data",
+      status: 200,
+      data: JSON.parse(JSON.stringify(findProduct))
+    });
   } catch (error) {
     if (error instanceof Error) {
       return handleError(error.message, (error as any).status || 500);
@@ -129,6 +131,7 @@ export const getProductbySlug=async(productslug:string)=>{
     return handleError('An unknown error occurred', 500);
   }
 }
+
 
 export const deleteproductByID=async(productid:string)=>{
   try {
