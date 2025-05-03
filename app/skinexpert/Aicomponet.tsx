@@ -35,9 +35,11 @@ const AiComponent = () => {
         setIsloading(false);
       setQuestion('');
       }
-    } catch {
-      toast.error('Error occur');
+    } catch(err:unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'Error occur';
+      toast.error(errorMessage);
       setQuestion('');
+      setIsloading(false);
     } 
   };
 
