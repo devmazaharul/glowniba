@@ -1,5 +1,4 @@
 'use client';
-
 import { useParams } from 'next/navigation';
 import SingleProduct from '@/app/components/client/SingleProduct';
 import { useEffect, useState } from 'react';
@@ -9,14 +8,13 @@ import SingleProductSkeleton from '@/app/components/others/SingleProductSkeleton
 import Link from 'next/link';
 
 const Page = () => {
-  const { slug } = useParams();
+  const  pramsVal = useParams();
   const [err, setErr] = useState(false);
   const [product, setProduct] = useState<productInformation | null>(null);
   const [loading, setLoading] = useState(true);
-
+ const slug = decodeURIComponent((pramsVal.slug ?? '').toString());
   useEffect(() => {
     if (!slug) return;
-
     getProductbySlug(slug.toString().trim())
       .then((res) => {
         if (res?.status !== 200) throw new Error();

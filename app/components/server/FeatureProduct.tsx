@@ -15,7 +15,7 @@ const FeatureProduct = () => {
     getProducts()
       .then((res) => {
         if (res?.status !== 200 || !('items' in res)) throw new Error();
-        setProducts(res.items.filter((item) => item.featured === true));
+        setProducts(res.items.filter((item) => item.featured === true).reverse());
         setErr(false);
       })
       .catch(() => {

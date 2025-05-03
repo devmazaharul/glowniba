@@ -58,7 +58,7 @@ export const addProduct = async ({
       image: uploadRes.secure_url,
       rating,
       reviews,
-      tags,
+      tags:tags.split(","),
       category,
       featured,
       size:size.split(",")
@@ -66,6 +66,7 @@ export const addProduct = async ({
 
     const savedProduct = await newProduct.save();
     revalidatePath("/dashboard/products")
+    revalidatePath("/")
     return responce({
       message: 'successfully product added',
       status: 200,
@@ -115,7 +116,7 @@ export const getProductbySlug=async(productslug:string)=>{
     const findProduct=await Product.findOne({slug:productslug});
     if(!findProduct) throw new CustomError("Invalid product slug",400)
     return responce({
-      message:"successfully get product",
+      message:"successfully get product data",
       status:200,
       data:JSON.parse(JSON.stringify(findProduct))
     })

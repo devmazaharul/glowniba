@@ -17,7 +17,7 @@ const poppins = Poppins({
   subsets: ['latin-ext'],
 });
 const SingleProduct = ({ item }: { item: productInformation }) => {
-  const productLink = defaultValues.siteUrl + `/products/${item.slug}`;
+  const productLink = defaultValues.siteUrl + `/products/${decodeURIComponent(item.slug.toString())}`;
 
   const { cart, addToCart, increaseQuantity, decreaseQuantity } =
     useCartStore();
@@ -29,14 +29,14 @@ const SingleProduct = ({ item }: { item: productInformation }) => {
   return (
     <div className="">
       <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 ">
-        <div className=" shadow-gray-50 rounded-2xl cursor-zoom-in p-2">
-          <div className="bg-yellow-100 flex opacity-100 md:opacity-0 px-2 md:flex items-center gap-1 rounded-md w-fit text-md">
+        <div className=" shadow-gray-50   cursor-zoom-in ">
+          <div className="bg-yellow-100 flex opacity-100  relative top-7 left-1 md:opacity-0 px-2 md:flex items-center gap-1 rounded-md w-fit text-md">
             {' '}
             <FaGripfire className="fill-yellow-700" /> available
           </div>
 
           <Image
-            className="w-full h-full "
+            className="w-fit h-fit rounded-md"
             src={item.image}
             width={600}
             height={600}
@@ -81,7 +81,7 @@ const SingleProduct = ({ item }: { item: productInformation }) => {
               <Rating rating={item.rating} reviews={item.reviews} />
             </div>
             <p className="text-gray-500 capitalize">
-              {item.description || 'description text'}
+              {item.shortDescription || 'description text'}
             </p>
             {/* product size */}
             <div className="py-6">
@@ -152,7 +152,7 @@ const SingleProduct = ({ item }: { item: productInformation }) => {
                 </div>
 
                 <div className="flex text-gray-500 capitalize">
-                  Tag : {item.tags ? item.tags.join(' - ') : 'serume'}
+                  Tags : {item.tags ? item.tags.join(",") : 'glow_niba,face,serum'}
                 </div>
               </div>
             </div>

@@ -28,7 +28,7 @@ const CommonCard = ({item,color,}: {item: productInformation;color: string}) => 
   };
 
   const addProudctTocart = useCartStore((state) => state.addToCart);
-  const productLink = `/products/${item.slug}`;
+  const productLink = `/products/${encodeURIComponent(item.slug)}`;
 
   return (
     <>

@@ -20,38 +20,44 @@ export interface ProductDataInvalidation {
 const validateProductData = (productData: ProductDataInvalidation) => {
   const errors: { [key: string]: string } = {};
 
-  // Name Validation
-  if (!productData.name.trim()) {
-    errors.name = 'Product name is required.';
-  }
+// Product Name Validation
+if (!productData.name.trim()) {
+  errors.name = 'Product name is required.';
+} else if (productData.name.length < 3 || productData.name.length > 100) {
+  errors.name = 'Product name must be between 3 and 100 characters.';
+}
 
-  // Price Validation
-  if (
-    !productData.price ||
-    isNaN(Number(productData.price)) ||
-    Number(productData.price) <= 0
-  ) {
-    errors.price = 'Price must be a positive number.';
-  }
+// Price Validation
+if (
+  !productData.price ||
+  isNaN(Number(productData.price)) ||
+  Number(productData.price) <= 0
+) {
+  errors.price = 'Price must be a positive number.';
+}
 
-  // Category Validation
-  if (!productData.category) {
-    errors.category = 'Category is required.';
-  }
+// Category Validation
+if (!productData.category || productData.category.trim() === '') {
+  errors.category = 'Category is required.';
+}
 
-  // Brand Validation
-  if (!productData.brand.trim()) {
-    errors.brand = 'Brand is required.';
-  }
+// Brand Validation
+if (!productData.brand.trim()) {
+  errors.brand = 'Brand is required.';
+} else if (productData.brand.length < 2 || productData.brand.length > 50) {
+  errors.brand = 'Brand must be between 2 and 50 characters.';
+}
 
-  // Stock Validation
-  if (
-    !productData.stock ||
-    isNaN(Number(productData.stock)) ||
-    Number(productData.stock) < 0
-  ) {
-    errors.stock = 'Stock must be a non-negative number.';
-  }
+// Stock Validation
+if (
+  productData.stock === undefined ||
+  isNaN(Number(productData.stock)) ||
+  Number(productData.stock) < 0
+) {
+  errors.stock = 'Stock must be a non-negative number.';
+}
+
+
 
   // Rating Validation
   if (
@@ -68,15 +74,23 @@ const validateProductData = (productData: ProductDataInvalidation) => {
     errors.reviews = 'Reviews must be a valid number.';
   }
 
-  // Short Description Validation
-  if (!productData.shortDescription.trim()) {
-    errors.shortDescription = 'Short description is required.';
-  }
+// Short Description Validation
+if (!productData.shortDescription.trim()) {
+  errors.shortDescription = 'Short description is required.';
+} else if (productData.shortDescription.length < 10) {
+  errors.shortDescription = 'Short description must be at least 10 characters.';
+} else if (productData.shortDescription.length > 120) {
+  errors.shortDescription = 'Short description must be less than 120 characters.';
+}
 
-  // Description Validation
-  if (!productData.description.trim()) {
-    errors.description = 'Description is required.';
-  }
+// Description Validation
+if (!productData.description.trim()) {
+  errors.description = 'Description is required.';
+} else if (productData.description.length < 30) {
+  errors.description = 'Description must be at least 30 characters.';
+} else if (productData.description.length > 1000) {
+  errors.description = 'Description must be less than 1000 characters.';
+}
 
   const tagPattern =
     /^(?:[a-zA-Z0-9]+(?:[-_][a-zA-Z0-9]+)*)(?:,(?:[a-zA-Z0-9]+(?:[-_][a-zA-Z0-9]+)*)){0,3}$/;
@@ -104,9 +118,16 @@ const validateProductData = (productData: ProductDataInvalidation) => {
     errors.discount = 'Discount must be between 0 and 100.';
   }
 
-  // Image Validation (Required if no image is provided)
   if (!productData.image) {
     errors.image = 'Product image is required.';
+  } else {
+    const file = productData.image as File;
+  
+    // ✅ Check valid file type
+    const validTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/jpg'];
+    if (!validTypes.includes(file.type)) {
+      errors.image = 'Only JPG, JPEG, PNG, and WEBP formats are allowed.';
+    }
   }
 
   const pattern =
