@@ -114,7 +114,8 @@ export const getProducts=async(limit=10,page=1)=>{
 
 export const getProductbySlug = async (productslug: string) => {
   try {
-    const findProduct = await Product.findOne({ slug: productslug });
+    const slug = decodeURIComponent(productslug.trim())
+    const findProduct = await Product.findOne({ slug });
     if (!findProduct) throw new CustomError("Invalid product slug", 400);
 
     return responce({
