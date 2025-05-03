@@ -1,5 +1,4 @@
 'use client';
-
 import { ShoppingBag, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -12,9 +11,9 @@ import {
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useCartStore } from '@/store/addTocart';
-import { productItem } from '@/types';
 import Link from 'next/link';
 import { defaultValues } from '@/constants';
+import { productInformation } from '@/types/product';
 
 const CustomSheetContent = () => {
   const { increaseQuantity, decreaseQuantity, cart, removeFromCart } = useCartStore();
@@ -30,7 +29,7 @@ const CustomSheetContent = () => {
       >
         {/* Header */}
         <SheetHeader>
-          <SheetClose className="absolute right-4 top-4 z-100 cursor-pointer hover:bg-gray-100 rounded-full p-1 transition-all" />
+          <SheetClose className="absolute right-4 top-4 z-100 cursor-pointer hover:bg-gray-500 rounded-full p-4 transition-all" />
           <SheetTitle className="flex items-center gap-1">
             <span className="text-lg font-semibold">My Cart</span>
             <ShoppingBag />
@@ -40,9 +39,9 @@ const CustomSheetContent = () => {
         {/* Cart Items */}
         <div className="flex-1 overflow-y-auto mt-4 space-y-4 pr-2">
           {cart.length > 0 ? (
-            cart.map((item: productItem) => (
+            cart.map((item: productInformation) => (
               <div
-                key={item.id}
+                key={item.productID}
                 className="flex items-center justify-between border-b border-dashed last:border-b-0 p-2"
               >
                 <div className="flex items-center gap-4">
@@ -58,7 +57,7 @@ const CustomSheetContent = () => {
                     <p className="text-sm text-gray-500">{item.price}৳</p>
                     <div className="flex items-center gap-3 my-2">
                       <Button
-                        onClick={() => decreaseQuantity(item.id)}
+                        onClick={() => decreaseQuantity(item.productID)}
                         variant="outline"
                         disabled={item.quantity === 1}
                         className={`${
@@ -69,7 +68,7 @@ const CustomSheetContent = () => {
                       </Button>
                       <button>{item.quantity}</button>
                       <Button
-                        onClick={() => increaseQuantity(item.id)}
+                        onClick={() => increaseQuantity(item.productID)}
                         disabled={item.quantity==defaultValues.addProductLimit && true}
                         variant="outline"
                         className={`${
@@ -82,7 +81,7 @@ const CustomSheetContent = () => {
                   </div>
                 </div>
                 <Button
-                  onClick={() => removeFromCart(item.id)}
+                  onClick={() => removeFromCart(item.productID)}
                   variant="ghost"
                   size="sm"
                   className="cursor-pointer"

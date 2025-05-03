@@ -1,7 +1,6 @@
 'use client';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
-
 import { FaArrowRightLong } from 'react-icons/fa6';
 import { FaPlus } from 'react-icons/fa6';
 import { FaMinus } from 'react-icons/fa6';
@@ -40,7 +39,7 @@ const Page = () => {
           <div className="space-y-4 py-4 col-span-2 border border-gray-100 p-2 rounded-md shadow-2xl shadow-gray-100">
             {cart.map((item) => (
               <div
-                key={item.id}
+                key={item.productID}
                 className="md:flex space-y-4   border-b border-dashed  last:border-b-0 items-center justify-between py-2  "
               >
                 <div className="flex items-center gap-4">
@@ -66,7 +65,7 @@ const Page = () => {
                 <div className="flex items-center  gap-4 my-2">
                   <div className="flex items-center gap-4">
                     <Button
-                      onClick={() => decreaseQuantity(item.id)}
+                      onClick={() => decreaseQuantity(item.productID)}
                       variant={'outline'}
                       disabled={item.quantity == 1 && true}
                       className="cursor-pointer h-8 w-8"
@@ -76,7 +75,7 @@ const Page = () => {
                     </Button>
                     <p>{item.quantity || 0}</p>
                     <Button
-                      onClick={() => increaseQuantity(item.id)}
+                      onClick={() => increaseQuantity(item.productID)}
                       disabled={
                         item.quantity == defaultValues.addProductLimit && true
                       }
@@ -86,7 +85,7 @@ const Page = () => {
                       <FaPlus />
                     </Button>
                   </div>
-                  <Removecart productId={item.id} />
+                  <Removecart productId={item.productID} />
                 </div>
               </div>
             ))}

@@ -1,10 +1,8 @@
 'use server';
 import cloudinary from '@/lib/cloudinary';
-//import { uploaderClud } from '@/lib/cloudinary';
-
 import connectDB from '@/lib/db';
 import Product from '@/model/product';
-import { AddproductItem } from '@/types';
+import { addproductInformation } from '@/types/product';
 import { CustomError, handleError } from '@/utils/error';
 import { responce, responceItems } from '@/utils/success';
 import { revalidatePath } from 'next/cache';
@@ -27,7 +25,7 @@ export const addProduct = async ({
   category,
   featured,
   size
-}: AddproductItem) => {
+}: addproductInformation) => {
   try {
     await connectDB();
 
@@ -46,7 +44,7 @@ export const addProduct = async ({
     const makeSlug = name.split(' ').join('-').concat(`-${makeProductId}`);
     // Save to MongoDB
     const newProduct = new Product({
-      productId: makeProductId,
+      productID: makeProductId,
       name,
       slug: makeSlug,
       brand,
@@ -102,6 +100,46 @@ export const getProducts=async(limit=10,page=1)=>{
     totalpage:totalPage
   })
     
+  } catch (error) {
+    if (error instanceof Error) {
+      return handleError(error.message, (error as any).status || 500);
+    } else if (error instanceof CustomError) {
+      return handleError(error.message, (error as any).status || 500);
+    }
+    return handleError('An unknown error occurred', 500);
+  }
+}
+
+export const getProductbySlug=async(productslug:string)=>{
+  try { 
+    const findProduct=await Product.findOne({slug:productslug});
+    if(!findProduct) throw new CustomError("Invalid product slug",400)
+    return responce({
+      message:"successfully get product",
+      status:200,
+      data:JSON.parse(JSON.stringify(findProduct))
+    })
+  } catch (error) {
+    if (error instanceof Error) {
+      return handleError(error.message, (error as any).status || 500);
+    } else if (error instanceof CustomError) {
+      return handleError(error.message, (error as any).status || 500);
+    }
+    return handleError('An unknown error occurred', 500);
+  }
+}
+
+export const deleteproductByID=async(productid:string)=>{
+  try {
+      const res=await Product.findOne({productID:productid})
+      if(!res) throw new CustomError("Product not found",400);
+      await Product.deleteOne({productID:productid})
+      revalidatePath("/dashboard/products")
+      return responce({
+        message:"product has been deleted successfully.",
+        status:200,
+        data:{}
+      })
   } catch (error) {
     if (error instanceof Error) {
       return handleError(error.message, (error as any).status || 500);

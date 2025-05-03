@@ -1,6 +1,6 @@
 // stores/useCartStore.ts
 import {  defaultValues} from '@/constants';
-import { CartStateType, productItem } from '@/types';
+import { CartStateType } from '@/types';
 import { toast } from 'sonner';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
@@ -9,29 +9,9 @@ export const useCartStore = create<CartStateType>()(
   persist(
     (set, get) => ({
       cart: [],
-      increaseQuantity: (id) => {
-        get().cart.map((item) => {
-          if (item.id == id) {
-            if ((item.quantity ?? 1) < defaultValues.addProductLimit) {
-              set({
-                cart: get().cart.map((item) =>
-                  item.id == id
-                    ? { ...item, quantity: (item.quantity ?? 1) + 1 }
-                    : item
-                ),
-              });
-            } else {
-              toast.warning(`Product added faild `, {
-                description: `You can only add ${defaultValues.addProductLimit} of this product at a time.`,
-                duration: 3000,
-              });
-              return;
-            }
-          }
-        });
-      },
-      addToCart: (product: productItem) => {
-        const exists = get().cart.find((item) => item.id === product.id);
+    
+      addToCart: (product) => {
+        const exists = get().cart.find((item) => item.productID === product.productID);
         if (exists) {
           if (exists.quantity == defaultValues.addProductLimit) {
             toast.warning(`Product added faild `, {
@@ -42,7 +22,7 @@ export const useCartStore = create<CartStateType>()(
           } else {
             set({
               cart: get().cart.map((item) =>
-                item.id === product.id
+                item.productID === product.productID
                   ? { ...item, quantity: (item.quantity ?? 1) + 1 }
                   : item
               ),
@@ -61,18 +41,38 @@ export const useCartStore = create<CartStateType>()(
           });
         }
       },
-      removeFromCart: (id) => {
-        set({ cart: get().cart.filter((item) => item.id !== id) });
+      removeFromCart: (productid) => {
+        set({ cart: get().cart.filter((item) => item.productID !== productid) });
         toast.success('Product has been removed', {
           description: `Successfully removed product from cart`,
           duration: 2000,
         });
       },
-
+      increaseQuantity: (productid) => {
+        get().cart.map((item) => {
+          if (item.productID == productid) {
+            if ((item.quantity ?? 1) < defaultValues.addProductLimit) {
+              set({
+                cart: get().cart.map((item) =>
+                  item.productID == productid
+                    ? { ...item, quantity: (item.quantity ?? 1) + 1 }
+                    : item
+                ),
+              });
+            } else {
+              toast.warning(`Product is not added.`, {
+                description: `You can only add ${defaultValues.addProductLimit} of this product at a time.`,
+                duration: 3000,
+              });
+              return;
+            }
+          }
+        });
+      },
       decreaseQuantity: (id) => {
         set({
           cart: get().cart.map((item) =>
-            item.id === id && item.quantity !== 0
+            item.productID === id && item.quantity !== 0
               ? { ...item, quantity: (item.quantity ?? 1) - 1 }
               : item
           ),
@@ -81,7 +81,7 @@ export const useCartStore = create<CartStateType>()(
       clearCart: () => set({ cart: [] }),
     }),
     {
-      name: 'glow-niba-cart',
+      name: 'cartitems',
     }
   )
 );

@@ -1,30 +1,69 @@
 'use client';
-import React from 'react';
-import { productsData } from '@/lib/source';
+import React, { useEffect, useState } from 'react';
 import SectionTop from '../others/SectionTop';
 import { defaultValues } from '@/constants';
+import { productInformation } from '@/types/product';
 import CommonCard from '../others/CommonCard';
+import { getProducts } from '@/action/product';
 
 const FeatureProduct = () => {
-  const featuredProducts = productsData.filter((item) => {
-    return item?.isFeatured;
-  });
+  const [products, setProducts] = useState<productInformation[]>([]);
+  const [err, setErr] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    getProducts()
+      .then((res) => {
+        if (res?.status !== 200 || !('items' in res)) throw new Error();
+        setProducts(res.items.filter((item) => item.featured === true));
+        setErr(false);
+      })
+      .catch(() => {
+        setErr(true);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
 
   return (
     <div className="section">
       <SectionTop
         title="✨ Featured Products ✨"
-        desc=" আমরা বেছে নিয়েছি সেরা কিছু প্রোডাক্ট, যেগুলো আপনার স্কিন কেয়ারে দেবে অসাধারণ ফলাফল।"
+        desc="আমরা বেছে নিয়েছি সেরা কিছু প্রোডাক্ট, যেগুলো আপনার স্কিন কেয়ারে দেবে অসাধারণ ফলাফল।"
       />
-      <div>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2">
-          {featuredProducts
-            .slice(0, defaultValues.featureListSize)
-            .map((item, idx) => (
-              <CommonCard key={idx} item={item} color='bg-yellow-100 text-yellow-800' />
+
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2">
+        {loading
+          ? Array.from({ length: defaultValues.featureListSize }).map((_, i) => (
+              <ProductCardSkeleton key={i} />
+            ))
+          : products.slice(0, defaultValues.featureListSize).map((item) => (
+              <CommonCard
+                key={item._id}
+                item={item}
+                color="bg-yellow-100 text-yellow-800"
+              />
             ))}
-        </div>
       </div>
+
+      {err && (
+        <div className="text-center py-6 text-red-600 font-semibold">
+          কিছু ভুল হয়েছে, প্রোডাক্ট লোড হচ্ছে না।
+        </div>
+      )}
+    </div>
+  );
+};
+
+
+export const ProductCardSkeleton = () => {
+  return (
+    <div className="animate-pulse p-3 border border-gray-100 rounded-md shadow-2xl shadow-gray-100 space-y-2">
+      <div className="bg-gray-200 h-[160px] w-full rounded-md" />
+      <div className="h-4 bg-gray-100 rounded w-3/4"></div>
+      <div className="h-4 bg-gray-100 rounded w-1/2"></div>
+      <div className="h-6 bg-gray-100 rounded w-full mt-3" />
     </div>
   );
 };

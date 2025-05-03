@@ -36,6 +36,7 @@ const ProductForm = () => {
   };
   const [productData, setProductData] = useState({ ...prObj });
   const [isLoading,setIsloading]=useState(false)
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -63,46 +64,10 @@ const ProductForm = () => {
         }
       }
       if (Object.keys(error).length == 0) {
-        const {
-          name,
-          category,
-          price,
-          discount,
-          isDiscount,
-          brand,
-          description,
-          shortDescription,
-          status,
-          stock,
-          featured,
-          image,
-          rating,
-          reviews,
-          tags,
-          size
-        } = productData;
+        const base63 = await fileToBase64(productData.image);
   
-      
-        const base63 = await fileToBase64(image);
-  
-        const res = await addProduct({
-          name,
-          category,
-          price,
-          discount,
-          isDiscount,
-          brand,
-          description,
-          shortDescription,
-          status,
-          stock,
-          featured,
-          image: base63,
-          rating,
-          reviews,
-          tags,
-          size
-        });
+        const res = await addProduct({...productData,image:base63});
+
         if (res.status == 200) {
           toast.success('Products successfully added');
           // setProductData({

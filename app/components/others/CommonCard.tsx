@@ -3,32 +3,14 @@ import Link from 'next/link';
 import React from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { commonCartType } from '@/types';
 import Rating from './Rating';
 import { Button } from '@/components/ui/button';
 import { useCartStore } from '@/store/addTocart';
 import { FaGripfire } from 'react-icons/fa';
+import { productInformation } from '@/types/product';
 
-const CommonCard = ({
-  item,
-  color,
-}: {
-  item: commonCartType;
-  color: string;
-}) => {
-  const {
-    brand,
-    id,
-    image,
-    name,
-    price,
-    rating,
-    reviews,
-    shortDescription,
-    description,
-    stock,
-    tags,
-  } = item;
+const CommonCard = ({item,color,}: {item: productInformation;color: string}) => {
+
   const cardVariants = {
     offscreen: {
       opacity: 0,
@@ -46,7 +28,7 @@ const CommonCard = ({
   };
 
   const addProudctTocart = useCartStore((state) => state.addToCart);
-  const productLink = `/products/${(name + ' ' + id).split(' ').join('-')}`;
+  const productLink = `/products/${item.slug}`;
 
   return (
     <>
@@ -54,10 +36,10 @@ const CommonCard = ({
         {item.isDiscount ? (
           <p className="w-fit flex items-center  bg-yellow-100 rounded-md px-2 text-yellow-800  ">
             {' '}
-            <FaGripfire /> {parseInt(item.discount || '0')}% less
+            <FaGripfire /> {parseInt(item.discount.toString())}% less
           </p>
         ) : (
-          <p className="opacity-0">new</p>
+          <p className="opacity-0">{item.status || 'new'}</p>
         )}
         <Link href={productLink}>
           <motion.div
@@ -67,13 +49,14 @@ const CommonCard = ({
             whileInView="onscreen"
             viewport={{ once: true, amount: 0.3 }}
           >
-            <Image
-              src={image}
-              width={500}
-              height={500}
-              alt={item.name}
-              className="w-[140px] mx-auto h-[140px] object-contain"
-            />
+      <Image
+  src={item.image}
+  width={160}
+  height={160}
+  alt={item.name}
+  className="w-[160px] h-[160px] rounded-md object-cover mx-auto  "
+/>
+
 
             <p
               className={`${color} px-3 py-1 rounded-full mx-auto w-fit my-3 capitalize text-sm`}
@@ -91,13 +74,13 @@ const CommonCard = ({
 
             <div>
               <h3 className="text-lg font-semibold text-gray-800">
-                {name.slice(0, 18)}
+                {item.name.slice(0, 18)}
               </h3>
               <div>
-                <Rating rating={rating} reviews={reviews} />
+                <Rating rating={item.rating} reviews={item.reviews} />
               </div>
               <p className="text-gray-500 mt-2 text-sm">
-                {shortDescription.slice(0, 50)}
+                {item.shortDescription.slice(0, 50)}
               </p>
             </div>
           </motion.div>
@@ -105,23 +88,7 @@ const CommonCard = ({
         <div className="w-fit mx-auto my-2">
           <Button
             onClick={() =>
-              addProudctTocart({
-                id,
-                brand,
-                image,
-                name,
-                price,
-                quantity: 0,
-                rating,
-                reviews,
-                shortDescription,
-                description,
-                stock,
-                discount: '20',
-                isDiscount: true,
-                status: 'new',
-                tags,
-              })
+              addProudctTocart({...item})
             }
             variant={'outline'}
             className="cursor-pointer"

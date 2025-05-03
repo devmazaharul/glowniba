@@ -1,5 +1,4 @@
 'use client';
-import { productItem } from '@/types';
 import Image from 'next/image';
 import React from 'react';
 import { QRCodeSVG } from 'qrcode.react';
@@ -11,37 +10,20 @@ import Rating from '../others/Rating';
 import { Button } from '@/components/ui/button';
 import { useCartStore } from '@/store/addTocart';
 import { defaultValues } from '@/constants';
+import { productInformation } from '@/types/product';
 const poppins = Poppins({
   weight: '700',
   style: 'normal',
   subsets: ['latin-ext'],
 });
-const SingleProduct = ({ item }: { item: productItem }) => {
-  const {
-    name,
-    description,
-    shortDescription,
-    brand,
-    id,
-    image,
-    price,
-    rating,
-    stock,
-    status,
-    reviews,
-    discount,
-    isDiscount,
-    quantity,
-    tags,
-  } = item;
-  const productLink =
-  defaultValues.siteUrl +
-    `/products/${(item.name + ' ' + item.id).split(' ').join('-')}`;
+const SingleProduct = ({ item }: { item: productInformation }) => {
+  const productLink = defaultValues.siteUrl + `/products/${item.slug}`;
 
   const { cart, addToCart, increaseQuantity, decreaseQuantity } =
     useCartStore();
+
   const finPoduct = cart.find(
-    (val) => val.id == item.id && val.name == item.name
+    (val) => val.productID == item.productID && val.slug==item.slug
   );
 
   return (
@@ -121,18 +103,15 @@ const SingleProduct = ({ item }: { item: productItem }) => {
               {finPoduct && (finPoduct.quantity ?? 0) > 0 && (
                 <div className="flex items-center gap-2 mb-8">
                   <Button
-                  className='cursor-pointer'
+                    className="cursor-pointer"
                     disabled={finPoduct?.quantity == 1 ? true : false}
-                    onClick={() => decreaseQuantity(item.id)}
+                    onClick={() => decreaseQuantity(item.productID)}
                     variant={'outline'}
                   >
                     <FaMinus />
                   </Button>
 
-                  <Button
-                    className="font-bold w-20 "
-                    variant={'outline'}
-                  >
+                  <Button className="font-bold w-20 " variant={'outline'}>
                     {finPoduct?.quantity || 0}
                   </Button>
                   <Button
@@ -142,8 +121,8 @@ const SingleProduct = ({ item }: { item: productItem }) => {
                         : false
                     }
                     variant={'outline'}
-                    onClick={() => increaseQuantity(item.id)}
-                      className='cursor-pointer'
+                    onClick={() => increaseQuantity(item.productID)}
+                    className="cursor-pointer"
                   >
                     <FaPlus />
                   </Button>
@@ -153,32 +132,16 @@ const SingleProduct = ({ item }: { item: productItem }) => {
               {/*prouduct add to cart and checkout*/}
               <div className="flex items-center gap-2">
                 <Button
-                  onClick={() =>
-                    addToCart({
-                      name,
-                      brand,
-                      stock,
-                      shortDescription,
-                      description,
-                      id,
-                      image,
-                      price,
-                      rating,
-                      reviews,
-                      discount,
-                      isDiscount,
-                      quantity,
-                      status,
-                      tags,
-                    })
-                  }
+                  onClick={() => addToCart({ ...item })}
                   className="cursor-pointer"
                   variant={'default'}
                 >
                   Add to cart
                 </Button>
                 {finPoduct && (finPoduct.quantity ?? 0) > 0 && (
-                  <Button   className='cursor-pointer' variant={'outline'}>Check out</Button>
+                  <Button className="cursor-pointer" variant={'outline'}>
+                    Check out
+                  </Button>
                 )}
               </div>
 

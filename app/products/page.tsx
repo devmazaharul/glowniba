@@ -6,24 +6,25 @@ import SectionTop from '../components/others/SectionTop';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { toast } from 'sonner';
+import { getProducts } from '@/action/product';
+import { productInformation } from '@/types/product';
 const Page = () => {
-  const [visibleCount, setVisibleCount] = useState(4);
+  const [visibleCount, setVisibleCount] = useState(16);
   const [isLoading, setIsLoading] = useState(false);
+  const [productInfo,setProductsInfo]=useState<productInformation[]>([])
 
-  useEffect(()=>{
-
-    const getProducts=async()=>{
-      try {
-        
-      } catch  {
-        toast.error("Product fething faild")
-      }finally{
-        setIsLoading(false)
+ useEffect(() => {
+    const getproducts = async () => {
+      const res = await getProducts();
+      if ("items" in res) {
+        setProductsInfo(res.items.reverse());
+      }else{
+        toast.error("Get products faild")
       }
-    }
-    getProducts()
-  },[visibleCount])
-
+    
+    };
+    getproducts();
+  }, []);
 
 
   const handleLoadMore = () => {
@@ -31,19 +32,20 @@ const Page = () => {
     setTimeout(() => {
       setVisibleCount((prev) => prev + 4);
       setIsLoading(false);
-    }, 1000); // simulate loading delay
+    }, 500); // simulate loading delay
   };
 
-  const visibleProducts = productsData.slice(0, visibleCount);
+
+  const visibleProducts = productInfo && productInfo.slice(0, visibleCount);
   const isAllLoaded = visibleCount >= productsData.length;
 
   return (
     <div className="section">
       <SectionTop title="Products" desc="Your favourite products all in here" />
 
-      <div className="grid my-4 md:grid-cols-3 lg:grid-cols-4 grid-cols-1 sm:grid-cols-2 gap-4">
+      <div className="grid space-y-2 md:grid-cols-3 lg:grid-cols-4 grid-cols-1 sm:grid-cols-2 gap-4 w-[80%] md:w-full mx-auto">
         {visibleProducts.map((item) => (
-          <ProductCart quantity={0} key={item.id} {...item} />
+          <ProductCart key={item.productID} prop={item}/>
         ))}
 
         {isLoading &&

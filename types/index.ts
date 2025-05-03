@@ -1,46 +1,8 @@
-export interface productItem{
-  name:string,
-  image:string,
-  shortDescription:string,
-  description:string,
-  rating:number,
-  stock:number,
-  price:number,
-  brand:string
-  id:string,
-  reviews:number
-  quantity?:number
-  discount?:string
-  isDiscount?:boolean,
-  status?:string
-  tags:string[]
-}
-
-export interface AddproductItem {
-  productID?:string,
-  imageurl?:string,
-  name:string,
-    price: string,
-    category: string,
-    brand: string,
-    stock: string,
-    rating:string,
-    reviews: string,
-    shortDescription: string,
-    description: string,
-    tags: string,
-    discount: number,
-    isDiscount: boolean,
-    status: string,
-    featured: boolean,
-    image: any, 
-    size:string
-}
-
+import { productInformation } from "./product";
 
 export type CartStateType = {
-  cart: productItem[];
-  addToCart: (product: productItem) => void;
+  cart: productInformation[];
+  addToCart: (product: productInformation) => void;
   removeFromCart: (id: string) => void;
   increaseQuantity: (id: string) => void;
   decreaseQuantity: (id: string) => void;

@@ -95,7 +95,7 @@ const SubscriptionsTable = () => {
               : items.items.map((item, i) => (
                   <TableRow key={item.subacriberId ?? i}>
                     <TableCell>
-                      <input type='checkbox' checked={isChecked} className='cursor-pointer'/>
+                      <input type='checkbox' checked={isChecked}className='cursor-pointer'/>
                     </TableCell>
                     <TableCell>{i + 1}</TableCell>
                     <TableCell>

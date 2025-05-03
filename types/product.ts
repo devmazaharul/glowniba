@@ -1,16 +1,45 @@
-export interface productItem{
-  name:string,
-  id:string,
-  price:number,
-  quentity:number
-  isDiscount?:boolean
-  discount?:number
-  shortDescription:string,
-  category:string,
-  isFeatured:string,
+
+export interface productInformation {
+  _id:string,
+  productID:string,
   image:string,
+  isDiscount:boolean,
+  discount:number,
+  name:string,
+  price:number,
   slug:string,
-  rating:number
-  reviews:number
-  stock:number
+  stock:number,
+  rating:number,
+  reviews:number,
+  shortDescription:string,
+  description:string,
+  size:[],
+  tags:[],
+  status:string,
+  featured:boolean,
+  brand:string,
+  category:string
+  quantity?:number
 }
+
+
+export interface addproductInformation {
+  image:string,
+  isDiscount:boolean,
+  discount:number,
+  name:string,
+  price:string,
+  stock:string,
+  rating:string,
+  reviews:string,
+  shortDescription:string,
+  description:string,
+  size:string,
+  tags:string,
+  status:string,
+  featured:boolean,
+  brand:string,
+  category:string
+  quantity?:number
+}
+
