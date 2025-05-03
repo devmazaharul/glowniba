@@ -103,7 +103,6 @@ if (!productData.description.trim()) {
   const validateTags = (tagString: string) => {
     const isFormatValid = tagPattern.test(tagString);
     const tagCount = tagString.split(',').filter(Boolean).length;
-    console.log(isFormatValid);
     if (!isFormatValid) {
       errors.tag =
         'Format invalid. Only a-z, A-Z, 0-9, -, _ allowed with comma separation.';

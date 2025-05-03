@@ -70,8 +70,6 @@ const ProductForm = () => {
         const base63 = await fileToBase64(productData.image);
 
         const res = await addProduct({ ...productData, image: base63 });
-        console.log(res);
-
         if (res?.status == 200) {
           toast.success('Products successfully added');
           // setProductData({
