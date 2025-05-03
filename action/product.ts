@@ -42,7 +42,7 @@ export const addProduct = async ({
       length: 7,
     });
     const makeSlug = (name.trim().split(" ").join("-")+"-"+makeProductId).toLocaleLowerCase();
-    // Save to MongoDB
+    // Save to MongoDBa
     const newProduct = new Product({
       productID: makeProductId,
       name,
