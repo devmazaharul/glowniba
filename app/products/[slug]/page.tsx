@@ -16,24 +16,24 @@ const Page = () => {
 
   useEffect(() => {
     if (!slug) return;
-    getProductbySlug(slug.toString())
-      .then((res) => {
-        if (res?.status !== 200) throw new Error();
-
-        if ('data' in res) {
-          setProduct(res.data as productInformation);
+    const getproductbyslug=async()=>{
+      try {
+        const decodeslug=decodeURIComponent(slug.toString().trim())
+        const responce=await getProductbySlug(decodeslug)
+        if ('data' in responce && responce.status==200) {
+          setProduct(responce.data as productInformation);
         } else {
-          console.log(res);
+          console.log(responce);
           setErr(true);
         }
-      })
-      .catch((err) => {
-        console.log(err);
-        setErr(true);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+
+      } catch (error) {
+        console.log(error);
+      }finally{
+        setLoading(false)
+      }
+    }
+    getproductbyslug()
   }, [slug]);
 
   return (
