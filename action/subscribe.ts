@@ -31,7 +31,7 @@ export const subscribeUser = async (email: string) => {
       }),
     });
     await addEmailSubscribe.save();
-    revalidatePath('/dashboard/subscriptions'); // বা যেই path এ user list show হয়
+    revalidatePath('/dashboard/subscriptions');
 
     return responce({
       message: 'Thanks for subscribing',

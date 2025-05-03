@@ -1,15 +1,18 @@
 import Sidebar from './components/Navbar';
 import Topbar from './components/Topbar';
-import { Inter } from "next/font/google";
+import { Raleway } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"], display: "swap" });
-
-
+const raleway = Raleway({
+  weight: '400',
+  subsets: ['cyrillic'],
+  style: 'normal',
+  display:"swap"
+});
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html>
-      <body className={inter.className}>
+      <body className={raleway.className}>
         <div className=" ">
           <div>
             <Topbar />

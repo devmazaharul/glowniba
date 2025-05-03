@@ -66,7 +66,6 @@ export const addProduct = async ({
 
     const savedProduct = await newProduct.save();
     revalidatePath("/dashboard/products")
-    revalidatePath("/")
     return responce({
       message: 'successfully product added',
       status: 200,
@@ -86,21 +85,29 @@ export const addProduct = async ({
   }
 };
 
-export const getProducts=async(limit=10,page=1)=>{
+export const getProducts = async (limit: number = 10, page: number = 1) => {
   try {
-    await connectDB()
-    const items=await Product.find()
-    const totalitems=await Product.countDocuments({})
-    if(!items) throw new CustomError("No products found",400)
-      const totalPage=Math.ceil(items.length/limit)
-      return responceItems({
-    message:"successfully get products",
-    status:200,
-    items: JSON.parse(JSON.stringify(items)),
-    totalitems,
-    totalpage:totalPage
-  })
-    
+    await connectDB();
+
+    const skip = (page - 1) * limit;
+
+    const [items, totalItems] = await Promise.all([
+      Product.find().sort({ createdAt: -1 }).skip(skip).limit(limit),
+      Product.countDocuments()
+    ]);
+
+    if (!items.length) throw new CustomError("No products found", 400);
+
+    const totalPages = Math.ceil(totalItems / limit);
+
+    return responceItems({
+      message: "Successfully retrieved products",
+      status: 200,
+      items: JSON.parse(JSON.stringify(items)),
+      totalitems: totalItems,
+      totalpage: totalPages
+    });
+
   } catch (error) {
     if (error instanceof Error) {
       return handleError(error.message, (error as any).status || 500);
@@ -109,7 +116,8 @@ export const getProducts=async(limit=10,page=1)=>{
     }
     return handleError('An unknown error occurred', 500);
   }
-}
+};
+
 
 
 export const getProductbySlug = async (productslug: string) => {

@@ -32,10 +32,10 @@ const ProductForm = () => {
     status: 'new',
     featured: false,
     image: null,
-    size:''
+    size: '',
   };
   const [productData, setProductData] = useState({ ...prObj });
-  const [isLoading,setIsloading]=useState(false)
+  const [isLoading, setIsloading] = useState(false);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -51,33 +51,38 @@ const ProductForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsloading(true)
+    setIsloading(true);
     try {
       const error = validateProductData(productData);
       if (error) {
         for (const key in error) {
           const arr = error[key];
           toast.error(arr, {
-            duration: key=='size'?5000:2000,
-            description:key=="size"?"Invalid product size example [200ML,500ML] and max 20 character use total22":"Validation faild"
+            duration: key == 'size' ? 5000 : 2000,
+            description:
+              key == 'size'
+                ? 'Invalid product size example [200ML,500ML] and max 20 character use total22'
+                : 'Validation faild',
           });
         }
       }
       if (Object.keys(error).length == 0) {
         const base63 = await fileToBase64(productData.image);
-  
-        const res = await addProduct({...productData,image:base63});
 
-        if (res.status == 200) {
+        const res = await addProduct({ ...productData, image: base63 });
+        console.log(res);
+
+        if (res?.status == 200) {
           toast.success('Products successfully added');
           // setProductData({
           //   ...prObj,
           // });
-        }}
+        }
+      }
     } catch {
-        toast.error("Product added faild")
-    }finally{
-      setIsloading(false)
+      toast.error('Product added faild');
+    } finally {
+      setIsloading(false);
     }
   };
 
@@ -278,31 +283,35 @@ const ProductForm = () => {
         </div>
 
         {/* Tags */}
-        <div className='flex items-center justify-between gap-6'>
-        <div className='w-full'>
-          <Label>Tags</Label>
-          <Input
-            type="text"
-            placeholder="sunblock, UV, SPF"
-            className="mt-1 rounded-md"
-            name="tags"
-            value={productData.tags}
-            onChange={handleChange}
-          />
-        </div>
-        <div className='w-full'>
-          <Label className='pb-1'>Size <small className='text-gray-500 '>(Write carefully and separate with commas. )</small></Label>
-          <Input
-            type="text"
-            required
-            placeholder="200ML,500ML"
-            className="mt-1 rounded-md lowercase"
-            name="size"
-            value={productData.size}
-            onChange={handleChange}
-          />
-        </div>
-
+        <div className="flex items-center justify-between gap-6">
+          <div className="w-full">
+            <Label>Tags</Label>
+            <Input
+              type="text"
+              placeholder="sunblock, UV, SPF"
+              className="mt-1 rounded-md"
+              name="tags"
+              value={productData.tags}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="w-full">
+            <Label className="pb-1">
+              Size{' '}
+              <small className="text-gray-500 ">
+                (Write carefully and separate with commas. )
+              </small>
+            </Label>
+            <Input
+              type="text"
+              required
+              placeholder="200ML,500ML"
+              className="mt-1 rounded-md lowercase"
+              name="size"
+              value={productData.size}
+              onChange={handleChange}
+            />
+          </div>
         </div>
 
         {/* Status */}
@@ -381,7 +390,7 @@ const ProductForm = () => {
             type="submit"
             className="bg-gray-700 text-white px-4 py-2 cursor-pointer rounded-md hover:bg-gray-800"
           >
-            {isLoading?"Processing...":"Submit Product"}
+            {isLoading ? 'Processing...' : 'Submit Product'}
           </button>
         </div>
       </form>
