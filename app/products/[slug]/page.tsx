@@ -23,10 +23,12 @@ const Page = () => {
         if ('data' in res) {
           setProduct(res.data as productInformation);
         } else {
+          console.log(res);
           setErr(true);
         }
       })
-      .catch(() => {
+      .catch((err) => {
+        console.log(err);
         setErr(true);
       })
       .finally(() => {
