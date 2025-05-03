@@ -42,10 +42,11 @@ if (!productData.category || productData.category.trim() === '') {
 }
 
 // Brand Validation
+const brandNameRegex = /^[a-zA-Z0-9]+([-\s&.][a-zA-Z0-9]+)*$/;
 if (!productData.brand.trim()) {
   errors.brand = 'Brand is required.';
-} else if (productData.brand.length < 2 || productData.brand.length > 50) {
-  errors.brand = 'Brand must be between 2 and 50 characters.';
+} else if (brandNameRegex.test(productData.brand)) {
+  errors.brand = 'Brand must be between 2 and 20 characters.';
 }
 
 // Stock Validation
