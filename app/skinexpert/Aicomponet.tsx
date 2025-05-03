@@ -37,6 +37,7 @@ const AiComponent = () => {
       }
     } catch {
       toast.error('Error occur');
+      setQuestion('');
     } 
   };
 
