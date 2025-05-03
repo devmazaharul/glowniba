@@ -12,10 +12,10 @@ const Page = () => {
   const [err, setErr] = useState(false);
   const [product, setProduct] = useState<productInformation | null>(null);
   const [loading, setLoading] = useState(true);
- const slug = decodeURIComponent((pramsVal.slug ?? '').toString());
+ const slug = decodeURIComponent((pramsVal.slug ?? '').toString().trim())
   useEffect(() => {
     if (!slug) return;
-    getProductbySlug(slug.toString().trim())
+    getProductbySlug(slug)
       .then((res) => {
         if (res?.status !== 200) throw new Error();
 
