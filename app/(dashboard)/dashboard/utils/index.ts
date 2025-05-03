@@ -41,13 +41,17 @@ if (!productData.category || productData.category.trim() === '') {
   errors.category = 'Category is required.';
 }
 
-// Brand Validation
+
+
 const brandNameRegex = /^[a-zA-Z0-9]+([-\s&.][a-zA-Z0-9]+)*$/;
-if (!productData.brand.trim()) {
-  errors.brand = 'Brand is required.';
-} else if (brandNameRegex.test(productData.brand)) {
-  errors.brand = 'Brand must be between 2 and 20 characters.';
-}
+
+  if (productData.brand.length < 2 || productData.brand.length > 20) {
+    errors.brand = 'Brand must be between 2 and 20 characters.';
+  }
+  // regex দিয়ে নামটি পরীক্ষা করা
+  if (!brandNameRegex.test(productData.brand)) {
+    errors.brand="Invalid brand name format. Only letters, numbers, spaces, '-', '&', and '.' are allowed."
+  }
 
 // Stock Validation
 if (
