@@ -18,8 +18,11 @@ const Page = () => {
     0
   );
 
+
+
+
   return (
-    <div className="max-w-[90%] mx-auto p-4 section1">
+    <div className="max-w-[98%] mx-auto p-4 section1">
       <h2 className="text-2xl font-bold mb-4">Your Cart</h2>
 
       {cart.length === 0 ? (
@@ -37,7 +40,7 @@ const Page = () => {
       ) : (
         <div className="md:grid space-y-4 md:space-y-0 grid-cols-3 gap-2 ">
           <div className="space-y-4 py-4 col-span-2 border border-gray-100 p-2 rounded-md shadow-2xl shadow-gray-100">
-            {cart.map((item) => (
+            {[...cart].reverse().map((item) => (
               <div
                 key={item.productID}
                 className="md:flex space-y-4   border-b border-dashed  last:border-b-0 items-center justify-between py-2  "
@@ -48,7 +51,7 @@ const Page = () => {
                     alt={item.name}
                     width={80}
                     height={80}
-                    className="rounded-md"
+                    className="rounded-md object-contain w-[100px] h-[100px]"
                   />
                   <div>
                     <h4 className="font-semibold">{item.name}</h4>
@@ -62,24 +65,23 @@ const Page = () => {
                   </div>
                 </div>
 
-                <div className="flex items-center  gap-4 my-2">
-                  <div className="flex items-center gap-4">
+                <div className="flex items-center  gap-4 w-fit mx-auto my-2 md:justify-around justify-around ">
+                  <div className="flex items-center gap-6 py-1 ">
                     <Button
                       onClick={() => decreaseQuantity(item.productID)}
                       variant={'outline'}
                       disabled={item.quantity == 1 && true}
-                      className="cursor-pointer h-8 w-8"
+                       className="cursor-pointer h-7 w-8 text-gray-600"
                     >
-                      {' '}
                       <FaMinus />
                     </Button>
-                    <p>{item.quantity || 0}</p>
+                    <b className='text-gray-500'>{item.quantity || 0}</b>
                     <Button
                       onClick={() => increaseQuantity(item.productID)}
                       disabled={
                         item.quantity == defaultValues.addProductLimit && true
                       }
-                      className="cursor-pointer h-8 w-8"
+                       className="cursor-pointer h-7 w-8 text-gray-600"
                       variant={'outline'}
                     >
                       <FaPlus />

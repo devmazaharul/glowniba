@@ -11,9 +11,9 @@ import {
 } from "@/components/ui/alert-dialog"
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import { MdOutlineDelete } from "react-icons/md";
 import { useCartStore } from "@/store/addTocart";
 
+import { RiDeleteBinLine } from "react-icons/ri";
 
 const Removecart = ({productId}:{productId:string}) => {
 
@@ -25,7 +25,7 @@ const Removecart = ({productId}:{productId:string}) => {
                     <AlertDialog>
   <AlertDialogTrigger asChild>
     <Button variant="outline" className="cursor-pointer border-0 shadow-none">
-      <MdOutlineDelete className="text-xl fill-red-400 hover:fill-red-500" />
+      <RiDeleteBinLine className=" fill-red-400  hover:fill-red-500" />
     </Button>
   </AlertDialogTrigger>
   <AlertDialogContent>
