@@ -6,6 +6,7 @@ import { CustomError, handleError } from '@/utils/error';
 import { responce, responceItems } from '@/utils/success';
 import { revalidatePath } from 'next/cache';
 import randomstring from 'randomstring';
+import Users from "@/model/user"
 
 export const subscribeUser = async (email: string) => {
   try {
@@ -62,13 +63,27 @@ export const getSubscribers = async (limit: number, page: number) => {
     }
 
     const totalPage = Math.ceil(totalCount / limit);
+
+    const itemsWithMember = await Promise.all(items.map(async (item) => {
+      const res = await Users.findOne({ email: item.email });
+      return {
+        ...item._doc,
+        isMember: !!res, // res যদি থাকে তাহলে true, না থাকলে false
+      };
+    }));
+    
     return responceItems({
       message: 'Subscriptions data',
       status: 200,
-      items:JSON.parse(JSON.stringify(items)),
-      totalitems:11,
-      totalpage:totalPage,
+      items: JSON.parse(JSON.stringify(itemsWithMember)),
+      totalitems: 11,
+      totalpage: totalPage,
     });
+    
+
+
+   
+
   } catch (error: unknown) {
     if (error instanceof CustomError) {
       return handleError(error.message, error.status);

@@ -19,7 +19,7 @@ const Page = () => {
     const getproducts = async () => {
       const res = await getProductsClient();
       if ('data' in res) {
-        setProductsInfo((res?.data as productInformation[]) || []); // Store fetched products in state
+        setProductsInfo((res?.data as productInformation[]) || []);
       } else {
         toast.error('Get products failed');
       }

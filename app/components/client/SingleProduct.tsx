@@ -1,6 +1,6 @@
 'use client';
 import Image from 'next/image';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { QRCodeSVG } from 'qrcode.react';
 import { FaGripfire } from 'react-icons/fa';
 import { FaPlus } from 'react-icons/fa';
@@ -11,6 +11,10 @@ import { Button } from '@/components/ui/button';
 import { useCartStore } from '@/store/addTocart';
 import { defaultValues } from '@/constants';
 import { productInformation } from '@/types/product';
+import { toast } from 'sonner';
+import { getProductsClient } from '@/action/product';
+import { Skeleton } from '@/components/ui/skeleton';
+import ProductCart from '../server/ProductCard';
 const poppins = Poppins({
   weight: '700',
   style: 'normal',
@@ -25,6 +29,36 @@ const SingleProduct = ({ item }: { item: productInformation }) => {
   const finPoduct = cart.find(
     (val) => val.productID == item.productID && val.slug==item.slug
   );
+
+  const [related,setIsrelated]=useState<productInformation[]>([])
+  const [loading,setLoading]=useState(true)
+  useEffect(()=>{
+
+    const relatedProduct=async()=>{
+      try {
+        const productRes=await getProductsClient();
+        if('data' in productRes){
+       const productsArr=productRes?.data as productInformation[]
+       
+        setTimeout(()=>{
+          setIsrelated(  productsArr.filter((info)=>{
+            return info.tags.some((tag) => {
+              if(item.tags.includes(tag)){
+                return tag;
+              }
+            })
+          }))
+          setLoading(false)
+        },1000)
+        }
+
+      } catch  {
+        toast.error("No related prodcicts")
+      }
+    }
+    relatedProduct()
+   
+  },[item.tags])
 
   return (
     <div className="">
@@ -157,6 +191,37 @@ const SingleProduct = ({ item }: { item: productInformation }) => {
           </div>
         </div>
       </div>
+
+      {/* related products */}
+
+    <div className='mt-50'>
+      {related && <div>
+        <h1 className=' text-xl font-semibold py-2'>Related products</h1>
+      </div>}
+    <div className="grid space-y-2 md:grid-cols-3 relative  lg:grid-cols-4 grid-cols-1 sm:grid-cols-2 gap-4 w-[80%] md:w-full mx-auto">
+                {loading?<>
+                {
+                      Array.from({ length: 8 }).map((_, index) => (
+                                  <div
+                                    key={index}
+                                    className="shadow-2xl shadow-gray-100 p-4 border border-gray-100 w-[85%] sm:w-full mx-auto rounded-2xl bg-white duration-500 ease-in-out"
+                                  >
+                                    <Skeleton className="h-55 w-full mb-2" />
+                                    <Skeleton className="h-6 w-3/4 mb-1" />
+                                    <Skeleton className="h-4 w-1/2" />
+                                  </div>
+                                ))}
+              </>:  <>
+                  {related && related.slice(0,8).map((item)=>(
+                    <div key={item.productID}>
+             <ProductCart  prop={item} />
+                    </div>
+                  ))}
+                </>}
+                </div>
+    </div>
+            
+
     </div>
   );
 };

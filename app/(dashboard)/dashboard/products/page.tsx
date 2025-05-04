@@ -1,5 +1,16 @@
 'use client';
 export const dynamic = 'force-dynamic';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
 
 import React, { useEffect, useState } from 'react';
 import {
@@ -125,9 +136,43 @@ const ProductsTable = () => {
                         <Link href={`/dashboard/products/edit/${product.productID}`}>
                           <TbShoppingBagEdit className="text-xl cursor-pointer" />
                         </Link>
-                        <button onClick={() => handleProductDelete(product.productID)}>
-                          <RiDeleteBinLine className="text-xl fill-red-500 hover:fill-red-400" />
-                        </button>
+
+
+                        
+ <div>
+                    <AlertDialog>
+  <AlertDialogTrigger asChild>
+    <Button variant="outline" className="cursor-pointer border-0 shadow-none">
+    <RiDeleteBinLine className="text-xl fill-red-500 hover:fill-red-400 cursor-pointer" />
+    </Button>
+  </AlertDialogTrigger>
+  <AlertDialogContent>
+    <AlertDialogHeader>
+      <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+      <AlertDialogDescription>
+        This product will be permanently delete from your store.
+      </AlertDialogDescription>
+    </AlertDialogHeader>
+    <AlertDialogFooter>
+      <AlertDialogCancel className="cursor-pointer">Cancel</AlertDialogCancel>
+      <AlertDialogAction
+        className="bg-gray-700 hover:bg-gray-600 cursor-pointer "
+        onClick={() => {
+          handleProductDelete(product.productID)
+          toast.success("Item removed from cart.");
+        }}
+      >
+        Yes, Remove
+      </AlertDialogAction>
+    </AlertDialogFooter>
+  </AlertDialogContent>
+</AlertDialog>
+    </div>
+
+
+
+                      
+                        
                       </div>
                     </TableCell>
                   </TableRow>

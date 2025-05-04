@@ -13,8 +13,8 @@ export const defaultValues = Object.freeze({
   instagramUserName: '@glowniba',
   whatsAppNumber: '8801799588',
   whatAppsMessage: 'Hi, I want to buy from Glow Niba!',
-  responceUserLimit:10,
-  responceSubscriberLimit:10,
+  responceUserLimit:30,
+  responceSubscriberLimit:40,
 });
 
 export const contactInfo = Object.freeze({

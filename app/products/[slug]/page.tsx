@@ -35,6 +35,8 @@ const Page = () => {
     getproductbyslug()
   }, [slug]);
 
+  
+
   return (
     <div className="py-10 section w-[90%] mx-auto">
       {loading && <SingleProductSkeleton />}

@@ -64,5 +64,6 @@ export interface commonCartType {
 export interface subscriptionInfo{
   subacriberId:string,
   email:string,
-  createdAt:string
+  createdAt:string,
+  isMember:boolean
 }

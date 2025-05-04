@@ -121,7 +121,7 @@ const UsersTable = () => {
       </div>
 
       {/* Table */}
-      <div className="rounded-md border shadow-2xl shadow-gray-100 overflow-x-auto">
+      <div className="rounded-md border max-h-[500px] overflow-y-scroll shadow-2xl shadow-gray-100 overflow-x-auto">
         <Table>
           <TableHeader className="bg-gray-700">
             <TableRow>
@@ -176,13 +176,14 @@ const UsersTable = () => {
                 ))}
           </TableBody>
         </Table>
-      </div>
-
-      {/* Pagination */}
+          {/* Pagination */}
 
       {!isLoading && <div className="my-4">
         <PaginationUI currentPage={Number(currentPage)} totalPage={state.totalpage} />
       </div>}
+      </div>
+
+    
 
     </div>
   );
