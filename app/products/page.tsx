@@ -42,11 +42,11 @@ const Page = () => {
   const isAllLoaded = visibleProducts.length >= productInfo.length;
 
   return (
-    <div className="section">
+    <div className="p-1">
       <SectionTop title="Products" desc="Your favourite products all in here" />
 
         <div>
-          <div className="grid space-y-2 md:grid-cols-3 lg:grid-cols-4 grid-cols-1 sm:grid-cols-2 gap-4 w-[80%] md:w-full mx-auto">
+          <div className="grid gap-3 lg:w-[95%]  space-y-1 md:grid-cols-3 lg:grid-cols-4 grid-cols-2 sm:grid-cols-2  w-full md:w-full mx-auto">
             {/* Display products */}
             {!isLoading &&
               visibleProducts.map((item) => (

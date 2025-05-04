@@ -41,7 +41,7 @@ const ProductCart = ({ prop }: { prop: productInformation }) => {
   return (
     <motion.div
       key={prop.productID}
-      className="cursor-pointer shadow-2xl shadow-gray-100 p-3 border border-gray-100 w-[85%] sm:w-full mx-auto rounded-2xl bg-white duration-500 ease-in-out"
+      className="cursor-pointer shadow-2xl shadow-gray-100 p-3 border border-gray-100  sm:w-full mx-auto rounded-2xl bg-white duration-500 ease-in-out"
     >
       <div className="rounded-md">
         <div className="flex items-center px-1 relative top-[2px] justify-between w-full">
@@ -93,9 +93,15 @@ const ProductCart = ({ prop }: { prop: productInformation }) => {
 
         <div className="py-1">
           <small className="text-gray-500">
-            {prop.shortDescription.length > 60
-              ? prop.shortDescription.slice(0, 60) + '...'
-              : prop.shortDescription}
+          {prop.shortDescription.length > 55 ? (
+  <div className='cursor-default'>
+    {prop.shortDescription.slice(0, 55)}
+   <Link href={`/products/${prop.slug}`} className="text-sm text-blue-300 inline cursor-pointer"> see more</Link>
+  </div>
+) : (
+  prop.shortDescription
+)}
+
           </small>
         </div>
 
@@ -131,7 +137,7 @@ const ProductCart = ({ prop }: { prop: productInformation }) => {
             onClick={handleAddproduct}
             className="cursor-pointer w-full hover:bg-gray-600"
           >
-            <MdBookmarkAdd className="text-lg hidden md:block " />
+            <MdBookmarkAdd className="text-lg  md:block " />
             Add to Cart
           </Button>
         </div>

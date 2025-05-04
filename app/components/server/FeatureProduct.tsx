@@ -27,13 +27,13 @@ const FeatureProduct = () => {
   }, []);
 
   return (
-    <div className="section">
+    <div className="w-[96%] mx-auto md:w-[93%]">
       <SectionTop
         title="✨ Featured Products ✨"
         desc="আমরা বেছে নিয়েছি সেরা কিছু প্রোডাক্ট, যেগুলো আপনার স্কিন কেয়ারে দেবে অসাধারণ ফলাফল।"
       />
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2">
+      <div className="grid space-y-1 grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2">
         {loading
           ? Array.from({ length: defaultValues.featureListSize }).map((_, i) => (
               <ProductCardSkeleton key={i} />
@@ -42,7 +42,7 @@ const FeatureProduct = () => {
               <CommonCard
                 key={item._id}
                 item={item}
-                color="bg-yellow-100 text-yellow-800"
+                color="bg-green-100 text-green-700"
               />
             ))}
       </div>

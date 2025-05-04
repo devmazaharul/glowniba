@@ -8,9 +8,15 @@ import { Button } from '@/components/ui/button';
 import { useCartStore } from '@/store/addTocart';
 import { FaGripfire } from 'react-icons/fa';
 import { productInformation } from '@/types/product';
+import { MdBookmarkAdd } from 'react-icons/md';
 
-const CommonCard = ({item,color,}: {item: productInformation;color: string}) => {
-
+const CommonCard = ({
+  item,
+  color,
+}: {
+  item: productInformation;
+  color: string;
+}) => {
   const cardVariants = {
     offscreen: {
       opacity: 0,
@@ -32,7 +38,7 @@ const CommonCard = ({item,color,}: {item: productInformation;color: string}) => 
 
   return (
     <>
-      <div className="shadow-2xl  shadow-gray-100 p-4 border border-gray-100 rounded-2xl bg-white hover:translate-y-2 duration-500 ease-in-out">
+      <div className="shadow-2xl  shadow-gray-100 p-4 border border-gray-100 rounded-2xl bg-white hover:translate-y-1 duration-500 ease-in-out">
         {item.isDiscount ? (
           <p className="w-fit flex items-center  bg-yellow-100 rounded-md px-2 text-yellow-800  ">
             {' '}
@@ -49,26 +55,30 @@ const CommonCard = ({item,color,}: {item: productInformation;color: string}) => 
             whileInView="onscreen"
             viewport={{ once: true, amount: 0.3 }}
           >
-      <Image
-  src={item.image}
-  width={160}
-  height={160}
-  alt={item.name}
-  className="w-[160px] h-[160px] rounded-md object-cover mx-auto  "
-/>
-
+            <Image
+              src={item.image}
+              width={160}
+              height={160}
+              alt={item.name}
+              className="w-[160px] h-[160px] rounded-md object-cover mx-auto  "
+            />
 
             <p
-              className={`${color} px-3 py-1 rounded-full mx-auto w-fit my-3 capitalize text-sm`}
+              className={`${color} px-3 py-1 rounded-md font-semibold mx-auto w-fit my-3 capitalize text-sm`}
             >
               {item.isDiscount && item.discount ? (
                 <span>
                   {' '}
                   <span className="line-through"> ৳{item.price}</span> ৳
-                  {item.price - (item.price * Number(item.discount || 0)) / 100}
+                  {parseInt(
+                    (
+                      item.price -
+                      (item.price * Number(item.discount || 0)) / 100
+                    ).toString()
+                  )}
                 </span>
               ) : (
-                '৳' + item.price
+                '৳' + parseInt(item.price.toString())
               )}
             </p>
 
@@ -85,15 +95,14 @@ const CommonCard = ({item,color,}: {item: productInformation;color: string}) => 
             </div>
           </motion.div>
         </Link>
-        <div className="w-fit mx-auto my-2">
+        <div className="w-[80%] md:w-fit mx-auto text-center my-4">
           <Button
-            onClick={() =>
-              addProudctTocart({...item})
-            }
             variant={'outline'}
-            className="cursor-pointer"
+            onClick={() => addProudctTocart({ ...item })}
+            className="cursor-pointer w-full hover:bg-gray-100"
           >
-            Add to card
+            <MdBookmarkAdd className="text-lg  md:block " />
+            Add to Cart
           </Button>
         </div>
       </div>

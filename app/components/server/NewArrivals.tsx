@@ -31,7 +31,7 @@ const NewArrivals = () => {
   }, []);
 
   return (
-    <div className="section">
+    <div className="w-[96%] mx-auto md:w-[93%]">
       <SectionTop
         title="New Arrivals"
         desc="একদম নতুন যোগ হওয়া আমাদের বেস্ট স্কিন কেয়ার পণ্যগুলো দেখে নিন, যেগুলো আপনার সৌন্দর্য আরও বাড়াবে।"
@@ -43,7 +43,7 @@ const NewArrivals = () => {
         </Link>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
+      <div className="grid space-y-1 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2">
         {loading
           ? Array.from({ length: 10 }).map((_, i) => <ProductCardSkeleton key={i} />)
           : products.slice(0, 10).map((item) => (
