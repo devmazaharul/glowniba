@@ -1,6 +1,7 @@
 export const defaultValues = Object.freeze({
   saltRound: 10,
   addProductLimit: 50,
+  addTocartLimit:20,
   featureListSize: 10,
   productLimit: 10,
   productLimitMobile: 5,

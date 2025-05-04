@@ -11,6 +11,14 @@ export const useCartStore = create<CartStateType>()(
       cart: [],
     
       addToCart: (product) => {
+        if(get().cart.length==defaultValues.addTocartLimit){
+          toast.warning(`Add to cart limit reached`, {
+            description: `You can only add ${defaultValues.addTocartLimit} products added to cart at a time.`,
+            duration: 2000,
+          }
+          )
+          return
+        }
         const exists = get().cart.find((item) => item.productID === product.productID);
         if (exists) {
           if (exists.quantity == defaultValues.addProductLimit) {

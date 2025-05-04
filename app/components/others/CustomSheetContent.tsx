@@ -29,12 +29,15 @@ const CustomSheetContent = () => {
       >
         {/* Header */}
         <SheetHeader>
-          <SheetClose className="absolute right-4 top-4 z-100 cursor-pointer hover:bg-gray-500 rounded-full p-4 transition-all" />
-          <SheetTitle className="flex items-center gap-1">
-            <span className="text-lg font-semibold">My Cart</span>
-            <ShoppingBag />
-          </SheetTitle>
-        </SheetHeader>
+
+
+  <SheetTitle className="flex items-center gap-3 text-xl font-semibold text-gray-800">
+    <span>My Cart</span>
+    <div className="bg-gray-100 p-2 rounded-full shadow-inner">
+      <ShoppingBag className="w-6 h-6 text-gray-600" />
+    </div>
+  </SheetTitle>
+</SheetHeader>
 
         {/* Cart Items */}
         <div className="flex-1 overflow-y-auto mt-4 space-y-4 pr-2">

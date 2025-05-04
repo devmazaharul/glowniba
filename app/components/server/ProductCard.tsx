@@ -47,8 +47,8 @@ const ProductCart = ({ prop }: { prop: productInformation }) => {
         <div className="flex items-center px-1 relative top-[2px] justify-between w-full">
           <div className="w-full pb-2">
             {prop.isDiscount ? (
-              <p className="bg-blue-100 text-blue-800 px-1 rounded-sm w-fit my-3 capitalize text-sm">
-                discount
+              <p className="bg-gray-600 text-white px-1 rounded-sm w-fit my-3 capitalize text-sm">
+                {prop.discount}% discount
               </p>
             ) : (
               <p className="bg-gray-100 text-gray-800 px-1 rounded-sm w-fit my-3 capitalize text-sm">
@@ -74,7 +74,7 @@ const ProductCart = ({ prop }: { prop: productInformation }) => {
               alt={prop.brand}
               width={300}
               height={300}
-              className="w-full h-[250px] object-center rounded-md transition-transform duration-300 ease-in-out hover:scale-105"
+              className="w-full h-[250px] object-contain rounded-md transition-transform duration-300 ease-in-out hover:scale-105"
             />
           </motion.div>
         </Link>
@@ -83,7 +83,7 @@ const ProductCart = ({ prop }: { prop: productInformation }) => {
       <div className="px-2 py-3">
         <Link href={`/products/${prop.slug}`}>
           <h1 className="text-lg font-semibold capitalize py-2">
-            {prop.name.slice(0, 18)} 
+            {prop.name.length>25?prop.name.slice(0, 25)+"...":prop.name}
           </h1>
         </Link>
 
@@ -125,7 +125,7 @@ const ProductCart = ({ prop }: { prop: productInformation }) => {
           )}
         </div>
 
-        <div className="w-[80%] md:w-fit mx-auto text-center my-6">
+        <div className="w-[80%] md:w-fit mx-auto text-center my-4">
           <Button
             variant={'default'}
             onClick={handleAddproduct}

@@ -43,7 +43,7 @@ const SingleProduct = ({ item }: { item: productInformation }) => {
         setTimeout(()=>{
           setIsrelated(  productsArr.filter((info)=>{
             return info.tags.some((tag) => {
-              if(item.tags.includes(tag)){
+              if(item.tags.includes(tag) && item.productID!=info.productID){
                 return tag;
               }
             })
@@ -70,12 +70,13 @@ const SingleProduct = ({ item }: { item: productInformation }) => {
           </div>
 
           <Image
-            className="w-full h-full rounded-md"
-            src={item.image}
-            width={600}
-            height={600}
-            alt={item.name}
-          />
+  className="w-full max-w-[300px] h-auto rounded-md mx-auto object-contain"
+  src={item.image}
+  width={600}
+  height={600}
+  alt={item.name}
+/>
+
         </div>
         <div className="py-3">
           <div>
