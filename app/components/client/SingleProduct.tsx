@@ -58,7 +58,7 @@ const SingleProduct = ({ item }: { item: productInformation }) => {
     }
     relatedProduct()
    
-  },[item.tags])
+  },[item.tags,item.productID])
 
   return (
     <div className="">

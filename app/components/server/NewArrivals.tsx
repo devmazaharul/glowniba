@@ -31,7 +31,7 @@ const NewArrivals = () => {
   }, []);
 
   return (
-    <div className="w-[96%] mx-auto md:w-[93%]">
+    <div className="w-[96%] mx-auto md:w-[93%] py-10">
       <SectionTop
         title="New Arrivals"
         desc="একদম নতুন যোগ হওয়া আমাদের বেস্ট স্কিন কেয়ার পণ্যগুলো দেখে নিন, যেগুলো আপনার সৌন্দর্য আরও বাড়াবে।"

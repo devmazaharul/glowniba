@@ -16,6 +16,7 @@ export const defaultValues = Object.freeze({
   whatAppsMessage: 'Hi, I want to buy from Glow Niba!',
   responceUserLimit:30,
   responceSubscriberLimit:40,
+  processingFee: 40,
 });
 
 export const contactInfo = Object.freeze({

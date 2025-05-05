@@ -101,11 +101,11 @@ const Page = () => {
               </div>
               <div className="flex items-center border-b border-dashed py-2 px-1 justify-between">
                 <p>Online fee</p>
-                <p>80 BDT</p>
+                <p>{defaultValues.processingFee || 0} BDT</p>
               </div>
               <b className="flex items-center py-2 mt-4 px-1 justify-between">
                 <p>Total</p>
-                <p>{totalPrice + 80} BDT</p>
+                <p>{totalPrice + (defaultValues.processingFee || 0)} BDT</p>
               </b>
 
               <div className="mt-7 text-center">

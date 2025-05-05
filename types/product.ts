@@ -19,7 +19,8 @@ export interface productInformation {
   featured:boolean,
   brand:string,
   category:string
-  quantity?:number
+  quantity?:number,
+  createdAt?:any
 }
 
 
@@ -40,6 +41,7 @@ export interface addproductInformation {
   featured:boolean,
   brand:string,
   category:string
-  quantity?:number
+  quantity?:number,
+
 }
 

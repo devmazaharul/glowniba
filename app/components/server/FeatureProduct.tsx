@@ -27,7 +27,7 @@ const FeatureProduct = () => {
   }, []);
 
   return (
-    <div className="w-[96%] mx-auto md:w-[93%]">
+    <div className="w-[96%] mx-auto md:w-[93%] py-10">
       <SectionTop
         title="✨ Featured Products ✨"
         desc="আমরা বেছে নিয়েছি সেরা কিছু প্রোডাক্ট, যেগুলো আপনার স্কিন কেয়ারে দেবে অসাধারণ ফলাফল।"

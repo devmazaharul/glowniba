@@ -48,7 +48,7 @@ const ProductCart = ({ prop }: { prop: productInformation }) => {
           <div className="w-full pb-2">
             {prop.isDiscount ? (
               <p className="bg-gray-600 text-white px-1 rounded-sm w-fit my-3 capitalize text-sm">
-                {prop.discount}% discount
+                {prop.discount}% less
               </p>
             ) : (
               <p className="bg-gray-100 text-gray-800 px-1 rounded-sm w-fit my-3 capitalize text-sm">
@@ -124,7 +124,7 @@ const ProductCart = ({ prop }: { prop: productInformation }) => {
                   ).toString()
                 )}
               </b>
-              <small> less price</small>
+              <small> now price</small>
             </p>
           ) : (
             <small>{' - Limited stock'}</small>

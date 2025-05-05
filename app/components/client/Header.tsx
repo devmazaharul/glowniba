@@ -73,7 +73,9 @@ const Header = () => {
             whileHover={{ scale: 1.1 }}
             transition={{ type: 'spring', stiffness: 300 }}
           >
-            <p>Shops </p>
+            <Link href={'/products'}   className={`${
+                  path == '/products' ? 'text-yellow-500' : 'text-gray-700'
+                } `}>Shops </Link>
             <MdOutlineExpandMore className="relative top-0.5" />
           </motion.div>
         </div>
