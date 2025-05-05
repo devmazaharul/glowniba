@@ -10,7 +10,6 @@ import { Sheet, SheetTrigger } from '@/components/ui/sheet';
 import CustomSheetContent from '../others/CustomSheetContent';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { defaultValues } from '@/constants';
 import Image from 'next/image';
 
 const pacifico = Pacifico({
