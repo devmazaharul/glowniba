@@ -159,7 +159,7 @@ const ProductsTable = () => {
         className="bg-gray-700 hover:bg-gray-600 cursor-pointer "
         onClick={() => {
           handleProductDelete(product.productID)
-          toast.success("Item removed from cart.");
+        
         }}
       >
         Yes, Remove
