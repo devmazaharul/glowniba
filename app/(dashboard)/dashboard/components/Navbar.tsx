@@ -16,7 +16,7 @@ const Sidebar = () => {
   const path=usePathname()
 
   return (
-    <div className="h-full w-full bg-gray-700 text-white flex flex-col p-4">
+    <div className="h-full w-full  bg-gray-700 text-white flex flex-col p-4">
       {/* Logo or Title */}
 
       {/* Navigation Links */}

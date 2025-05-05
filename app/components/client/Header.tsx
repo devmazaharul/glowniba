@@ -11,6 +11,7 @@ import CustomSheetContent from '../others/CustomSheetContent';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { defaultValues } from '@/constants';
+import Image from 'next/image';
 
 const pacifico = Pacifico({
   style: 'normal',
@@ -62,9 +63,17 @@ const Header = () => {
         <div className="flex items-center gap-2 md:gap-6">
           <div className={pacifico.className}>
             <Link href="/">
-              <p className="text-2xl text-gray-700 font-bold cursor-pointer">
+            <Image
+  src="/mylogo.png"
+  width={150} // Optional: you can remove this if using Tailwind width
+  height={50} // Optional: same here
+  alt="logo"
+  className="h-[50px] w-auto object-contain"
+/>
+
+              {/* <p className="text-2xl text-gray-700 font-bold cursor-pointer">
                 {defaultValues.siteName || 'Glow niba'}
-              </p>
+              </p> */}
             </Link>
           </div>
           <p className="text-gray-400 font-extralight relative top-1">|</p>
