@@ -9,7 +9,6 @@ import InstagramPost from './components/server/InstagramPost';
 import NewArrivals from './components/server/NewArrivals';
 import Reviews from './components/server/Reviews';
 import Step from './components/server/Step';
-import Address from './components/others/Address';
 
 export default function page() {
   return (
@@ -17,7 +16,6 @@ export default function page() {
       <BackgroundImageSlider />
       <AiComponent/>
       <Category />
-      <Address/>
       <FeatureProduct />
       <NewArrivals />
       <Common />

@@ -9,6 +9,9 @@ export function ConditionalHeader() {
   if (pathname.startsWith('/dashboard')) {
     return null; // Dashboard এ Header দেখাবো না
   }
+  if (pathname.startsWith('/checkout')) {
+    return null; // Dashboard এ Header দেখাবো না
+  }
 
   return (
     <>

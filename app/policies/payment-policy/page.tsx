@@ -20,7 +20,7 @@ export default function Page() {
         </p>
 
         <h2 className="text-2xl font-semibold">১. পেমেন্ট পদ্ধতি</h2>
-        <p>
+        <div>
           Glow Niba-তে আপনি বিভিন্ন পেমেন্ট পদ্ধতির মাধ্যমে পণ্য কেনাকাটা করতে পারবেন, যেমন:
           <ul className="list-disc pl-6">
   <li>মোবাইল ব্যাংকিং (বিকাশ, নগদ)</li>
@@ -28,7 +28,7 @@ export default function Page() {
   <li>নগদে পণ্য গ্রহণের সময় পরিশোধ (Cash on Delivery - COD)</li>
 </ul>
 
-        </p>
+        </div>
 
         <h2 className="text-2xl font-semibold">২. পেমেন্ট প্রক্রিয়া</h2>
         <p>

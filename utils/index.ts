@@ -1,5 +1,6 @@
 import { defaultValues } from '@/constants';
 import bcrypt from 'bcryptjs';
+import { toast } from 'sonner';
 // import { cookies } from 'next/headers';
 // import jwt from 'jsonwebtoken';
 
@@ -46,4 +47,40 @@ export function getFormattedDate() {
   const month = `${date.getMonth() + 1}`.padStart(2, '0'); // 0-based month
   const day = `${date.getDate()}`.padStart(2, '0');
   return `${year}-${month}-${day}`;
+}
+
+
+
+
+export const checkoutValidation=({info,address}:{info:{name:string,phone:string,instraction:string},address:{division?:string,district?:string,upazela?:string,union?:string}})=>{
+  const {name,phone,instraction}=info
+  const {division,district,upazela,union}=address
+  if(!isValidName(name)){
+      toast.error("Please provide a valid name",{
+        description:"Name must be at least 3 characters long and contain only letters and spaces"
+      })
+      return false;
+    }
+  if(!isValidNumber(phone)){
+      toast.error("Please provide a valid BD number",{
+        description:"Number must be 11 digit"
+      })
+      return false;
+    }
+
+  if(instraction.length>100){
+      toast.error("Please provide a under 100 charecter in instraction fiedld",{
+        description:"Instraction must be under 100 charecter"
+      })
+      return false;
+    }
+    if(!division || !district || !upazela || !union){
+      toast.error("Please provide a valid address",{
+        description:"Address must be provide all field"
+      })
+      return false;
+    }
+
+    return true;
+
 }

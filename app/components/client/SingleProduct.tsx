@@ -1,6 +1,6 @@
 'use client';
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { QRCodeSVG } from 'qrcode.react';
 import { FaGripfire } from 'react-icons/fa';
 import { FaPlus } from 'react-icons/fa';
@@ -21,44 +21,55 @@ const poppins = Poppins({
   subsets: ['latin-ext'],
 });
 const SingleProduct = ({ item }: { item: productInformation }) => {
-  const productLink = defaultValues.siteUrl + `/products/${decodeURIComponent(item.slug.toString())}`;
+  const productLink =
+    defaultValues.siteUrl +
+    `/products/${decodeURIComponent(item.slug.toString())}`;
 
   const { cart, addToCart, increaseQuantity, decreaseQuantity } =
     useCartStore();
 
   const finPoduct = cart.find(
-    (val) => val.productID == item.productID && val.slug==item.slug
+    (val) => val.productID == item.productID && val.slug == item.slug
   );
 
-  const [related,setIsrelated]=useState<productInformation[]>([])
-  const [loading,setLoading]=useState(true)
-  useEffect(()=>{
-
-    const relatedProduct=async()=>{
+  const [related, setIsrelated] = useState<productInformation[]>([]);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const relatedProduct = async () => {
       try {
-        const productRes=await getProductsClient();
-        if('data' in productRes){
-       const productsArr=productRes?.data as productInformation[]
-       
-        setTimeout(()=>{
-          setIsrelated(  productsArr.filter((info)=>{
-            return info.tags.some((tag) => {
-              if(item.tags.includes(tag) && item.productID!=info.productID){
-                return tag;
-              }
-            })
-          }))
-          setLoading(false)
-        },1000)
-        }
+        const productRes = await getProductsClient();
+        if ('data' in productRes) {
+          const productsArr = productRes?.data as productInformation[];
 
-      } catch  {
-        toast.error("No related prodcicts")
+          setTimeout(() => {
+            setIsrelated(
+              productsArr.filter((info) => {
+                return info.tags.some((tag) => {
+                  return (
+                    item.tags.includes(tag) && item.productID != info.productID
+                  );
+                });
+              })
+            );
+            setLoading(false);
+          }, 200);
+        }
+      } catch {
+        toast.error('No related prodcicts');
       }
-    }
-    relatedProduct()
-   
-  },[item.tags,item.productID])
+    };
+    relatedProduct();
+  }, [item.tags, item.productID]);
+
+  function shuffleProduct(
+    arr: productInformation[] = []
+  ): productInformation[] {
+    return arr.sort(() => Math.random() - 0.5);
+  }
+
+  const relatedProduct = useMemo(() => {
+    return shuffleProduct(related).slice(0, 8);
+  }, [related]);
 
   return (
     <div className="">
@@ -70,13 +81,12 @@ const SingleProduct = ({ item }: { item: productInformation }) => {
           </div>
 
           <Image
-  className="w-full max-w-[300px] h-auto rounded-md mx-auto object-contain"
-  src={item.image}
-  width={600}
-  height={600}
-  alt={item.name}
-/>
-
+            className="w-full max-w-[300px] h-auto rounded-md mx-auto object-contain"
+            src={item.image}
+            width={600}
+            height={600}
+            alt={item.name}
+          />
         </div>
         <div className="py-3">
           <div>
@@ -121,13 +131,14 @@ const SingleProduct = ({ item }: { item: productInformation }) => {
             {/* product size */}
             <div className="py-6">
               <div className="flex items-center gap-2">
-              {item.size.map((s,i)=>(
- <button key={i} className="border-2 font-semibold rounded-md py-1 px-4  border-gray-400 focus:bg-gray-700 cursor-pointer focus:text-gray-100 text-gray-600">
- {s || '10ml'}
-</button>
-              ))}
-               
-              
+                {item.size.map((s, i) => (
+                  <button
+                    key={i}
+                    className="border-2 font-semibold rounded-md py-1 px-4  border-gray-400 focus:bg-gray-700 cursor-pointer focus:text-gray-100 text-gray-600"
+                  >
+                    {s || '10ml'}
+                  </button>
+                ))}
               </div>
             </div>
 
@@ -185,7 +196,8 @@ const SingleProduct = ({ item }: { item: productInformation }) => {
                 </div>
 
                 <div className="flex text-gray-500 capitalize">
-                  Tags : {item.tags ? item.tags.join(",") : 'glow_niba,face,serum'}
+                  Tags :{' '}
+                  {item.tags ? item.tags.join(',') : 'glow_niba,face,serum'}
                 </div>
               </div>
             </div>
@@ -195,34 +207,37 @@ const SingleProduct = ({ item }: { item: productInformation }) => {
 
       {/* related products */}
 
-    <div className='mt-50'>
-      {related && <div>
-        <h1 className=' text-xl font-semibold py-2'>Related products</h1>
-      </div>}
-    <div className="grid space-y-2 md:grid-cols-3 relative  lg:grid-cols-4 grid-cols-1 sm:grid-cols-2 gap-4 w-[80%] md:w-full mx-auto">
-                {loading?<>
-                {
-                      Array.from({ length: 8 }).map((_, index) => (
-                                  <div
-                                    key={index}
-                                    className="shadow-2xl shadow-gray-100 p-4 border border-gray-100 w-[85%] sm:w-full mx-auto rounded-2xl bg-white duration-500 ease-in-out"
-                                  >
-                                    <Skeleton className="h-55 w-full mb-2" />
-                                    <Skeleton className="h-6 w-3/4 mb-1" />
-                                    <Skeleton className="h-4 w-1/2" />
-                                  </div>
-                                ))}
-              </>:  <>
-                  {related && related.slice(0,8).map((item)=>(
-                    <div key={item.productID}>
-             <ProductCart  prop={item} />
-                    </div>
-                  ))}
-                </>}
+      <div className="mt-50">
+        {related && (
+          <div>
+            <h1 className=" text-xl font-semibold py-2">Related products</h1>
+          </div>
+        )}
+        <div className="grid space-y-2 md:grid-cols-3 relative  lg:grid-cols-4 grid-cols-2 sm:grid-cols-2 gap-4 w-[95%] md:w-full mx-auto">
+          {loading ? (
+            <>
+              {Array.from({ length: 8 }).map((_, index) => (
+                <div
+                  key={index}
+                  className="shadow-2xl shadow-gray-100 p-4 border border-gray-100 w-[85%] sm:w-full mx-auto rounded-2xl bg-white duration-500 ease-in-out"
+                >
+                  <Skeleton className="h-55 w-full mb-2" />
+                  <Skeleton className="h-6 w-3/4 mb-1" />
+                  <Skeleton className="h-4 w-1/2" />
                 </div>
-    </div>
-            
-
+              ))}
+            </>
+          ) : (
+            <>
+              {relatedProduct.map((item) => (
+                <div key={item.productID}>
+                  <ProductCart prop={item} />
+                </div>
+              ))}
+            </>
+          )}
+        </div>
+      </div>
     </div>
   );
 };
