@@ -7,15 +7,14 @@ export function ConditionalHeader() {
   const pathname = usePathname();
 
   if (pathname.startsWith('/dashboard')) {
-    return null; // Dashboard এ Header দেখাবো না
+    return null; 
   }
   if (pathname.startsWith('/checkout')) {
-    return null; // Dashboard এ Header দেখাবো না
+    return null; 
   }
 
   return (
     <>
-      {/* Global Header */}
       <Header />
     </>
   );

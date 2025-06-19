@@ -178,7 +178,7 @@ const [isChacked,setIschaked]=useState(false)
         {/* other section */}
         <div className="flex text-sm  py-3 px-1  items-center w-fit mx-auto gap-2">
           <p>Already have an account?</p>
-          <Link href={'/user'} className="text-blue-500">
+          <Link href={'/login'} className="text-blue-500">
             Sign In
           </Link>
         </div>

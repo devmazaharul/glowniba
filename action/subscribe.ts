@@ -68,7 +68,7 @@ export const getSubscribers = async (limit: number, page: number) => {
       const res = await Users.findOne({ email: item.email });
       return {
         ...item._doc,
-        isMember: !!res, // res যদি থাকে তাহলে true, না থাকলে false
+        isMember: !!res, 
       };
     }));
     

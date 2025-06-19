@@ -46,16 +46,11 @@ const Page = () => {
           });
         }
 
-        // Call login action
         const res = await userLogin({ email, password });
 
         if (res.status === 200) {
-          toast.success('Login Successful', {
-            description: 'Welcome back!',
-            duration: 5000,
-          });
-          // Redirect to dashboard or home page
-          router.push('/dashboard');
+          toast.success("successfully login user")
+          router.push("/")
         } else {
           throw new CustomError(res.message, res.status);
         }

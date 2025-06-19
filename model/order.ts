@@ -14,18 +14,35 @@ const orderSchema = new Schema(
         price: { type: Number, required: true },
       },
     ],
-
-    totalAmount: { type: Number, required: true },
-    shippingAddress: {
-      name: String,
-      phone: String,
-      address: String,
-      city: String,
-      postalCode: String,
+    name: {
+      type: String,
+      required: true,
     },
 
-    paymentMethod: { type: String, default: 'cash_on_delivery' },
+    instraction: {
+      type: String,
+    },
+    phone: {
+      type: String,
+      required: true,
+    },
 
+    shippingAddress: {
+      type:{
+        division:String,
+        district:String,
+        upazela:String,
+        union:String,
+      }
+    },
+
+    paymentMethod: {
+       type: String,
+       enum: ['bkash', 'nagad', 'cash'],
+       required: true,
+       default: 'cash',
+
+     },
     status: {
       type: String,
       enum: ['pending', 'processing', 'shipped', 'delivered', 'cancelled'],

@@ -44,12 +44,7 @@ const SingleProduct = ({ item }: { item: productInformation }) => {
           setTimeout(() => {
             setIsrelated(
               productsArr.filter((info) => {
-                return info.tags.some((tag) => {
-                  return (
-                    item.tags.includes(tag) && item.productID != info.productID
-                  );
-                });
-              })
+                return info.tags.some((tag) => item.tags.includes(tag) && item.productID != info.productID)})
             );
             setLoading(false);
           }, 200);
@@ -111,7 +106,7 @@ const SingleProduct = ({ item }: { item: productInformation }) => {
                 )}
               </div>
               <div className="bg-yellow-100 opacity-0 md:opacity-100 px-2 md:flex items-center gap-1 rounded-md w-fit text-md">
-                {' '}
+   
                 <FaGripfire className="fill-yellow-700" /> Trending
               </div>
 

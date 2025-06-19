@@ -1,15 +1,31 @@
+// middleware.ts
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { verifyJwt } from './utils/token';
+
 export async function middleware(request: NextRequest) {
   try {
-    console.log('request...');
+    const token = request.cookies.get('token')?.value;
+
+    if (!token) {
+      throw new Error('No token found');
+    }
+    const response = NextResponse.next();
+
+  
+  const decoded = await verifyJwt(token);
+
+  if (!decoded || typeof decoded !== 'object' || !decoded.email) {
+    console.log("i am here")
+    return NextResponse.redirect(new URL('/login', request.url));
+  }
+
+    return response;
   } catch (error) {
-    console.log('er' + error);
-    // টোকেন invalid হলে login page এ পাঠাবে
-    return NextResponse.redirect(new URL('/admin', request.url));
+    return NextResponse.redirect(new URL('/login', request.url));
   }
 }
 
 export const config = {
-  matcher: ['/dashfboard/:path*'], // শুধুমাত্র /admin routes গুলোতে apply হবে
+  matcher: ['/checkout'],
 };

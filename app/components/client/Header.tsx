@@ -21,7 +21,7 @@ const pacifico = Pacifico({
 const Header = () => {
   const cartItems = useCartStore((state) => state.cart);
   const path = usePathname();
-
+  
   const [showHeader, setShowHeader] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 

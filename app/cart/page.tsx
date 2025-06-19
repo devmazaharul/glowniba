@@ -108,10 +108,12 @@ const Page = () => {
                 <p>{totalPrice + (defaultValues.processingFee || 0)} BDT</p>
               </b>
               <div className="mt-7 text-center">
+                <Link href={"/checkout"}>
                 <Button className="cursor-pointer hover:bg-gray-700 flex items-center gap-1 w-fit mx-auto">
                   Proceed to Checkout{' '}
                   <FaArrowRightLong className="text-xl animate-caret-blink ease-in-out duration-100" />
                 </Button>
+                </Link>
               </div>
             </div>
           </div>

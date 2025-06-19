@@ -1,13 +1,15 @@
 'use server';
 import connectDB from '@/lib/db';
 import { systemLogger } from '@/lib/logger';
-
 import User from '@/model/user';
 import { userlogin, userregister, userUpdate } from '@/types/user';
 import { compareHashPass, hashPassword } from '@/utils';
 import { CustomError, handleError } from '@/utils/error';
 import { responce, responceItems } from '@/utils/success';
-import  randomstring  from 'randomstring';
+import { cookies } from 'next/headers';
+import { signJwt } from '../utils/token';
+
+import randomstring from 'randomstring';
 const userRegister = async ({
   name,
   email,
@@ -26,7 +28,7 @@ const userRegister = async ({
       password: hashPass,
       address,
       number,
-      userId:randomstring.generate({length:7,charset:"alphanumeric"})
+      userId: randomstring.generate({ length: 7, charset: 'alphanumeric' }),
     });
     await create.save();
     return responce({
@@ -57,7 +59,16 @@ const userLogin = async ({ email, password }: userlogin) => {
 
     if ((await compareHashPass(password, checkUser.password)) == false)
       throw new CustomError('Invalid credentials', 400);
-    systemLogger.info('success login');
+    const token = await signJwt({ email });
+
+    const cookieRady = await cookies();
+    cookieRady.set({
+      name: 'token',
+      value: token,
+      maxAge: 60 * 60 * 24 * 7,
+      httpOnly: true,
+    });
+
     return responce({
       message: 'Successfully login',
       status: 200,
