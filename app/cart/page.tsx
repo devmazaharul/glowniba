@@ -13,7 +13,7 @@ import Removecart from '../(dashboard)/dashboard/components/Removecart';
 const Page = () => {
   const { cart, increaseQuantity, decreaseQuantity } = useCartStore();
 
-  const totalPrice = cart.reduce(
+  const totalPrice = [...cart].reduce(
     (total, item) => total + item.price * (item.quantity || 0),
     0
   );
