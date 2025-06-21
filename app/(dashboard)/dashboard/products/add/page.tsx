@@ -72,9 +72,9 @@ const ProductForm = () => {
         const res = await addProduct({ ...productData, image: base63 });
         if (res?.status == 200) {
           toast.success('Products successfully added');
-          // setProductData({
-          //   ...prObj,
-          // });
+          setProductData({
+            ...prObj,
+          });
         }
       }
     } catch {
