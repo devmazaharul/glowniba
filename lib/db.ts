@@ -8,7 +8,7 @@ if(!connectionUrl) console.log("Plese provide valid bd url");
 const connectDB = async () => {
   try {
     if (mongoose.connections[0].readyState) return;
-    await mongoose.connect("mongodb+srv://maza:28N8VbNP3ChnK1y9@cluster0.kxr8s.mongodb.net/glowniba?retryWrites=true&w=majority");
+    await mongoose.connect(connectionUrl);
     console.log("✅ MongoDB connected");
   } catch (error) {
     console.error("❌ MongoDB connection error:", error);
