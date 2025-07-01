@@ -1,7 +1,8 @@
-import React from 'react';
-
+"use client"
 const Page = () => {
-  return <div>dd</div>;
+
+  
+  return <div>Access denite</div>;
 };
 
 export default Page;
