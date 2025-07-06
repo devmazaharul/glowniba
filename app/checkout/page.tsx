@@ -124,9 +124,9 @@ export default function CheckoutPage() {
   const handlePlaceOrder = async () => {
     try {
       setLoading(true);
-      if (!checkoutValidation({ info, address: makeAddressObject || {} }))
-        return;
-
+      if (!checkoutValidation({ info, address: makeAddressObject || {} })){
+        return
+      }
       if (!agree) {
         toast.warning('Please accept terms and conditions.', {
           description: 'You must accept the terms and conditions to proceed.',
@@ -135,9 +135,7 @@ export default function CheckoutPage() {
         return;
       }
 
-      const orderproductInfo = cart.reduce<
-        { productId: string; quantity: number | undefined; price: number }[]
-      >((acc, curr) => {
+const orderproductInfo = cart.reduce<{ productId: string; quantity: number | undefined; price: number }[] >((acc, curr) => {
         acc.push({
           productId: curr._id,
           quantity: curr.quantity,

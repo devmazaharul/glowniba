@@ -68,7 +68,7 @@ const ProductForm = () => {
       }
       if (Object.keys(error).length == 0) {
         const base63 = await fileToBase64(productData.image);
-
+        
         const res = await addProduct({ ...productData, image: base63 });
         if (res?.status == 200) {
           toast.success('Products successfully added');

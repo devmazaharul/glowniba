@@ -12,15 +12,20 @@ import { userRegister } from '@/action/user';
 import { CustomError } from '@/utils/error';
 import { signupValidation } from '@/utils/validation';
 import Spiner from '../components/others/Spiner';
+import { useRouter } from 'next/navigation';
 
 const Page = () => {
+  const router=useRouter()
   //signup state
-  const [state, setState] = React.useState({
+  const singUppropertiesObj={
     email: '',
     password: '',
     name: '',
     number: '',
     address: ''
+  }
+  const [state, setState] = React.useState({
+    ...singUppropertiesObj
   });
 
   const [loading, setLoading] = useState(false);
@@ -58,12 +63,10 @@ const [isChacked,setIschaked]=useState(false)
             duration: 5000,
           });
           setState({
-            email: '',
-            password: '',
-            name: '',
-            number: '',
-            address: ''
+            ...singUppropertiesObj
           })
+          router.replace("/login")
+          
         } else {
           throw new CustomError(res.message, res.status);
         }

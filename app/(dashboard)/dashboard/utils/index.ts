@@ -149,10 +149,25 @@ export default validateProductData;
 
 export const fileToBase64 = (file: File | null): Promise<string> =>
   new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    if (file) {
-      reader.readAsDataURL(file);
+    if (!file) {
+      reject(new Error("File is null or undefined"));
+      return;
     }
-    reader.onload = () => resolve(reader.result as string);
-    reader.onerror = reject;
+
+    const reader = new FileReader();
+
+    reader.onload = (event) => {
+      if (typeof event.target?.result === "string") {
+        resolve(event.target.result);
+      } else {
+        reject(new Error("Failed to read file as base64 string"));
+      }
+    };
+
+    reader.onerror = (error) => {
+      reject(error);
+    };
+
+    reader.readAsDataURL(file);
   });
+

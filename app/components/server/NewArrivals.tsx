@@ -43,17 +43,26 @@ const NewArrivals = () => {
         </Link>
       </div>
 
-      <div className="grid space-y-1 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2">
-        {loading
-          ? Array.from({ length: 10 }).map((_, i) => <ProductCardSkeleton key={i} />)
-          : products.slice(0, 10).map((item) => (
-              <CommonCard
-                item={item}
-                color="bg-green-100 text-green-800"
-                key={item.productID}
-              />
-            ))}
-      </div>
+<div className="grid space-y-1 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2">
+  {loading ? (
+    Array.from({ length: 10 }).map((_, i) => <ProductCardSkeleton key={i} />)
+  ) : products.length > 0 ? (
+    products.slice(0, 10).map((item) => (
+      <CommonCard
+        item={item}
+        color="bg-green-100 text-green-800"
+        key={item.productID}
+      />
+    ))
+  ) : (
+    <div className="col-span-full flex items-center justify-center p-4">
+      <p className="text-red-600 font-bold text-lg px-4 py-2 ">
+        ❗ No product found
+      </p>
+    </div>
+  )}
+</div>
+
     </div>
   );
 };

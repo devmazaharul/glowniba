@@ -92,42 +92,42 @@ const Header = () => {
         <div className="flex items-center gap-3 md:gap-6">
           {/* Search */}
           <motion.div
-            whileHover={{ scale: 1.1 }}
+            // whileHover={{ scale: 1.1 }}
             transition={{ type: 'spring', stiffness: 300 }}
           >
-            <Link href="/products" className="p-2 rounded-full">
+            <Link href="/products" className="p-2 rounded-full ">
               <Search
                 className={`${
                   path == '/products' ? 'text-yellow-500' : 'text-gray-700'
-                } text-2xl`}
+                } text-2xl hover:scale-110 ease-in-out duration-200`}
               />
             </Link>
           </motion.div>
 
           {/* User */}
           <motion.div
-            whileHover={{ scale: 1.1 }}
+            // whileHover={{ scale: 1.1 }}
             transition={{ type: 'spring', stiffness: 300 }}
           >
-            <Link href="/user" className="p-2 rounded-full">
+            <Link href="/login" className="p-2 rounded-full">
               <User
                 className={`${
                   path == '/user' ? 'text-yellow-500' : 'text-gray-700'
-                } text-2xl`}
+                } text-2xl hover:scale-110 ease-in-out duration-200`}
               />
             </Link>
           </motion.div>
 
           {/* Cart */}
           <motion.div
-            whileHover={{ scale: 1.1 }}
+            // whileHover={{ scale: 1.1 }}
             transition={{ type: 'spring', stiffness: 300 }}
           >
             <Sheet>
               <SheetTrigger asChild>
                 <div className="relative">
                   <button className="flex items-center cursor-pointer z-50" >
-                    <ShoppingCart className="text-gray-700 text-2xl" />
+                    <ShoppingCart className="text-gray-700 text-2xl hover:scale-110 ease-in-out duration-200" />
                     <p className="absolute -top-2 -right-2 bg-gray-700 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
                       {cartItems.length || 0}
                     </p>

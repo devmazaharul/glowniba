@@ -50,7 +50,7 @@ const Page = () => {
 
         if (res.status === 200) {
           toast.success("successfully login user")
-          router.push("/")
+          router.back()
         } else {
           throw new CustomError(res.message, res.status);
         }

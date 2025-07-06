@@ -47,11 +47,14 @@ const raleway = Raleway({
   display:"swap"
 });
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+
+
   return (
     <html>
       <body className={` ${raleway.className} `}>

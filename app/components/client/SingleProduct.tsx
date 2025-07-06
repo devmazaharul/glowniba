@@ -15,6 +15,7 @@ import { toast } from 'sonner';
 import { getProductsClient } from '@/action/product';
 import { Skeleton } from '@/components/ui/skeleton';
 import ProductCart from '../server/ProductCard';
+import Link from 'next/link';
 const poppins = Poppins({
   weight: '700',
   style: 'normal',
@@ -44,10 +45,14 @@ const SingleProduct = ({ item }: { item: productInformation }) => {
           setTimeout(() => {
             setIsrelated(
               productsArr.filter((info) => {
-                return info.tags.some((tag) => item.tags.includes(tag) && item.productID != info.productID)})
+                return info.tags.some(
+                  (tag) =>
+                    item.tags.includes(tag) && item.productID != info.productID
+                );
+              })
             );
             setLoading(false);
-          }, 200);
+          }, 100);
         }
       } catch {
         toast.error('No related prodcicts');
@@ -106,7 +111,6 @@ const SingleProduct = ({ item }: { item: productInformation }) => {
                 )}
               </div>
               <div className="bg-yellow-100 opacity-0 md:opacity-100 px-2 md:flex items-center gap-1 rounded-md w-fit text-md">
-   
                 <FaGripfire className="fill-yellow-700" /> Trending
               </div>
 
@@ -178,9 +182,12 @@ const SingleProduct = ({ item }: { item: productInformation }) => {
                   Add to cart
                 </Button>
                 {finPoduct && (finPoduct.quantity ?? 0) > 0 && (
-                  <Button className="cursor-pointer" variant={'outline'}>
+                  <Link
+                    href={'/checkout'}
+                    className="cursor-pointer border px-2 py-1 rounded-md hover:bg-gray-50"
+                  >
                     Check out
-                  </Button>
+                  </Link>
                 )}
               </div>
 
