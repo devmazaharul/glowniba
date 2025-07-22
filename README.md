@@ -1,6 +1,6 @@
-# GlowNiva - Skincare Products Store ✨
+# GlowNiba - Skincare Products Store ✨
 
-Welcome to **GlowNiva**! A modern eCommerce platform built using **Next.js** where you can browse, purchase, and manage skincare products such as face serums, face creams, and other beauty products.
+Welcome to **GlowNiba**! A modern eCommerce platform built using **Next.js** where you can browse, purchase, and manage skincare products such as face serums, face creams, and other beauty products.
 
 ## 🛍️ Features
 

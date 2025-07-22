@@ -16,7 +16,7 @@ export async function middleware(request: NextRequest) {
   const decoded = await verifyJwt(token);
 
   if (!decoded || typeof decoded !== 'object' || !decoded.email) {
-    console.log("i am here")
+
     return NextResponse.redirect(new URL('/login', request.url));
   }
 

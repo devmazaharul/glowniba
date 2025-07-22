@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema(
       type:Number,
       default:5
     },
-    purcessedItems: [
+    purcessedId: [
       { 
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Product',

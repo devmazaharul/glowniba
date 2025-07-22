@@ -13,7 +13,7 @@ export default function Islogin({ children }: { children: React.ReactNode }) {
         setisLoggedIn(true);
       }
     }
-  }, []);
+  }, [pass]);
 
   const handleRefraseh = () => {
     window.location.reload();

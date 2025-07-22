@@ -12,6 +12,9 @@ export function ConditionalHeader() {
   if (pathname.startsWith('/checkout')) {
     return null; 
   }
+  if (pathname.startsWith('/laststep')) {
+    return null; 
+  }
 
   return (
     <>

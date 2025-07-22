@@ -1,8 +1,5 @@
 import { defaultValues } from '@/constants';
 import bcrypt from 'bcryptjs';
-import { toast } from 'sonner';
-// import { cookies } from 'next/headers';
-// import jwt from 'jsonwebtoken';
 
 export function isValidName(name: string) {
   const trimmedName = name.trim();
@@ -50,37 +47,70 @@ export function getFormattedDate() {
 }
 
 
+export interface addressType{
+  division:string,
+  district:string,
+  upazila:string,
+  union:string
+}
+export interface basicInfoType{
+  fullName:string,
+  email:string,
+  number:string,
+}
+
+export const checkOutValidation=({address,basicInfo,productInfo}:{
+  address:addressType,
+  basicInfo:basicInfoType,
+  productInfo:string[]
+})=>{
+  const error={
+    key:"",
+    message:"",
+    status:true
+  }
+
+  //validation basic info 
+  if(!basicInfo.fullName || !isValidName(basicInfo.fullName)){
+    error.key="fullName";
+    error.message="Please enter a valid full name";
+    return error;
+  }
+   if(!basicInfo.number || !isValidNumber(basicInfo.number.toString())){
+    error.key="number";
+    error.message="Please enter a valid phone number";
+    return error;
+  }
+  if(!basicInfo.email || !isValidEmail(basicInfo.email)){
+    error.key="email";
+    error.message="Please enter a valid email address";
+    return error;
+  }
+ 
+  //address validation
+
+  if(address.district=="N/A" || address.division=="N/A" || address.upazila=="N/A" || address.union=="N/A"){
+   error.key="address";
+    error.message="Please provide  a valid address";
+    return error;
+  }
+
+  //product validation
+  if(productInfo.length==0){
+     error.key="product";
+    error.message="Please add  product then process";
+    return error;
+  }
 
 
-export const checkoutValidation=({info,address}:{info:{name:string,phone:string,instraction:string},address:{division?:string,district?:string,upazela?:string,union?:string}})=>{
-  const {name,phone,instraction}=info
-  const {division,district,upazela,union}=address
-  if(!isValidName(name)){
-      toast.info("Please provide a valid name",{
-        description:"Name must be at least 3 characters long and contain only letters and spaces"
-      })
-      return false;
-    }
-  if(!isValidNumber(phone)){
-      toast.info("Please provide a valid BD number",{
-        description:"Number must be 11 digit"
-      })
-      return false;
-    }
+  return {
+    status:false,
+    message:"All fields are valid",
+    key:""
+  }
 
-  if(instraction.length>100){
-      toast.info("Please provide a under 100 charecter in instraction fiedld",{
-        description:"Instraction must be under 100 charecter"
-      })
-      return false;
-    }
-    if(!division || !district || !upazela || !union){
-      toast.info("Please provide a valid address",{
-        description:"Address must be provide all field"
-      })
-      return false;
-    }
-
-    return true;
 
 }
+
+
+

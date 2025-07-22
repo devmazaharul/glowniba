@@ -8,6 +8,9 @@ export function ConditionalFooter() {
   if (pathname.startsWith('/dashboard')) {
     return null; // Dashboard এ Header দেখাবো না
   }
+  if (pathname.startsWith('/laststep')) {
+    return null; // Dashboard এ Header দেখাবো না
+  }
 
   return (
     <>

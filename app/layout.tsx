@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Raleway } from 'next/font/google';
+import {  Nunito } from 'next/font/google';
 import './globals.css';
 import { Toaster } from '@/components/ui/sonner';
 import { defaultValues } from '@/constants';
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: `${siteName} | Premium Skincare`,
     description:
-      'Best serums and creams for glowing skin. Discover Glow Niva now.',
+      'Best serums and creams for glowing skin. Discover Glow Niba now.',
     url: siteUrl,
     siteName: siteName,
     images: [
@@ -40,12 +40,18 @@ export const metadata: Metadata = {
   },
 };
 
-const raleway = Raleway({
+// const raleway = Raleway({
+//   weight: '400',
+//   subsets: ['cyrillic'],
+//   style: 'normal',
+//   display:"swap"
+// });
+
+const InterFont=Nunito({
   weight: '400',
-  subsets: ['cyrillic'],
+  subsets: ['latin'],
   style: 'normal',
-  display:"swap"
-});
+})
 
 export default async function RootLayout({
   children,
@@ -57,7 +63,7 @@ export default async function RootLayout({
 
   return (
     <html>
-      <body className={` ${raleway.className} `}>
+      <body className={` ${InterFont.className} `}>
         <div>
           <div>
             <ConditionalHeader />

@@ -231,3 +231,18 @@ export {
   getUsers,
   userDelete,
 };
+
+export const findUserwithEmail=async(email:string)=>{
+  try {
+    await connectDB()
+    const find=await User.findOne({email:email});
+    if(!find) throw new CustomError("Invalid user")
+      return find._id
+
+  } catch (error) {
+ if (error instanceof Error) {
+      return handleError(error.message, (error as any).status);
+    }
+    return handleError('An unknown error occurred', 500);
+  }
+}

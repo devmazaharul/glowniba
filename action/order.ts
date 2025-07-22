@@ -1,26 +1,55 @@
-"use server"
-import connectDB from "@/lib/db";
-import Order from "@/model/order";
-import { CustomError, handleError } from "@/utils/error";
-import { responce } from "@/utils/success";
+import { ProcessProps } from "@/app/laststep/Process"
 
 
-
-export const placeOrderUsers = async (orderDetails: any) => {
+const createOrder=async(items:ProcessProps)=>{
   try {
-    await connectDB();
-    const { name, phone, products, paymentMethod, address, instraction, totalAmount } = orderDetails;
-    return {
-      messsage:"successfully order placed",
-      status:200
-    }
-
+    const {address,basicInfo,productInfo,paymentInfo}=items;
+    const {}=address
 
   } catch (error) {
-    if (error instanceof Error) {
-      return handleError(error.message, (error as any).status);
-    }
-    return handleError("An unknown error occurred", 500);
+       console.log(error);
   }
-};
+}
 
+
+export {
+  createOrder
+}
+
+const handleCodPayment=async()=>{
+  try {
+    
+  } catch (error) {
+       console.log(error);
+  }
+}
+const handleBkashPayment=async()=>{
+  try {
+    
+  } catch (error) {
+       console.log(error);
+  }
+}
+const handleNagadPayment=async()=>{
+  try {
+    
+  } catch (error) {
+       console.log(error);
+  }
+}
+const handleMazaPayPayment=async()=>{
+  try {
+    
+  } catch (error) {
+       console.log(error);
+  }
+}
+
+
+const orderPlace=async()=>{
+  try {
+    
+  } catch (error) {
+    console.log(error);
+  }
+}

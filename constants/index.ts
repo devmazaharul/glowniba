@@ -37,3 +37,22 @@ export const loggerControllerExternalObject = Object.freeze({
 export const productLimitation=Object.freeze({
   productShowLImit:30
 })
+
+export   const avableAblepaymentMethods = [
+    {
+      name: 'cod',
+      url: 'https://img.freepik.com/premium-vector/cod-icon-shipping-cash-delivery-symbol-vector-logo-template_883533-219.jpg',
+    },
+    {
+      name: 'mazapay',
+      url: 'https://glowniba.vercel.app/_next/image?url=%2Fmazapay.png&w=64&q=75',
+    },
+    {
+      name: 'bkash',
+      url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQexegg4w0f3wDXzIeODqG8GI4JPMnsHupA-g&s',
+    },
+    {
+      name: 'nagad',
+      url: 'https://freelogopng.com/images/all_img/1679248787Nagad-Logo.png',
+    },
+  ];
